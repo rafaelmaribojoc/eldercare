@@ -1,0 +1,78 @@
+Scanning 26 files in C:\eldercare_rcfms\form_templates\Social Service...
+
+[2025 CASE FOLDER-updated.docx] - No obvious tags found.
+----------------------------------------
+[admission_case_conference.docx]
+  Tags: case_category, client_age, client_name, condition, conference_date, date_admitted, date_submitted, item, noted_by, noted_by_designation, time_allotted, venue
+----------------------------------------
+[admission_slip.docx]
+  Tags: admission_time, noted_by_designation
+----------------------------------------
+[after_care_plan.docx]
+  Tags: noted_by_designation
+----------------------------------------
+[case_conference.docx]
+  Tags: case_category, client_age, client_name, condition, conference_date, date_admitted, date_submitted, item, noted_by, noted_by_designation, time_allotted, venue
+----------------------------------------
+[case_transfer_summary.docx]
+  Tags: address, birth_place, birthday, case_category, case_no, civil_status, client_age, date_admitted, educational_attainment, gender, noted_by_designation, referral_source, religion
+----------------------------------------
+[client_photo.docx]
+  Tags: address, age, category, civil_status, client_name, client_photo, date_admitted, date_of_birth, date_picture_taken, educ_attainment, gender, place_of_birth
+----------------------------------------
+[clients_contract.docx]
+  Tags: custodian_name, noted_by, noted_by_designation
+----------------------------------------
+[closing_summary.docx]
+  Tags: noted_by_designation
+----------------------------------------
+[discharge_conference.docx]
+  Tags: case_category, client_age, client_name, condition, conference_date, date_admitted, date_submitted, item, noted_by, noted_by_designation, time_allotted, venue
+----------------------------------------
+[discharge_slip.docx]
+  Tags: noted_by_designation
+----------------------------------------
+[emergency_conference.docx]
+  Tags: case_category, client_age, client_name, condition, conference_date, date_admitted, date_submitted, item, noted_by, noted_by_designation, time_allotted, venue
+----------------------------------------
+[general_intake_sheet.docx] - No obvious tags found.
+----------------------------------------
+[intervention_plan.docx]
+  Tags: case_control_no, center_head_name, client_name, date_prepared, goal_period, noted_by_designation, prepared_by
+----------------------------------------
+[kasunduan.docx]
+  Tags: noted_by_designation, prepared_by_designation
+----------------------------------------
+[pre_admission_checklist.docx]
+  Tags: age
+----------------------------------------
+[pre_admission_conference.docx]
+  Tags: case_category, client_age, client_name, condition, conference_date, date_admitted, date_submitted, item, noted_by, noted_by_designation, time_allotted, venue
+----------------------------------------
+[pre_discharge_conference.docx]
+  Tags: case_category, client_age, client_name, condition, conference_date, date_admitted, date_submitted, item, noted_by, noted_by_designation, time_allotted, venue
+----------------------------------------
+[pre_termination_plan.docx]
+  Tags: noted_by_designation
+----------------------------------------
+[progress_notes.docx]
+  Tags: prepared_by_designation
+----------------------------------------
+[quarterly_narrative.docx]
+  Tags: noted_by_designation
+----------------------------------------
+[requirements_checklist.docx]
+  Tags: age
+----------------------------------------
+[running_notes.docx]
+  Tags: client_name, notes, prepared_by, prepared_by_designation, running_date, supervisory_remarks
+----------------------------------------
+[social_case_study.docx]
+  Tags: noted_by_designation
+----------------------------------------
+[termination_report.docx]
+  Tags: noted_by_designation
+----------------------------------------
+[updated_social_case_study.docx]
+  Tags: noted_by_designation
+----------------------------------------

@@ -1,0 +1,9 @@
+flask
+gunicorn
+python-dotenv
+supabase
+flask-cors
+requests
+docxtpl
+docx2pdf
+Pillow

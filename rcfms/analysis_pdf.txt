@@ -1,0 +1,6 @@
+Analyzing pdf_generator.dart...                                 
+
+   info - Don't invoke 'print' in production code - lib\features\forms\pdf\pdf_generator.dart:677:11 - avoid_print
+   info - Don't invoke 'print' in production code - lib\features\forms\pdf\pdf_generator.dart:683:9 - avoid_print
+   info - Don't invoke 'print' in production code - lib\features\forms\pdf\pdf_generator.dart:709:9 - avoid_print
+

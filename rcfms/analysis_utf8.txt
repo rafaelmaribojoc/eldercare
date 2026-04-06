@@ -1,0 +1,26 @@
+﻿Analyzing user_management_screen.dart...                        
+
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\features\admin\screens\user_management_screen.dart:1541:29 - deprecated_member_use
+
+flutter : 1 issue 
+found. (ran in 26.9s)
+At line:1 char:1
++ flutter analyze lib
+/features/admin/scree
+ns/user_management_sc
+reen.dar ...
++ ~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~
+    + CategoryInfo   
+           : NotSpe  
+  cified: (1 issue   
+  found. (ran in     
+26.9s):String) [    
+], RemoteExcepti    
+on
+    + FullyQualified 
+   ErrorId : Native  
+  CommandError
+ 

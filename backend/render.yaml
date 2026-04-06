@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: rcfms-backend
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    plan: starter
+    envVars:
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        sync: false
+      - key: PYTHON_ENV
+        value: production
+    healthCheckPath: /health
+    autoDeploy: true

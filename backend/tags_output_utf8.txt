@@ -1,0 +1,24 @@
+﻿--- Tags found in admission_slip.docx ---
+ - admission_date
+ - admission_time
+ - assigned_room
+ - case_number
+ - center_head_name
+ - center_head_signature_url
+ - civil_status
+ - client_age
+ - client_name
+ - complete_address
+ - educational_attainment
+ - medical_findings
+ - medical_staff_designation
+ - medical_staff_name
+ - medical_staff_name_signature_url
+ - nearest_relative
+ - noted_by_designation
+ - prepared_by
+ - prepared_by_designation
+ - prepared_by_signature_url
+ - referred_by
+ - referring_party_address
+ - religion

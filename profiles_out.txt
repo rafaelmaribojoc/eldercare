@@ -1,0 +1,16 @@
+Rosa Medical | Role: medical_staff | Unit: medical
+Kent Brylle Losare Alvarez | Role: social_staff | Unit: social
+Juan Homelife | Role: homelife_staff | Unit: homelife
+Medical Head | Role: medical_head | Unit: medical
+Homelife Head | Role: homelife_head | Unit: homelife
+Psych Head | Role: psych_head | Unit: psych
+Rafael Maribojoc | Role: social_staff | Unit: social
+Viel Han Apog | Role: psych_staff | Unit: psych
+Center Doctor, MD | Role: medical_center_doctor | Unit: medical
+Juana Gementiza, RN | Role: medical_staff | Unit: medical
+Nutri Personnel, RND | Role: nutrition_staff | Unit: nutrition
+Jason Oreal Moline, RND, MAEM | Role: nutrition_head | Unit: nutrition
+Nutri Staff, RND | Role: nutrition_staff | Unit: nutrition
+Candelaria Tingson | Role: center_head | Unit: None
+Super Administrator | Role: super_admin | Unit: None
+Social Unit Head | Role: social_head | Unit: social

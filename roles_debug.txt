@@ -1,0 +1,16 @@
+{
+  "Rosa Medical": [
+    {
+      "full_name": "Rosa Medical",
+      "role": "medical_staff",
+      "unit": "medical"
+    }
+  ],
+  "Social Unit Head": [
+    {
+      "full_name": "Social Unit Head",
+      "role": "social_head",
+      "unit": "social"
+    }
+  ]
+}
