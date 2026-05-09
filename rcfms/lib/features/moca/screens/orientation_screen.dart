@@ -327,7 +327,7 @@ class _OrientationScreenState extends State<OrientationScreen> {
                     children: [
                       Expanded(
                         child: OutlinedButton(
-                          onPressed: () => context.pop(),
+                          onPressed: _onBack,
                           child: Text(
                             'Back',
                             style: TextStyle(fontFamily: MocaColors.fontFamily),
@@ -337,27 +337,7 @@ class _OrientationScreenState extends State<OrientationScreen> {
                       const SizedBox(width: 8),
                       Expanded(
                         child: ElevatedButton(
-                          onPressed: () {
-                            context.read<MocaAssessmentBloc>().add(
-                                  MocaSaveSectionResult(
-                                    section: 'orientation',
-                                    score: totalScore,
-                                    maxScore: 6,
-                                    details: {
-                                      'date': _dateCorrect,
-                                      'month': _monthCorrect,
-                                      'year': _yearCorrect,
-                                      'day': _dayCorrect,
-                                      'place': _placeCorrect,
-                                      'city': _cityCorrect,
-                                    },
-                                  ),
-                                );
-                            context.read<MocaAssessmentBloc>().add(
-                                  MocaCompleteAssessment(),
-                                );
-                            context.go('/moca/complete');
-                          },
+                          onPressed: _onComplete,
                           style: ElevatedButton.styleFrom(
                             backgroundColor: MocaColors.orientationColor,
                           ),
@@ -394,7 +374,7 @@ class _OrientationScreenState extends State<OrientationScreen> {
                     ),
                   ),
                   OutlinedButton(
-                    onPressed: () => context.pop(),
+                    onPressed: _onBack,
                     child: Text(
                       'Back',
                       style: TextStyle(fontFamily: MocaColors.fontFamily),
@@ -402,27 +382,7 @@ class _OrientationScreenState extends State<OrientationScreen> {
                   ),
                   const SizedBox(width: 8),
                   ElevatedButton(
-                    onPressed: () {
-                      context.read<MocaAssessmentBloc>().add(
-                            MocaSaveSectionResult(
-                              section: 'orientation',
-                              score: totalScore,
-                              maxScore: 6,
-                              details: {
-                                'date': _dateCorrect,
-                                'month': _monthCorrect,
-                                'year': _yearCorrect,
-                                'day': _dayCorrect,
-                                'place': _placeCorrect,
-                                'city': _cityCorrect,
-                              },
-                            ),
-                          );
-                      context.read<MocaAssessmentBloc>().add(
-                            MocaCompleteAssessment(),
-                          );
-                      context.go('/moca/complete');
-                    },
+                    onPressed: _onComplete,
                     style: ElevatedButton.styleFrom(
                       backgroundColor: MocaColors.orientationColor,
                     ),
@@ -435,5 +395,53 @@ class _OrientationScreenState extends State<OrientationScreen> {
               ),
       ),
     );
+  }
+
+  void _onBack() {
+    context.go('/moca/delayed-recall');
+  }
+
+  Future<void> _onComplete() async {
+    if (totalScore == 0) {
+      final shouldContinue = await showDialog<bool>(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text('Confirm Continue'),
+          content: const Text(
+            'The score for this section is 0. Are you sure you want to continue?',
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context, false),
+              child: const Text('Cancel'),
+            ),
+            ElevatedButton(
+              onPressed: () => Navigator.pop(context, true),
+              child: const Text('Continue'),
+            ),
+          ],
+        ),
+      );
+
+      if (shouldContinue != true || !mounted) return;
+    }
+
+    context.read<MocaAssessmentBloc>().add(
+          MocaSaveSectionResult(
+            section: 'orientation',
+            score: totalScore,
+            maxScore: 6,
+            details: {
+              'date': _dateCorrect,
+              'month': _monthCorrect,
+              'year': _yearCorrect,
+              'day': _dayCorrect,
+              'place': _placeCorrect,
+              'city': _cityCorrect,
+            },
+          ),
+        );
+    context.read<MocaAssessmentBloc>().add(MocaCompleteAssessment());
+    context.go('/moca/complete');
   }
 }

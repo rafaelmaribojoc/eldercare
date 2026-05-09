@@ -350,6 +350,8 @@ class _DashboardScreenState extends State<DashboardScreen> with RouteAware {
       builder: (context, constraints) {
         final isWide = constraints.maxWidth > 900;
         final authState = context.read<AuthBloc>().state;
+        final isPsych = authState is AuthAuthenticated &&
+            authState.user.unit == 'psych';
         final canApprove = AppConstants.canApproveforms(
             authState is AuthAuthenticated ? authState.user.role : null);
 
@@ -399,6 +401,22 @@ class _DashboardScreenState extends State<DashboardScreen> with RouteAware {
               '/residents?filter=pre_admission'), // Filter by pre-admission?
         );
 
+        final mocaAssessmentCard = _StatCard(
+          icon: Icons.psychology,
+          iconColor: AppColors.unitPsych,
+          label: 'MoCA Assessment',
+          value: 'Start',
+          onTap: () => context.push('/residents?intent=moca'),
+        );
+
+        final mocaAnalyticsCard = _StatCard(
+          icon: Icons.analytics_outlined,
+          iconColor: AppColors.unitPsych,
+          label: 'MoCA Analytics',
+          value: 'View',
+          onTap: () => context.go('/moca/analytics'),
+        );
+
         final caseCompletenessCard = _StatCard(
           icon: Icons.fact_check_outlined,
           iconColor: AppColors.unitSocial,
@@ -409,6 +427,8 @@ class _DashboardScreenState extends State<DashboardScreen> with RouteAware {
 
         final cards = [
           residentsCard,
+          if (isPsych) mocaAssessmentCard,
+          if (isPsych) mocaAnalyticsCard,
           if (canApprove) pendingApprovalsCard,
           preAdmissionCard,
           completedCard,

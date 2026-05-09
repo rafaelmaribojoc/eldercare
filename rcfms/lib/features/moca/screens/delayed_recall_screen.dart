@@ -450,7 +450,7 @@ class _DelayedRecallScreenState extends State<DelayedRecallScreen> {
                     children: [
                       Expanded(
                         child: OutlinedButton(
-                          onPressed: () => context.pop(),
+                          onPressed: _onBack,
                           child: Text(
                             'Back',
                             style: TextStyle(fontFamily: MocaColors.fontFamily),
@@ -460,24 +460,7 @@ class _DelayedRecallScreenState extends State<DelayedRecallScreen> {
                       const SizedBox(width: 8),
                       Expanded(
                         child: ElevatedButton(
-                          onPressed: () {
-                            context.read<MocaAssessmentBloc>().add(
-                                  MocaSaveSectionResult(
-                                    section: 'delayedRecall',
-                                    score: totalScore,
-                                    maxScore: 5,
-                                    details: {
-                                      'uncued': _uncuedRecall,
-                                      'category': _categoryRecall,
-                                      'multiple_choice': _multipleChoiceRecall,
-                                    },
-                                  ),
-                                );
-                            context.read<MocaAssessmentBloc>().add(
-                                  MocaNextSection(),
-                                );
-                            context.go('/moca/orientation');
-                          },
+                          onPressed: _onContinue,
                           style: ElevatedButton.styleFrom(
                             backgroundColor: MocaColors.recallColor,
                           ),
@@ -514,7 +497,7 @@ class _DelayedRecallScreenState extends State<DelayedRecallScreen> {
                     ),
                   ),
                   OutlinedButton(
-                    onPressed: () => context.pop(),
+                    onPressed: _onBack,
                     child: Text(
                       'Back',
                       style: TextStyle(fontFamily: MocaColors.fontFamily),
@@ -522,22 +505,7 @@ class _DelayedRecallScreenState extends State<DelayedRecallScreen> {
                   ),
                   const SizedBox(width: 8),
                   ElevatedButton(
-                    onPressed: () {
-                      context.read<MocaAssessmentBloc>().add(
-                            MocaSaveSectionResult(
-                              section: 'delayedRecall',
-                              score: totalScore,
-                              maxScore: 5,
-                              details: {
-                                'uncued': _uncuedRecall,
-                                'category': _categoryRecall,
-                                'multiple_choice': _multipleChoiceRecall,
-                              },
-                            ),
-                          );
-                      context.read<MocaAssessmentBloc>().add(MocaNextSection());
-                      context.go('/moca/orientation');
-                    },
+                    onPressed: _onContinue,
                     style: ElevatedButton.styleFrom(
                       backgroundColor: MocaColors.recallColor,
                     ),
@@ -550,5 +518,50 @@ class _DelayedRecallScreenState extends State<DelayedRecallScreen> {
               ),
       ),
     );
+  }
+
+  void _onBack() {
+    context.go('/moca/abstraction');
+  }
+
+  Future<void> _onContinue() async {
+    if (totalScore == 0) {
+      final shouldContinue = await showDialog<bool>(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text('Confirm Continue'),
+          content: const Text(
+            'The score for this section is 0. Are you sure you want to continue?',
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context, false),
+              child: const Text('Cancel'),
+            ),
+            ElevatedButton(
+              onPressed: () => Navigator.pop(context, true),
+              child: const Text('Continue'),
+            ),
+          ],
+        ),
+      );
+
+      if (shouldContinue != true || !mounted) return;
+    }
+
+    context.read<MocaAssessmentBloc>().add(
+          MocaSaveSectionResult(
+            section: 'delayedRecall',
+            score: totalScore,
+            maxScore: 5,
+            details: {
+              'uncued': _uncuedRecall,
+              'category': _categoryRecall,
+              'multiple_choice': _multipleChoiceRecall,
+            },
+          ),
+        );
+    context.read<MocaAssessmentBloc>().add(MocaNextSection());
+    context.go('/moca/orientation');
   }
 }

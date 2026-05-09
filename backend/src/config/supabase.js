@@ -1,14 +1,26 @@
 const { createClient } = require('@supabase/supabase-js');
 
-// Regular client (uses anon key)
-const supabase = createClient(
-  process.env.SUPABASE_URL,
-  process.env.SUPABASE_ANON_KEY
-);
+const supabaseUrl = process.env.SUPABASE_URL;
+// Prefer anon key for regular client, but allow fallback in dev setups where only
+// the service role key is configured.
+const supabaseKey =
+  process.env.SUPABASE_ANON_KEY ?? process.env.SUPABASE_SERVICE_ROLE_KEY;
+
+if (!supabaseUrl) {
+  throw new Error('SUPABASE_URL is required.');
+}
+if (!supabaseKey) {
+  throw new Error(
+    'A Supabase key is required. Set SUPABASE_ANON_KEY (recommended) or SUPABASE_SERVICE_ROLE_KEY.'
+  );
+}
+
+// Regular client (uses anon key when available)
+const supabase = createClient(supabaseUrl, supabaseKey);
 
 // Admin client (uses service role key - bypasses RLS)
 const supabaseAdmin = createClient(
-  process.env.SUPABASE_URL,
+  supabaseUrl,
   process.env.SUPABASE_SERVICE_ROLE_KEY,
   {
     auth: {

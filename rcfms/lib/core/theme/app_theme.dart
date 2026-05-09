@@ -42,10 +42,11 @@ class AppTheme {
   // TYPOGRAPHY
   // ============================================================================
 
-  static const String _fontFamily = 'Inter';
+  static const String _fontFamily = 'Poppins';
 
   /// Text theme with proper scale and line heights
-  static TextTheme get _textTheme => GoogleFonts.interTextTheme(const TextTheme(
+  static TextTheme get _textTheme =>
+      GoogleFonts.poppinsTextTheme(const TextTheme(
         // Display styles - Large hero text
         displayLarge: TextStyle(
           fontSize: 48,
@@ -164,7 +165,7 @@ class AppTheme {
 
   /// Dark text theme
   static TextTheme get _textThemeDark =>
-      GoogleFonts.interTextTheme(const TextTheme(
+      GoogleFonts.poppinsTextTheme(const TextTheme(
         // Display styles
         displayLarge: TextStyle(
           fontSize: 48,

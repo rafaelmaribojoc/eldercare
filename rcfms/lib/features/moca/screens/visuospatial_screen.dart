@@ -393,13 +393,7 @@ class _VisuospatialScreenState extends State<VisuospatialScreen>
         ),
         const SizedBox(width: 12),
         OutlinedButton(
-          onPressed: () {
-            if (context.canPop()) {
-              context.pop();
-            } else {
-              context.go('/dashboard');
-            }
-          },
+          onPressed: _onBack,
           child: Text(
             'Back',
             style: TextStyle(fontFamily: MocaColors.fontFamily),
@@ -448,13 +442,7 @@ class _VisuospatialScreenState extends State<VisuospatialScreen>
           children: [
             Expanded(
               child: OutlinedButton(
-                onPressed: () {
-                  if (context.canPop()) {
-                    context.pop();
-                  } else {
-                    context.go('/dashboard');
-                  }
-                },
+                onPressed: _onBack,
                 child: Text(
                   'Back',
                   style: TextStyle(
@@ -487,7 +475,37 @@ class _VisuospatialScreenState extends State<VisuospatialScreen>
     );
   }
 
-  void _onContinue() {
+  Future<void> _onContinue() async {
+    // If section has tabs, Continue advances through tabs first.
+    if (_tabController.index < _tabController.length - 1) {
+      _tabController.animateTo(_tabController.index + 1);
+      return;
+    }
+
+    if (totalScore == 0) {
+      final shouldContinue = await showDialog<bool>(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text('Confirm Continue'),
+          content: const Text(
+            'The score for this section is 0. Are you sure you want to continue?',
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context, false),
+              child: const Text('Cancel'),
+            ),
+            ElevatedButton(
+              onPressed: () => Navigator.pop(context, true),
+              child: const Text('Continue'),
+            ),
+          ],
+        ),
+      );
+
+      if (shouldContinue != true || !mounted) return;
+    }
+
     context.read<MocaAssessmentBloc>().add(
           MocaSaveSectionResult(
             section: 'visuospatial',
@@ -504,6 +522,21 @@ class _VisuospatialScreenState extends State<VisuospatialScreen>
         );
     context.read<MocaAssessmentBloc>().add(MocaNextSection());
     context.go('/moca/naming');
+  }
+
+  void _onBack() {
+    // If section has tabs, Back goes to the previous tab first.
+    if (_tabController.index > 0) {
+      _tabController.animateTo(_tabController.index - 1);
+      return;
+    }
+
+    // First MoCA section: return to where the assessment started.
+    if (context.canPop()) {
+      context.pop();
+    } else {
+      context.go('/dashboard');
+    }
   }
 }
 

@@ -347,7 +347,7 @@ class _MemoryScreenState extends State<MemoryScreen> {
               children: [
                 Expanded(
                   child: OutlinedButton(
-                    onPressed: () => context.pop(),
+                    onPressed: _onBack,
                     child: Text(
                       'Back',
                       style: TextStyle(
@@ -397,5 +397,9 @@ class _MemoryScreenState extends State<MemoryScreen> {
         );
     context.read<MocaAssessmentBloc>().add(MocaNextSection());
     context.go('/moca/attention');
+  }
+
+  void _onBack() {
+    context.go('/moca/naming');
   }
 }

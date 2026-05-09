@@ -314,7 +314,7 @@ class _FormListScreenState extends State<FormListScreen>
     if (selectedForm == null) return;
 
     // 3. Pick file (image or PDF)
-    final result = await FilePicker.platform.pickFiles(
+    final result = await FilePicker.pickFiles(
       type: FileType.custom,
       allowedExtensions: ['jpg', 'jpeg', 'png', 'pdf'],
       withData: true,

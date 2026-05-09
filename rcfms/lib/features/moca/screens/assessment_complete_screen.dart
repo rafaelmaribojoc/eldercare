@@ -6,7 +6,6 @@ import '../../../core/theme/app_colors.dart';
 import '../bloc/moca_assessment_bloc.dart';
 import '../constants/moca_constants.dart';
 import '../constants/moca_colors.dart';
-import '../services/dementia_probability_calculator.dart';
 import '../widgets/score_indicator.dart';
 
 class AssessmentCompleteScreen extends StatefulWidget {
@@ -89,11 +88,6 @@ class _AssessmentCompleteScreenState extends State<AssessmentCompleteScreen> {
         final totalScore = assessment.totalScore;
         final adjustedScore = assessment.adjustedScore;
         final isNormal = adjustedScore >= MocaConstants.normalThreshold;
-
-        // Calculate dementia probability
-        final probabilityResult = DementiaProbabilityCalculator.calculate(
-          adjustedScore,
-        );
 
         return Scaffold(
           body: SafeArea(
@@ -237,105 +231,6 @@ class _AssessmentCompleteScreenState extends State<AssessmentCompleteScreen> {
                                     ),
                                   ),
                                 ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-
-                    const SizedBox(height: 24),
-
-                    // Risk Assessment Card
-                    Card(
-                      child: Padding(
-                        padding: const EdgeInsets.all(20),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              children: [
-                                Icon(
-                                  Icons.analytics_outlined,
-                                  color: MocaColors.primary,
-                                  size: 22,
-                                ),
-                                const SizedBox(width: 8),
-                                const Text(
-                                  'Pagsusuri ng Panganib',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 18,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(height: 16),
-                            // Risk Level Badge
-                            Container(
-                              width: double.infinity,
-                              padding: const EdgeInsets.all(12),
-                              decoration: BoxDecoration(
-                                color: _getRiskColor(
-                                  probabilityResult.riskLevel,
-                                ).withOpacity(0.1),
-                                borderRadius: BorderRadius.circular(12),
-                                border: Border.all(
-                                  color: _getRiskColor(
-                                    probabilityResult.riskLevel,
-                                  ).withOpacity(0.3),
-                                ),
-                              ),
-                              child: Column(
-                                children: [
-                                  Text(
-                                    probabilityResult.riskLevel,
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 16,
-                                      color: _getRiskColor(
-                                        probabilityResult.riskLevel,
-                                      ),
-                                    ),
-                                  ),
-                                  const SizedBox(height: 4),
-                                  Text(
-                                    probabilityResult.riskDescription,
-                                    textAlign: TextAlign.center,
-                                    style: const TextStyle(
-                                      fontSize: 12,
-                                      color: MocaColors.textSecondary,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            const SizedBox(height: 16),
-                            // Probability Bars
-                            _buildProbabilityBar(
-                              'Normal',
-                              probabilityResult.normalProbability,
-                              MocaColors.success,
-                            ),
-                            const SizedBox(height: 8),
-                            _buildProbabilityBar(
-                              'MCI',
-                              probabilityResult.mciProbability,
-                              MocaColors.warning,
-                            ),
-                            const SizedBox(height: 8),
-                            _buildProbabilityBar(
-                              'Dementia',
-                              probabilityResult.dementiaProbability,
-                              MocaColors.error,
-                            ),
-                            const SizedBox(height: 12),
-                            const Text(
-                              'Tandaan: Ang mga probabilidad na ito ay mga tantiya batay sa MoCA scores. Ang pormal na diagnosis ay nangangailangan ng komprehensibong klinikal na ebalwasyon.',
-                              style: TextStyle(
-                                fontSize: 10,
-                                color: MocaColors.textSecondary,
-                                fontStyle: FontStyle.italic,
                               ),
                             ),
                           ],
@@ -564,56 +459,5 @@ class _AssessmentCompleteScreenState extends State<AssessmentCompleteScreen> {
     );
   }
 
-  Widget _buildProbabilityBar(String label, double probability, Color color) {
-    final percentage = (probability * 100).toStringAsFixed(1);
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              label,
-              style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w500),
-            ),
-            Text(
-              '$percentage%',
-              style: TextStyle(
-                fontSize: 13,
-                fontWeight: FontWeight.bold,
-                color: color,
-              ),
-            ),
-          ],
-        ),
-        const SizedBox(height: 4),
-        ClipRRect(
-          borderRadius: BorderRadius.circular(4),
-          child: LinearProgressIndicator(
-            value: probability,
-            backgroundColor: color.withOpacity(0.1),
-            valueColor: AlwaysStoppedAnimation<Color>(color),
-            minHeight: 8,
-          ),
-        ),
-      ],
-    );
-  }
-
-  Color _getRiskColor(String riskLevel) {
-    switch (riskLevel) {
-      case 'Low Risk':
-        return MocaColors.success;
-      case 'Low-Moderate Risk':
-        return const Color(0xFF8BC34A); // Light green
-      case 'Moderate Risk':
-        return MocaColors.warning;
-      case 'High Risk':
-        return const Color(0xFFFF5722); // Deep orange
-      case 'Very High Risk':
-        return MocaColors.error;
-      default:
-        return MocaColors.textSecondary;
-    }
-  }
+  // (Risk/probability UI removed)
 }

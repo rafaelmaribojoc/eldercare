@@ -10,6 +10,58 @@ class MocaRepository {
   MocaRepository({SupabaseClient? client})
       : _client = client ?? Supabase.instance.client;
 
+  /// Fetch assessments within a date range (completed only).
+  ///
+  /// Note: Supabase/PostgREST aggregation isn't used here; the caller computes
+  /// analytics client-side from DB rows.
+  Future<List<MocaAssessmentModel>> getAssessmentsInRange({
+    required DateTime from,
+    DateTime? to,
+    int limit = 1000,
+    String? clinicianId,
+  }) async {
+    var query = _client
+        .from('moca_assessments')
+        .select()
+        .not('completed_at', 'is', null)
+        .gte('completed_at', from.toIso8601String());
+
+    if (to != null) {
+      query = query.lte('completed_at', to.toIso8601String());
+    }
+    if (clinicianId != null && clinicianId.isNotEmpty) {
+      query = query.eq('clinician_id', clinicianId);
+    }
+
+    final response =
+        await query.order('completed_at', ascending: false).limit(limit);
+
+    return (response as List)
+        .map((json) => MocaAssessmentModel.fromJson(_convertDbResponse(json)))
+        .toList();
+  }
+
+  /// Get a map of clinician_id -> clinician full_name from `profiles`.
+  Future<Map<String, String>> getClinicianNames({
+    String? unit,
+  }) async {
+    var query = _client.from('profiles').select('id, full_name');
+    if (unit != null && unit.isNotEmpty) {
+      query = query.eq('unit', unit);
+    }
+
+    final response = await query;
+    final map = <String, String>{};
+    for (final row in (response as List)) {
+      final id = row['id']?.toString();
+      final name = row['full_name']?.toString();
+      if (id != null && id.isNotEmpty && name != null && name.isNotEmpty) {
+        map[id] = name;
+      }
+    }
+    return map;
+  }
+
   /// Save a completed MoCA assessment
   Future<MocaAssessmentModel> saveAssessment(
       MocaAssessmentModel assessment) async {

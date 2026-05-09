@@ -537,7 +537,7 @@ class _AttentionScreenState extends State<AttentionScreen>
               children: [
                 Expanded(
                   child: OutlinedButton(
-                    onPressed: () => context.pop(),
+                    onPressed: _onBack,
                     child: Text(
                       'Back',
                       style: TextStyle(
@@ -572,7 +572,37 @@ class _AttentionScreenState extends State<AttentionScreen>
     );
   }
 
-  void _onContinue() {
+  Future<void> _onContinue() async {
+    // If section has tabs, Continue advances through tabs first.
+    if (_tabController.index < _tabController.length - 1) {
+      _tabController.animateTo(_tabController.index + 1);
+      return;
+    }
+
+    if (totalScore == 0) {
+      final shouldContinue = await showDialog<bool>(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text('Confirm Continue'),
+          content: const Text(
+            'The score for this section is 0. Are you sure you want to continue?',
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context, false),
+              child: const Text('Cancel'),
+            ),
+            ElevatedButton(
+              onPressed: () => Navigator.pop(context, true),
+              child: const Text('Continue'),
+            ),
+          ],
+        ),
+      );
+
+      if (shouldContinue != true || !mounted) return;
+    }
+
     context.read<MocaAssessmentBloc>().add(
           MocaSaveSectionResult(
             section: 'attention',
@@ -588,5 +618,16 @@ class _AttentionScreenState extends State<AttentionScreen>
         );
     context.read<MocaAssessmentBloc>().add(MocaNextSection());
     context.go('/moca/language');
+  }
+
+  void _onBack() {
+    // If section has tabs, Back goes to the previous tab first.
+    if (_tabController.index > 0) {
+      _tabController.animateTo(_tabController.index - 1);
+      return;
+    }
+
+    // Previous section.
+    context.go('/moca/memory');
   }
 }

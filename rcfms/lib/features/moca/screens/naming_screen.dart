@@ -197,22 +197,12 @@ class _NamingScreenState extends State<NamingScreen> {
               ),
             ),
             OutlinedButton(
-              onPressed: () => context.pop(),
+              onPressed: _onBack,
               child: const Text('Back'),
             ),
             const SizedBox(width: 8),
             ElevatedButton(
-              onPressed: () {
-                context.read<MocaAssessmentBloc>().add(
-                      MocaSaveSectionResult(
-                        section: 'naming',
-                        score: totalScore,
-                        maxScore: 3,
-                      ),
-                    );
-                context.read<MocaAssessmentBloc>().add(MocaNextSection());
-                context.go('/moca/memory');
-              },
+              onPressed: _onContinue,
               style: ElevatedButton.styleFrom(
                 backgroundColor: MocaColors.namingColor,
               ),
@@ -222,5 +212,45 @@ class _NamingScreenState extends State<NamingScreen> {
         ),
       ),
     );
+  }
+
+  void _onBack() {
+    context.go('/moca/visuospatial');
+  }
+
+  Future<void> _onContinue() async {
+    if (totalScore == 0) {
+      final shouldContinue = await showDialog<bool>(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text('Confirm Continue'),
+          content: const Text(
+            'The score for this section is 0. Are you sure you want to continue?',
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context, false),
+              child: const Text('Cancel'),
+            ),
+            ElevatedButton(
+              onPressed: () => Navigator.pop(context, true),
+              child: const Text('Continue'),
+            ),
+          ],
+        ),
+      );
+
+      if (shouldContinue != true || !mounted) return;
+    }
+
+    context.read<MocaAssessmentBloc>().add(
+          MocaSaveSectionResult(
+            section: 'naming',
+            score: totalScore,
+            maxScore: 3,
+          ),
+        );
+    context.read<MocaAssessmentBloc>().add(MocaNextSection());
+    context.go('/moca/memory');
   }
 }

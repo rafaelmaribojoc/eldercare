@@ -14,6 +14,7 @@ import '../../../data/models/resident_model.dart';
 import '../../../data/models/ward_model.dart';
 import '../../../data/repositories/resident_repository.dart';
 import '../../auth/bloc/auth_bloc.dart';
+import '../../moca/bloc/moca_assessment_bloc.dart';
 import 'add_resident_screen.dart'; // Import AddResidentScreen
 import '../widgets/resident_sidebar.dart';
 import 'transfer_resident_dialog.dart';
@@ -21,10 +22,12 @@ import '../../../core/widgets/custom_error_dialog.dart';
 
 class ResidentsListScreen extends StatefulWidget {
   final String? initialFilter;
+  final String? intent;
 
   const ResidentsListScreen({
     super.key,
     this.initialFilter,
+    this.intent,
   });
 
   @override
@@ -511,11 +514,14 @@ class _ResidentsListScreenState extends State<ResidentsListScreen> {
                 if (_selectedResidentIds.isNotEmpty) {
                   _toggleSelection(resident.id);
                 } else {
+                  if (widget.intent == 'moca') {
+                    _startMocaAssessment(resident);
+                    return;
+                  }
+
                   final result = await context
                       .push<bool?>('/residents/${resident.id}?mode=view');
-                  if (result == true) {
-                    _loadResidents();
-                  }
+                  if (result == true) _loadResidents();
                 }
               },
               onLongPress: availableWidth >= 800
@@ -785,6 +791,11 @@ class _ResidentsListScreenState extends State<ResidentsListScreen> {
         if (_selectedResidentIds.isNotEmpty) {
           _toggleSelection(resident.id);
         } else {
+          if (widget.intent == 'moca') {
+            _startMocaAssessment(resident);
+            return;
+          }
+
           final result =
               await context.push<bool?>('/residents/${resident.id}$mode');
           if (result == true) {
@@ -794,6 +805,38 @@ class _ResidentsListScreenState extends State<ResidentsListScreen> {
       },
       onAction: (action) => _handleResidentAction(action, resident),
     );
+  }
+
+  void _startMocaAssessment(ResidentModel resident) {
+    final authState = context.read<AuthBloc>().state;
+    final user = authState is AuthAuthenticated ? authState.user : null;
+
+    if (user?.unit != 'psych') {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content:
+              Text('Only Psychological Services can conduct MoCA assessments.'),
+          backgroundColor: AppColors.error,
+        ),
+      );
+      return;
+    }
+
+    const educationYears = 0;
+
+    context.read<MocaAssessmentBloc>().add(
+          MocaStartAssessment(
+            residentId: resident.id,
+            clinicianId: user?.id,
+            residentName: resident.fullName,
+            residentSex: resident.gender,
+            residentBirthday: resident.dateOfBirth,
+            educationYears: educationYears,
+            educationAdjustment: educationYears < 12,
+          ),
+        );
+
+    context.go('/moca/visuospatial');
   }
 
   Widget _buildEmptyState() {

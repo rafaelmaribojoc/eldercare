@@ -461,7 +461,7 @@ class _LanguageScreenState extends State<LanguageScreen>
                     children: [
                       Expanded(
                         child: OutlinedButton(
-                          onPressed: () => context.pop(),
+                          onPressed: _onBack,
                           child: Text(
                             'Back',
                             style: TextStyle(fontFamily: MocaColors.fontFamily),
@@ -471,24 +471,7 @@ class _LanguageScreenState extends State<LanguageScreen>
                       const SizedBox(width: 8),
                       Expanded(
                         child: ElevatedButton(
-                          onPressed: () {
-                            context.read<MocaAssessmentBloc>().add(
-                                  MocaSaveSectionResult(
-                                    section: 'language',
-                                    score: totalScore,
-                                    maxScore: 3,
-                                    details: {
-                                      'sentence1': _sentence1Correct,
-                                      'sentence2': _sentence2Correct,
-                                      'fluency_count': _wordCount,
-                                    },
-                                  ),
-                                );
-                            context.read<MocaAssessmentBloc>().add(
-                                  MocaNextSection(),
-                                );
-                            context.go('/moca/abstraction');
-                          },
+                          onPressed: _onContinue,
                           style: ElevatedButton.styleFrom(
                             backgroundColor: MocaColors.languageColor,
                           ),
@@ -525,7 +508,7 @@ class _LanguageScreenState extends State<LanguageScreen>
                     ),
                   ),
                   OutlinedButton(
-                    onPressed: () => context.pop(),
+                    onPressed: _onBack,
                     child: Text(
                       'Back',
                       style: TextStyle(fontFamily: MocaColors.fontFamily),
@@ -533,22 +516,7 @@ class _LanguageScreenState extends State<LanguageScreen>
                   ),
                   const SizedBox(width: 8),
                   ElevatedButton(
-                    onPressed: () {
-                      context.read<MocaAssessmentBloc>().add(
-                            MocaSaveSectionResult(
-                              section: 'language',
-                              score: totalScore,
-                              maxScore: 3,
-                              details: {
-                                'sentence1': _sentence1Correct,
-                                'sentence2': _sentence2Correct,
-                                'fluency_count': _wordCount,
-                              },
-                            ),
-                          );
-                      context.read<MocaAssessmentBloc>().add(MocaNextSection());
-                      context.go('/moca/abstraction');
-                    },
+                    onPressed: _onContinue,
                     style: ElevatedButton.styleFrom(
                       backgroundColor: MocaColors.languageColor,
                     ),
@@ -561,5 +529,63 @@ class _LanguageScreenState extends State<LanguageScreen>
               ),
       ),
     );
+  }
+
+  Future<void> _onContinue() async {
+    // If section has tabs, Continue advances through tabs first.
+    if (_tabController.index < _tabController.length - 1) {
+      _tabController.animateTo(_tabController.index + 1);
+      return;
+    }
+
+    if (totalScore == 0) {
+      final shouldContinue = await showDialog<bool>(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text('Confirm Continue'),
+          content: const Text(
+            'The score for this section is 0. Are you sure you want to continue?',
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context, false),
+              child: const Text('Cancel'),
+            ),
+            ElevatedButton(
+              onPressed: () => Navigator.pop(context, true),
+              child: const Text('Continue'),
+            ),
+          ],
+        ),
+      );
+
+      if (shouldContinue != true || !mounted) return;
+    }
+
+    context.read<MocaAssessmentBloc>().add(
+          MocaSaveSectionResult(
+            section: 'language',
+            score: totalScore,
+            maxScore: 3,
+            details: {
+              'sentence1': _sentence1Correct,
+              'sentence2': _sentence2Correct,
+              'fluency_count': _wordCount,
+            },
+          ),
+        );
+    context.read<MocaAssessmentBloc>().add(MocaNextSection());
+    context.go('/moca/abstraction');
+  }
+
+  void _onBack() {
+    // If section has tabs, Back goes to the previous tab first.
+    if (_tabController.index > 0) {
+      _tabController.animateTo(_tabController.index - 1);
+      return;
+    }
+
+    // Previous section.
+    context.go('/moca/attention');
   }
 }

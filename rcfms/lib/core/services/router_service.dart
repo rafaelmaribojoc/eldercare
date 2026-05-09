@@ -50,6 +50,7 @@ import '../../features/moca/screens/abstraction_screen.dart';
 import '../../features/moca/screens/delayed_recall_screen.dart';
 import '../../features/moca/screens/orientation_screen.dart';
 import '../../features/moca/screens/assessment_complete_screen.dart';
+import '../../features/moca/screens/moca_analytics_screen.dart';
 
 void _log(String message) {
   if (kDebugMode) {
@@ -210,8 +211,12 @@ class RouterService {
             name: 'residents',
             pageBuilder: (context, state) {
               final filter = state.uri.queryParameters['filter'];
+              final intent = state.uri.queryParameters['intent'];
               return NoTransitionPage(
-                child: ResidentsListScreen(initialFilter: filter),
+                child: ResidentsListScreen(
+                  initialFilter: filter,
+                  intent: intent,
+                ),
               );
             },
             routes: [
@@ -476,6 +481,11 @@ class RouterService {
         ],
       ),
 
+      GoRoute(
+        path: '/moca/analytics',
+        name: 'moca-analytics',
+        builder: (context, state) => const MocaAnalyticsScreen(),
+      ),
       // MoCA-P Assessment routes (flat structure to avoid navigator key conflicts)
       // /moca redirects to dashboard - assessments must start from a resident
       GoRoute(
