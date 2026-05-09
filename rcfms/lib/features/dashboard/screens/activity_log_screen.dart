@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import '../../auth/bloc/auth_bloc.dart';
@@ -79,7 +80,7 @@ class _ActivityLogScreenState extends State<ActivityLogScreen> {
       appBar: AppBar(
         title: const Text('Activity Log'),
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
+          icon: const Icon(LucideIcons.arrowLeft),
           onPressed: () => context.pop(),
         ),
       ),

@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -87,7 +88,7 @@ class _ResidentDetailScreenState extends State<ResidentDetailScreen> {
       return Scaffold(
         appBar: AppBar(
           leading: IconButton(
-            icon: const Icon(Icons.arrow_back),
+            icon: const Icon(LucideIcons.arrowLeft),
             onPressed: () => context.pop(_hasChanges),
           ),
           title: const Text('Resident'),
@@ -96,7 +97,8 @@ class _ResidentDetailScreenState extends State<ResidentDetailScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Icon(Icons.error_outline, size: 64, color: AppColors.error),
+              const Icon(LucideIcons.circleAlert,
+                  size: 64, color: AppColors.error),
               const SizedBox(height: 16),
               Text(_error ?? 'Could not load resident details.'),
               const SizedBox(height: 16),
@@ -130,7 +132,7 @@ class _ResidentDetailScreenState extends State<ResidentDetailScreen> {
           // Header
           SliverAppBar(
             leading: IconButton(
-              icon: const Icon(Icons.arrow_back, color: Colors.white),
+              icon: const Icon(LucideIcons.arrowLeft, color: Colors.white),
               onPressed: () => context.pop(_hasChanges),
             ),
             expandedHeight: headerHeight,
@@ -203,7 +205,7 @@ class _ResidentDetailScreenState extends State<ResidentDetailScreen> {
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               Icon(
-                                Icons.location_on,
+                                LucideIcons.mapPin,
                                 size: isSmallScreen ? 14 : 16,
                                 color: Colors.white,
                               ),
@@ -232,7 +234,7 @@ class _ResidentDetailScreenState extends State<ResidentDetailScreen> {
             actions: [
               // Print Summary Button (New)
               IconButton(
-                icon: const Icon(Icons.print, color: Colors.white),
+                icon: const Icon(LucideIcons.printer, color: Colors.white),
                 onPressed: () => PdfService.generateResidentProfile(resident),
                 tooltip: 'Print Profile Summary',
               ),
@@ -245,7 +247,7 @@ class _ResidentDetailScreenState extends State<ResidentDetailScreen> {
                       .user
                       .unit))
                 IconButton(
-                  icon: const Icon(Icons.edit, color: Colors.white),
+                  icon: const Icon(LucideIcons.pencil, color: Colors.white),
                   onPressed: () async {
                     await context.pushNamed(
                       'edit-resident',
@@ -257,7 +259,8 @@ class _ResidentDetailScreenState extends State<ResidentDetailScreen> {
                   tooltip: 'Edit Profile',
                 ),
               IconButton(
-                icon: const Icon(Icons.timeline, color: Colors.white),
+                icon: const Icon(LucideIcons.chartNoAxesGantt,
+                    color: Colors.white),
                 onPressed: () => context.push(
                   '/residents/${resident.id}/timeline',
                 ),
@@ -286,7 +289,7 @@ class _ResidentDetailScreenState extends State<ResidentDetailScreen> {
                       children: [
                         Row(
                           children: [
-                            const Icon(Icons.info_outline,
+                            const Icon(LucideIcons.info,
                                 color: AppColors.warning),
                             const SizedBox(width: 12),
                             Expanded(
@@ -324,7 +327,7 @@ class _ResidentDetailScreenState extends State<ResidentDetailScreen> {
                                   _loadResident(); // Reload on success
                                 }
                               },
-                              icon: const Icon(Icons.login),
+                              icon: const Icon(LucideIcons.logIn),
                               label: Text(resident.status == 'discharged'
                                   ? 'Re-admit Resident'
                                   : 'Admit Resident'),
@@ -346,7 +349,7 @@ class _ResidentDetailScreenState extends State<ResidentDetailScreen> {
                 _buildSectionCard(
                   context,
                   title: 'Basic Information',
-                  icon: Icons.person,
+                  icon: LucideIcons.user,
                   children: [
                     _buildInfoRow(
                         'Date of Birth',
@@ -384,7 +387,7 @@ class _ResidentDetailScreenState extends State<ResidentDetailScreen> {
                       _buildSectionCard(
                         context,
                         title: 'Address Information',
-                        icon: Icons.location_on,
+                        icon: LucideIcons.mapPin,
                         children: [
                           if (resident.streetAddress != null)
                             _buildInfoRow('Street', resident.streetAddress!),
@@ -408,7 +411,7 @@ class _ResidentDetailScreenState extends State<ResidentDetailScreen> {
                       _buildSectionCard(
                         context,
                         title: 'Family Background',
-                        icon: Icons.people,
+                        icon: LucideIcons.users,
                         children: [
                           if (resident.nearestRelativeName != null)
                             _buildInfoRow('Nearest Relative',
@@ -445,7 +448,7 @@ class _ResidentDetailScreenState extends State<ResidentDetailScreen> {
                       _buildSectionCard(
                         context,
                         title: 'Emergency Contact',
-                        icon: Icons.emergency,
+                        icon: LucideIcons.siren,
                         children: [
                           _buildInfoRow('Name', resident.emergencyContactName!),
                           if (resident.emergencyContactPhone != null)
@@ -464,7 +467,7 @@ class _ResidentDetailScreenState extends State<ResidentDetailScreen> {
                 _buildSectionCard(
                   context,
                   title: 'Medical Information',
-                  icon: Icons.medical_information,
+                  icon: LucideIcons.clipboardPlus,
                   children: [
                     if (resident.primaryDiagnosis != null)
                       _buildInfoRow(
@@ -498,7 +501,7 @@ class _ResidentDetailScreenState extends State<ResidentDetailScreen> {
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () => context.push('/residents/${resident.id}/timeline'),
-        icon: const Icon(Icons.timeline),
+        icon: const Icon(LucideIcons.chartNoAxesGantt),
         label: const Text('View Timeline'),
       ),
     );
@@ -546,7 +549,7 @@ class _ResidentDetailScreenState extends State<ResidentDetailScreen> {
     if (canCreateForms) {
       row1Buttons.add(Expanded(
         child: _QuickActionButton(
-          icon: Icons.description,
+          icon: LucideIcons.fileText,
           label: 'New Form',
           color: AppColors.primary,
           compact: screenWidth < 360,
@@ -557,7 +560,7 @@ class _ResidentDetailScreenState extends State<ResidentDetailScreen> {
     if (canMakeNotes) {
       row1Buttons.add(Expanded(
         child: _QuickActionButton(
-          icon: Icons.note_add,
+          icon: LucideIcons.filePlus,
           label: 'Quick Note',
           color: AppColors.warning,
           compact: screenWidth < 360,
@@ -576,7 +579,7 @@ class _ResidentDetailScreenState extends State<ResidentDetailScreen> {
     }
     row1Buttons.add(Expanded(
       child: _QuickActionButton(
-        icon: Icons.folder_open,
+        icon: LucideIcons.folderOpen,
         label: 'Forms',
         color: AppColors.secondary,
         compact: screenWidth < 360,
@@ -585,7 +588,7 @@ class _ResidentDetailScreenState extends State<ResidentDetailScreen> {
     ));
     row1Buttons.add(Expanded(
       child: _QuickActionButton(
-        icon: Icons.picture_as_pdf,
+        icon: LucideIcons.fileText,
         label: 'Export',
         color: AppColors.accent,
         compact: screenWidth < 360,
@@ -612,7 +615,7 @@ class _ResidentDetailScreenState extends State<ResidentDetailScreen> {
                   user?.role != AppConstants.roleSuperAdmin)
                 Expanded(
                   child: _QuickActionButton(
-                    icon: Icons.psychology,
+                    icon: LucideIcons.brain,
                     label: 'New Assessment',
                     color: MocaColors.primary,
                     compact: screenWidth < 360,
@@ -624,7 +627,7 @@ class _ResidentDetailScreenState extends State<ResidentDetailScreen> {
                 SizedBox(width: buttonSpacing),
               Expanded(
                 child: _QuickActionButton(
-                  icon: Icons.history,
+                  icon: LucideIcons.history,
                   label: 'Timeline',
                   color: AppColors.info,
                   compact: screenWidth < 360,
@@ -641,7 +644,7 @@ class _ResidentDetailScreenState extends State<ResidentDetailScreen> {
             children: [
               Expanded(
                 child: _QuickActionButton(
-                  icon: Icons.swap_horiz,
+                  icon: LucideIcons.arrowLeftRight,
                   label: 'Transfer Ward',
                   color: AppColors.warning,
                   compact: screenWidth < 360,
@@ -652,7 +655,7 @@ class _ResidentDetailScreenState extends State<ResidentDetailScreen> {
                 SizedBox(width: buttonSpacing),
                 Expanded(
                   child: _QuickActionButton(
-                    icon: Icons.history,
+                    icon: LucideIcons.history,
                     label: 'Timeline',
                     color: AppColors.info,
                     compact: screenWidth < 360,
@@ -723,7 +726,7 @@ class _ResidentDetailScreenState extends State<ResidentDetailScreen> {
           builder: (dialogContext) => AlertDialog(
             title: Row(
               children: [
-                Icon(Icons.picture_as_pdf, color: AppColors.accent),
+                Icon(LucideIcons.fileText, color: AppColors.accent),
                 const SizedBox(width: 8),
                 const Text('Export Profile'),
               ],
@@ -746,15 +749,15 @@ class _ResidentDetailScreenState extends State<ResidentDetailScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      _buildExportItem(Icons.person, 'Basic Information'),
+                      _buildExportItem(LucideIcons.user, 'Basic Information'),
                       _buildExportItem(
-                          Icons.medical_information, 'Medical Records'),
-                      _buildExportItem(Icons.emergency, 'Emergency Contact'),
+                          LucideIcons.clipboardPlus, 'Medical Records'),
+                      _buildExportItem(LucideIcons.siren, 'Emergency Contact'),
                       _buildExportItem(
-                          Icons.description, '${forms.length} Form(s)'),
-                      _buildExportItem(Icons.psychology,
+                          LucideIcons.fileText, '${forms.length} Form(s)'),
+                      _buildExportItem(LucideIcons.brain,
                           '${mocaAssessments.length} MoCA Assessment(s)'),
-                      _buildExportItem(Icons.timeline,
+                      _buildExportItem(LucideIcons.chartNoAxesGantt,
                           '${timeline.length} Timeline Event(s)'),
                     ],
                   ),
@@ -772,7 +775,7 @@ class _ResidentDetailScreenState extends State<ResidentDetailScreen> {
                   await _generateProfilePdf(
                       resident, forms, mocaAssessments, timeline);
                 },
-                icon: const Icon(Icons.picture_as_pdf),
+                icon: const Icon(LucideIcons.fileText),
                 label: const Text('Export PDF'),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppColors.accent,
@@ -828,7 +831,7 @@ class _ResidentDetailScreenState extends State<ResidentDetailScreen> {
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Icon(Icons.nfc, size: 60, color: AppColors.primary),
+              const Icon(LucideIcons.nfc, size: 60, color: AppColors.primary),
               const SizedBox(height: 16),
               const Text(
                 'Hold the NFC wristband or tag to the back of your specific NFC area in your device.',
@@ -1223,7 +1226,7 @@ class _ResidentDetailScreenState extends State<ResidentDetailScreen> {
                       initialValue: selectedWardId,
                       decoration: const InputDecoration(
                         labelText: 'Select Ward',
-                        prefixIcon: Icon(Icons.location_on),
+                        prefixIcon: Icon(LucideIcons.mapPin),
                       ),
                       items: wards.map((ward) {
                         return DropdownMenuItem(
@@ -1306,8 +1309,8 @@ class _ResidentDetailScreenState extends State<ResidentDetailScreen> {
     final authState = context.read<AuthBloc>().state;
     if (authState is AuthAuthenticated && authState.user.isStaff) {
       final user = authState.user;
-      final isSocialWorker = user.unit == AppConstants.unitSocial ||
-          user.role == 'social_worker';
+      final isSocialWorker =
+          user.unit == AppConstants.unitSocial || user.role == 'social_worker';
       final isHouseparent = user.unit == AppConstants.unitHomelife ||
           user.role.startsWith('homelife');
 
@@ -1469,15 +1472,13 @@ class _ResidentDetailScreenState extends State<ResidentDetailScreen> {
         final forms = snapshot.data ?? [];
 
         final existingIds = forms.map((f) => f.templateId).toSet();
-        final expectedAdmission =
-            FormTemplatesRegistry.templates.where((t) {
+        final expectedAdmission = FormTemplatesRegistry.templates.where((t) {
           return t.allowedResidentStatuses.contains(resident.status) &&
               t.category == CaseFileCategory.admission;
         }).toList();
         final admTotal = expectedAdmission.length;
-        final admComplete = expectedAdmission
-            .where((t) => existingIds.contains(t.id))
-            .length;
+        final admComplete =
+            expectedAdmission.where((t) => existingIds.contains(t.id)).length;
         final admPct = admTotal > 0 ? admComplete / admTotal : 1.0;
 
         return Card(
@@ -1491,7 +1492,7 @@ class _ResidentDetailScreenState extends State<ResidentDetailScreen> {
               children: [
                 Row(
                   children: [
-                    const Icon(Icons.folder_open,
+                    const Icon(LucideIcons.folderOpen,
                         color: AppColors.primary, size: 20),
                     const SizedBox(width: 8),
                     Expanded(
@@ -1559,9 +1560,8 @@ class _ResidentDetailScreenState extends State<ResidentDetailScreen> {
                 SizedBox(
                   width: double.infinity,
                   child: OutlinedButton.icon(
-                    onPressed: () =>
-                        _showResidentForms(context, resident),
-                    icon: const Icon(Icons.folder_open, size: 16),
+                    onPressed: () => _showResidentForms(context, resident),
+                    icon: const Icon(LucideIcons.folderOpen, size: 16),
                     label: const Text('View Case Files'),
                   ),
                 ),
@@ -1586,7 +1586,7 @@ class _ResidentDetailScreenState extends State<ResidentDetailScreen> {
           borderRadius: BorderRadius.circular(8),
         ),
         child: Icon(
-          Icons.description,
+          LucideIcons.fileText,
           color: statusColor,
           size: 20,
         ),
@@ -1833,7 +1833,7 @@ class _FormTypeCard extends StatelessWidget {
               ),
               const SizedBox(width: 8),
               Icon(
-                Icons.chevron_right,
+                LucideIcons.chevronRight,
                 color: AppColors.textTertiary.withOpacity(0.5),
               ),
             ],
@@ -1857,35 +1857,35 @@ class _FormTypeCard extends StatelessWidget {
     // Fallback with smart defaults based on template ID prefix
     if (templateId.startsWith('ss_')) {
       return (
-        Icons.social_distance,
+        LucideIcons.users,
         AppColors.unitSocial,
         _formatTemplateId(templateId),
         'Social Service'
       );
     } else if (templateId.startsWith('hl_')) {
       return (
-        Icons.home,
+        LucideIcons.house,
         AppColors.unitHomelife,
         _formatTemplateId(templateId),
         'Home Life Service'
       );
     } else if (templateId.startsWith('ps_')) {
       return (
-        Icons.psychology,
+        LucideIcons.brain,
         AppColors.unitPsych,
         _formatTemplateId(templateId),
         'Psychological Service'
       );
     } else if (templateId.startsWith('med_')) {
       return (
-        Icons.medical_services,
+        LucideIcons.stethoscope,
         AppColors.unitMedical,
         _formatTemplateId(templateId),
         'Medical Service'
       );
     } else if (templateId.startsWith('rehab_')) {
       return (
-        Icons.accessibility_new,
+        LucideIcons.accessibility,
         AppColors.unitRehab,
         _formatTemplateId(templateId),
         'Rehabilitation'
@@ -1893,7 +1893,7 @@ class _FormTypeCard extends StatelessWidget {
     }
 
     return (
-      Icons.description,
+      LucideIcons.fileText,
       AppColors.primary,
       _formatTemplateId(templateId),
       'Generic'
@@ -1909,4 +1909,3 @@ class _FormTypeCard extends StatelessWidget {
         .join(' ');
   }
 }
-

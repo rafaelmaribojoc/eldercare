@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
@@ -122,7 +123,8 @@ class _LanguageScreenState extends State<LanguageScreen>
             ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 8),
-          const Text('Basahin ang bawat pangungusap nang isang beses. Kailangang ulitin nang eksakto ng pasyente.'),
+          const Text(
+              'Basahin ang bawat pangungusap nang isang beses. Kailangang ulitin nang eksakto ng pasyente.'),
           const SizedBox(height: 24),
           _buildSentenceCard(
             1,
@@ -249,7 +251,7 @@ class _LanguageScreenState extends State<LanguageScreen>
                     if (!_timerStarted)
                       ElevatedButton.icon(
                         onPressed: _startTimer,
-                        icon: const Icon(Icons.play_arrow),
+                        icon: const Icon(LucideIcons.play),
                         label: Text(
                           'Simulan ang Timer',
                           style: TextStyle(fontFamily: MocaColors.fontFamily),
@@ -262,7 +264,7 @@ class _LanguageScreenState extends State<LanguageScreen>
                     else if (!_timerCompleted)
                       ElevatedButton.icon(
                         onPressed: _resetTimer,
-                        icon: const Icon(Icons.refresh),
+                        icon: const Icon(LucideIcons.refreshCw),
                         label: Text(
                           'Reset',
                           style: TextStyle(fontFamily: MocaColors.fontFamily),
@@ -307,7 +309,7 @@ class _LanguageScreenState extends State<LanguageScreen>
                   onPressed: _wordCount > 0
                       ? () => setState(() => _wordCount--)
                       : null,
-                  icon: const Icon(Icons.remove_circle_outline),
+                  icon: const Icon(LucideIcons.circleMinus),
                   iconSize: 32,
                   color: MocaColors.languageColor,
                 ),
@@ -332,7 +334,7 @@ class _LanguageScreenState extends State<LanguageScreen>
                 ),
                 IconButton(
                   onPressed: () => setState(() => _wordCount++),
-                  icon: const Icon(Icons.add_circle_outline),
+                  icon: const Icon(LucideIcons.circlePlus),
                   iconSize: 32,
                   color: MocaColors.languageColor,
                 ),
@@ -347,7 +349,7 @@ class _LanguageScreenState extends State<LanguageScreen>
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Icon(Icons.info_outline, color: MocaColors.info),
+                  const Icon(LucideIcons.info, color: MocaColors.info),
                   const SizedBox(width: 12),
                   Expanded(
                     child: Text(
@@ -392,7 +394,7 @@ class _LanguageScreenState extends State<LanguageScreen>
             child: Row(
               children: [
                 Icon(
-                  value ? Icons.check_circle : Icons.circle_outlined,
+                  value ? LucideIcons.circleCheck : LucideIcons.circle,
                   color: value ? MocaColors.success : MocaColors.textSecondary,
                   size: 20,
                 ),

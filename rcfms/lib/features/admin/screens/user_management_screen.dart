@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 
@@ -74,12 +75,12 @@ class _UserManagementScreenState extends State<UserManagementScreen> {
             padding: const EdgeInsets.symmetric(horizontal: 8),
             child: ElevatedButton.icon(
               onPressed: _showAddUserDialog,
-              icon: const Icon(Icons.person_add, size: 20),
+              icon: const Icon(LucideIcons.userPlus, size: 20),
               label: const Text('Add User'),
             ),
           ),
           IconButton(
-            icon: const Icon(Icons.refresh),
+            icon: const Icon(LucideIcons.refreshCw),
             tooltip: 'Refresh List',
             onPressed: _loadUsers,
           ),
@@ -176,7 +177,7 @@ class _UserManagementScreenState extends State<UserManagementScreen> {
               borderRadius: BorderRadius.circular(AppTheme.radiusLg),
             ),
             child: const Icon(
-              Icons.people_outline,
+              LucideIcons.users,
               size: 40,
               color: AppColors.textTertiary,
             ),
@@ -213,7 +214,7 @@ class _UserManagementScreenState extends State<UserManagementScreen> {
                 borderRadius: BorderRadius.circular(AppTheme.radiusLg),
               ),
               child: const Icon(
-                Icons.error_outline,
+                LucideIcons.circleAlert,
                 size: 40,
                 color: AppColors.error,
               ),
@@ -226,7 +227,7 @@ class _UserManagementScreenState extends State<UserManagementScreen> {
             const SizedBox(height: 24),
             OutlinedButton.icon(
               onPressed: _loadUsers,
-              icon: const Icon(Icons.refresh),
+              icon: const Icon(LucideIcons.refreshCw),
               label: const Text('Try again'),
             ),
           ],
@@ -284,7 +285,7 @@ class _UserManagementScreenState extends State<UserManagementScreen> {
                                   BorderRadius.circular(AppTheme.radiusSm),
                             ),
                             child: const Icon(
-                              Icons.person_add,
+                              LucideIcons.userPlus,
                               color: AppColors.primary,
                             ),
                           ),
@@ -306,7 +307,7 @@ class _UserManagementScreenState extends State<UserManagementScreen> {
                           ),
                           IconButton(
                             onPressed: () => Navigator.pop(context),
-                            icon: const Icon(Icons.close),
+                            icon: const Icon(LucideIcons.x),
                           ),
                         ],
                       ),
@@ -323,7 +324,7 @@ class _UserManagementScreenState extends State<UserManagementScreen> {
                         keyboardType: TextInputType.emailAddress,
                         decoration: const InputDecoration(
                           hintText: 'user@example.com',
-                          prefixIcon: Icon(Icons.mail_outline, size: 20),
+                          prefixIcon: Icon(LucideIcons.mail, size: 20),
                         ),
                         validator: (v) {
                           if (v == null || v.isEmpty) {
@@ -345,7 +346,7 @@ class _UserManagementScreenState extends State<UserManagementScreen> {
                         textCapitalization: TextCapitalization.words,
                         decoration: const InputDecoration(
                           hintText: 'Juan',
-                          prefixIcon: Icon(Icons.person_outline, size: 20),
+                          prefixIcon: Icon(LucideIcons.user, size: 20),
                         ),
                         validator: (v) => v?.isEmpty == true
                             ? 'First Name is required'
@@ -361,7 +362,7 @@ class _UserManagementScreenState extends State<UserManagementScreen> {
                         textCapitalization: TextCapitalization.words,
                         decoration: const InputDecoration(
                           hintText: 'Miguel (Optional)',
-                          prefixIcon: Icon(Icons.person_outline, size: 20),
+                          prefixIcon: Icon(LucideIcons.user, size: 20),
                         ),
                       ),
                       const SizedBox(height: 16),
@@ -374,7 +375,7 @@ class _UserManagementScreenState extends State<UserManagementScreen> {
                         textCapitalization: TextCapitalization.words,
                         decoration: const InputDecoration(
                           hintText: 'Dela Cruz',
-                          prefixIcon: Icon(Icons.person_outline, size: 20),
+                          prefixIcon: Icon(LucideIcons.user, size: 20),
                         ),
                         validator: (v) =>
                             v?.isEmpty == true ? 'Last Name is required' : null,
@@ -389,7 +390,7 @@ class _UserManagementScreenState extends State<UserManagementScreen> {
                         textCapitalization: TextCapitalization.words,
                         decoration: const InputDecoration(
                           hintText: 'RSW',
-                          prefixIcon: Icon(Icons.badge_outlined, size: 20),
+                          prefixIcon: Icon(LucideIcons.badge, size: 20),
                         ),
                       ),
                       const SizedBox(height: 20),
@@ -402,7 +403,7 @@ class _UserManagementScreenState extends State<UserManagementScreen> {
                         controller: workIdController,
                         decoration: const InputDecoration(
                           hintText: '0012345',
-                          prefixIcon: Icon(Icons.badge_outlined, size: 20),
+                          prefixIcon: Icon(LucideIcons.badge, size: 20),
                         ),
                       ),
                       const SizedBox(height: 20),
@@ -426,12 +427,11 @@ class _UserManagementScreenState extends State<UserManagementScreen> {
                         },
                         child: InputDecorator(
                           decoration: InputDecoration(
-                            prefixIcon: const Icon(
-                                Icons.calendar_today_outlined,
-                                size: 20),
+                            prefixIcon:
+                                const Icon(LucideIcons.calendar, size: 20),
                             suffixIcon: licenseExpiryDate != null
                                 ? IconButton(
-                                    icon: const Icon(Icons.clear, size: 18),
+                                    icon: const Icon(LucideIcons.x, size: 18),
                                     onPressed: () => setDialogState(
                                         () => licenseExpiryDate = null),
                                   )
@@ -459,7 +459,7 @@ class _UserManagementScreenState extends State<UserManagementScreen> {
                       DropdownButtonFormField<String>(
                         initialValue: selectedUnit,
                         decoration: const InputDecoration(
-                          prefixIcon: Icon(Icons.business_outlined, size: 20),
+                          prefixIcon: Icon(LucideIcons.building2, size: 20),
                         ),
                         items: const [
                           DropdownMenuItem(
@@ -488,9 +488,7 @@ class _UserManagementScreenState extends State<UserManagementScreen> {
                       DropdownButtonFormField<String>(
                         initialValue: selectedRole,
                         decoration: InputDecoration(
-                          prefixIcon: const Icon(
-                              Icons.admin_panel_settings_outlined,
-                              size: 20),
+                          prefixIcon: const Icon(LucideIcons.shield, size: 20),
                           errorText: (selectedRole == 'center_head' &&
                                   _isCenterHeadOccupied())
                               ? 'A Center Head already exists'
@@ -669,7 +667,7 @@ class _UserManagementScreenState extends State<UserManagementScreen> {
                   borderRadius: BorderRadius.circular(AppTheme.radiusFull),
                 ),
                 child: const Icon(
-                  Icons.check,
+                  LucideIcons.check,
                   color: AppColors.success,
                   size: 32,
                 ),
@@ -723,7 +721,7 @@ class _UserManagementScreenState extends State<UserManagementScreen> {
                 child: Row(
                   children: [
                     Icon(
-                      Icons.warning_amber_rounded,
+                      LucideIcons.triangleAlert,
                       color: AppColors.warning,
                       size: 20,
                     ),
@@ -959,25 +957,25 @@ class _UserManagementScreenState extends State<UserManagementScreen> {
 
                       // Details
                       _DetailRow(
-                        icon: Icons.mail_outline,
+                        icon: LucideIcons.mail,
                         label: 'Email',
                         value: user.email,
                       ),
                       const SizedBox(height: 16),
                       _DetailRow(
-                        icon: Icons.badge_outlined,
+                        icon: LucideIcons.badge,
                         label: 'PRC License Number',
                         value: user.workId,
                       ),
                       const SizedBox(height: 16),
                       _DetailRow(
-                        icon: Icons.business_outlined,
+                        icon: LucideIcons.building2,
                         label: 'Unit',
                         value: _formatUnit(user.unit ?? 'N/A'),
                       ),
                       const SizedBox(height: 16),
                       _DetailRow(
-                        icon: Icons.calendar_today_outlined,
+                        icon: LucideIcons.calendar,
                         label: 'Created',
                         value: DateFormat('MMM d, y').format(user.createdAt),
                       ),
@@ -992,7 +990,7 @@ class _UserManagementScreenState extends State<UserManagementScreen> {
                                 Navigator.pop(context);
                                 _showEditUserDialog(user);
                               },
-                              icon: const Icon(Icons.edit_outlined),
+                              icon: const Icon(LucideIcons.pencil),
                               label: const Text('Edit'),
                             ),
                           ),
@@ -1014,8 +1012,8 @@ class _UserManagementScreenState extends State<UserManagementScreen> {
                                           : AppColors.success,
                                     ),
                                     icon: Icon(user.isActive
-                                        ? Icons.block_outlined
-                                        : Icons.check_circle_outlined),
+                                        ? LucideIcons.ban
+                                        : LucideIcons.circleCheck),
                                     label: Text(user.isActive
                                         ? 'Deactivate'
                                         : 'Reactivate'),
@@ -1123,7 +1121,7 @@ class _UserManagementScreenState extends State<UserManagementScreen> {
                                   BorderRadius.circular(AppTheme.radiusSm),
                             ),
                             child: const Icon(
-                              Icons.edit,
+                              LucideIcons.pencil,
                               color: AppColors.primary,
                             ),
                           ),
@@ -1145,7 +1143,7 @@ class _UserManagementScreenState extends State<UserManagementScreen> {
                           ),
                           IconButton(
                             onPressed: () => Navigator.pop(context),
-                            icon: const Icon(Icons.close),
+                            icon: const Icon(LucideIcons.x),
                           ),
                         ],
                       ),
@@ -1162,7 +1160,7 @@ class _UserManagementScreenState extends State<UserManagementScreen> {
                         readOnly: true,
                         enabled: false,
                         decoration: const InputDecoration(
-                          prefixIcon: Icon(Icons.mail_outline, size: 20),
+                          prefixIcon: Icon(LucideIcons.mail, size: 20),
                         ),
                       ),
                       const SizedBox(height: 20),
@@ -1176,7 +1174,7 @@ class _UserManagementScreenState extends State<UserManagementScreen> {
                         textCapitalization: TextCapitalization.words,
                         decoration: const InputDecoration(
                           hintText: 'Juan',
-                          prefixIcon: Icon(Icons.person_outline, size: 20),
+                          prefixIcon: Icon(LucideIcons.user, size: 20),
                         ),
                         validator: (v) => v?.isEmpty == true
                             ? 'First Name is required'
@@ -1192,7 +1190,7 @@ class _UserManagementScreenState extends State<UserManagementScreen> {
                         textCapitalization: TextCapitalization.words,
                         decoration: const InputDecoration(
                           hintText: 'Miguel (Optional)',
-                          prefixIcon: Icon(Icons.person_outline, size: 20),
+                          prefixIcon: Icon(LucideIcons.user, size: 20),
                         ),
                       ),
                       const SizedBox(height: 16),
@@ -1205,7 +1203,7 @@ class _UserManagementScreenState extends State<UserManagementScreen> {
                         textCapitalization: TextCapitalization.words,
                         decoration: const InputDecoration(
                           hintText: 'Dela Cruz',
-                          prefixIcon: Icon(Icons.person_outline, size: 20),
+                          prefixIcon: Icon(LucideIcons.user, size: 20),
                         ),
                         validator: (v) =>
                             v?.isEmpty == true ? 'Last Name is required' : null,
@@ -1220,7 +1218,7 @@ class _UserManagementScreenState extends State<UserManagementScreen> {
                         textCapitalization: TextCapitalization.words,
                         decoration: const InputDecoration(
                           hintText: 'RSW',
-                          prefixIcon: Icon(Icons.badge_outlined, size: 20),
+                          prefixIcon: Icon(LucideIcons.badge, size: 20),
                         ),
                       ),
                       const SizedBox(height: 20),
@@ -1233,7 +1231,7 @@ class _UserManagementScreenState extends State<UserManagementScreen> {
                         controller: workIdController,
                         decoration: const InputDecoration(
                           hintText: '0012345',
-                          prefixIcon: Icon(Icons.badge_outlined, size: 20),
+                          prefixIcon: Icon(LucideIcons.badge, size: 20),
                         ),
                       ),
                       const SizedBox(height: 20),
@@ -1257,12 +1255,11 @@ class _UserManagementScreenState extends State<UserManagementScreen> {
                         },
                         child: InputDecorator(
                           decoration: InputDecoration(
-                            prefixIcon: const Icon(
-                                Icons.calendar_today_outlined,
-                                size: 20),
+                            prefixIcon:
+                                const Icon(LucideIcons.calendar, size: 20),
                             suffixIcon: licenseExpiryDate != null
                                 ? IconButton(
-                                    icon: const Icon(Icons.clear, size: 18),
+                                    icon: const Icon(LucideIcons.x, size: 18),
                                     onPressed: () => setDialogState(
                                         () => licenseExpiryDate = null),
                                   )
@@ -1290,7 +1287,7 @@ class _UserManagementScreenState extends State<UserManagementScreen> {
                       DropdownButtonFormField<String>(
                         initialValue: selectedUnit,
                         decoration: const InputDecoration(
-                          prefixIcon: Icon(Icons.business_outlined, size: 20),
+                          prefixIcon: Icon(LucideIcons.building2, size: 20),
                         ),
                         items: const [
                           DropdownMenuItem(
@@ -1319,9 +1316,7 @@ class _UserManagementScreenState extends State<UserManagementScreen> {
                       DropdownButtonFormField<String>(
                         initialValue: selectedRole,
                         decoration: InputDecoration(
-                          prefixIcon: const Icon(
-                              Icons.admin_panel_settings_outlined,
-                              size: 20),
+                          prefixIcon: const Icon(LucideIcons.shield, size: 20),
                           errorText: (selectedRole == 'center_head' &&
                                   _isCenterHeadOccupied(excludeUserId: user.id))
                               ? 'A Center Head already exists'
@@ -1625,7 +1620,7 @@ class _UserCard extends StatelessWidget {
                 _RoleBadge(role: user.role, isActive: user.isActive),
                 const SizedBox(width: 8),
                 Icon(
-                  Icons.chevron_right,
+                  LucideIcons.chevronRight,
                   color: user.isActive
                       ? Theme.of(context).hintColor
                       : Theme.of(context).hintColor.withValues(alpha: 0.5),
@@ -1794,7 +1789,7 @@ class _CredentialRow extends StatelessWidget {
             );
           },
           icon: Icon(
-            Icons.copy,
+            LucideIcons.copy,
             size: 18,
             color: AppColors.textSecondary,
           ),

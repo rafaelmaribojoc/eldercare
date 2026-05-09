@@ -36,7 +36,8 @@ class CaseFilesCubit extends Cubit<CaseFilesState> {
         completionStats: completion,
       ));
     } catch (e) {
-      emit(state.copyWith(isLoading: false, error: ErrorHandler.getUserFriendlyMessage(e)));
+      emit(state.copyWith(
+          isLoading: false, error: ErrorHandler.getUserFriendlyMessage(e)));
     }
   }
 
@@ -111,8 +112,7 @@ class CaseFilesCubit extends Cubit<CaseFilesState> {
 
   Map<String, dynamic> _calculateCompletion(List<FormSubmissionModel> forms) {
     final activeForms = forms.where((f) => !f.isArchived).toList();
-    final existingTemplateIds =
-        activeForms.map((f) => f.templateId).toSet();
+    final existingTemplateIds = activeForms.map((f) => f.templateId).toSet();
 
     final expectedTemplates = FormTemplatesRegistry.templates.where((t) {
       return t.allowedResidentStatuses.contains(residentStatus) &&
@@ -136,10 +136,8 @@ class CaseFilesCubit extends Cubit<CaseFilesState> {
   }
 
   List<FormTemplate> getMissingTemplates(CaseFileCategory category) {
-    final activeForms =
-        state.allForms.where((f) => !f.isArchived).toList();
-    final existingTemplateIds =
-        activeForms.map((f) => f.templateId).toSet();
+    final activeForms = state.allForms.where((f) => !f.isArchived).toList();
+    final existingTemplateIds = activeForms.map((f) => f.templateId).toSet();
 
     return FormTemplatesRegistry.templates.where((t) {
       return t.category == category &&

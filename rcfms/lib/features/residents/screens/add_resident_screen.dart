@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
@@ -1223,7 +1224,8 @@ class _AddResidentScreenState extends State<AddResidentScreen> {
 
   Future<void> _saveResident() async {
     if (_dateOfBirth == null) {
-      CustomSnackBar.show(context, message: 'Please select date of birth', isError: true);
+      CustomSnackBar.show(context,
+          message: 'Please select date of birth', isError: true);
       return;
     }
 
@@ -1269,11 +1271,13 @@ class _AddResidentScreenState extends State<AddResidentScreen> {
     // Validation for Direct Admission
     if (_admissionStatus == 'admitted') {
       if (_selectedWard == null) {
-        CustomSnackBar.show(context, message: 'Please select a ward for admission', isError: true);
+        CustomSnackBar.show(context,
+            message: 'Please select a ward for admission', isError: true);
         return;
       }
       if (_admissionDate == null) {
-        CustomSnackBar.show(context, message: 'Please select admission date', isError: true);
+        CustomSnackBar.show(context,
+            message: 'Please select admission date', isError: true);
         return;
       }
     }
@@ -1586,7 +1590,7 @@ class _AddResidentScreenState extends State<AddResidentScreen> {
                 PdfService.generateResidentProfile(residentForPdf);
                 context.pop(); // Close form
               },
-              icon: const Icon(Icons.print, size: 18),
+              icon: const Icon(LucideIcons.printer, size: 18),
               label: const Text('VIEW PDF'),
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.primary,
@@ -1599,7 +1603,7 @@ class _AddResidentScreenState extends State<AddResidentScreen> {
     } catch (e) {
       if (mounted) {
         CustomSnackBar.showError(
-          context, 
+          context,
           error: e,
           fallbackMessage: 'Failed to save resident profile',
         );
@@ -1717,7 +1721,7 @@ class _AddResidentScreenState extends State<AddResidentScreen> {
       child: Scaffold(
         appBar: AppBar(
           leading: IconButton(
-            icon: const Icon(Icons.arrow_back),
+            icon: const Icon(LucideIcons.arrowLeft),
             onPressed: () async {
               // Dispatch PopScope logic manually since standard back button
               // in AppBar calls Navigator.pop directly which PopScope intercepts,
@@ -1730,7 +1734,7 @@ class _AddResidentScreenState extends State<AddResidentScreen> {
               widget.resident != null ? 'Edit Resident' : 'Add New Resident'),
           actions: [
             IconButton(
-              icon: const Icon(Icons.info_outline),
+              icon: const Icon(LucideIcons.info),
               onPressed: _showRequirementsDialog,
               tooltip: 'Requirements Checklist',
             ),
@@ -1938,7 +1942,7 @@ class _AddResidentScreenState extends State<AddResidentScreen> {
                   _photoBytes != null ? MemoryImage(_photoBytes!) : null,
               child: _photoBytes == null
                   ? const Icon(
-                      Icons.add_a_photo,
+                      LucideIcons.camera,
                       size: 32,
                       color: AppColors.primary,
                     )
@@ -1998,7 +2002,7 @@ class _AddResidentScreenState extends State<AddResidentScreen> {
               textInputAction: TextInputAction.next,
               decoration: const InputDecoration(
                 labelText: 'FIRST NAME *',
-                prefixIcon: Icon(Icons.person),
+                prefixIcon: Icon(LucideIcons.user),
               ),
               validator: (value) =>
                   value?.isEmpty ?? true ? 'First name is required' : null,
@@ -2010,7 +2014,7 @@ class _AddResidentScreenState extends State<AddResidentScreen> {
               textInputAction: TextInputAction.next,
               decoration: const InputDecoration(
                 labelText: 'MIDDLE NAME',
-                prefixIcon: Icon(Icons.person_outline),
+                prefixIcon: Icon(LucideIcons.user),
               ),
             ),
             TextFormField(
@@ -2021,7 +2025,7 @@ class _AddResidentScreenState extends State<AddResidentScreen> {
               textInputAction: TextInputAction.next,
               decoration: const InputDecoration(
                 labelText: 'LAST NAME *',
-                prefixIcon: Icon(Icons.person),
+                prefixIcon: Icon(LucideIcons.user),
               ),
               validator: (value) =>
                   value?.isEmpty ?? true ? 'Last name is required' : null,
@@ -2031,7 +2035,7 @@ class _AddResidentScreenState extends State<AddResidentScreen> {
               isExpanded: true,
               decoration: const InputDecoration(
                 labelText: 'SUFFIX',
-                prefixIcon: Icon(Icons.person_outline),
+                prefixIcon: Icon(LucideIcons.user),
               ),
               items: [
                 const DropdownMenuItem(value: null, child: Text('None')),
@@ -2052,7 +2056,7 @@ class _AddResidentScreenState extends State<AddResidentScreen> {
               textInputAction: TextInputAction.next,
               decoration: const InputDecoration(
                 labelText: 'NICKNAME',
-                prefixIcon: Icon(Icons.face),
+                prefixIcon: Icon(LucideIcons.smile),
               ),
             ),
             // Demographics
@@ -2062,7 +2066,7 @@ class _AddResidentScreenState extends State<AddResidentScreen> {
               child: InputDecorator(
                 decoration: const InputDecoration(
                   labelText: 'DATE OF BIRTH *',
-                  prefixIcon: Icon(Icons.cake),
+                  prefixIcon: Icon(LucideIcons.cake),
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -2097,7 +2101,7 @@ class _AddResidentScreenState extends State<AddResidentScreen> {
               initialValue: _gender,
               decoration: const InputDecoration(
                 labelText: 'SEX *',
-                prefixIcon: Icon(Icons.wc),
+                prefixIcon: Icon(LucideIcons.toilet),
               ),
               items: const [
                 DropdownMenuItem(value: 'male', child: Text('MALE')),
@@ -2125,7 +2129,7 @@ class _AddResidentScreenState extends State<AddResidentScreen> {
               isExpanded: true,
               decoration: const InputDecoration(
                 labelText: 'PROVINCE',
-                prefixIcon: Icon(Icons.location_city),
+                prefixIcon: Icon(LucideIcons.building2),
               ),
               items: _provinceList.isEmpty
                   ? []
@@ -2142,7 +2146,7 @@ class _AddResidentScreenState extends State<AddResidentScreen> {
               isExpanded: true,
               decoration: const InputDecoration(
                 labelText: 'CITY/MUNICIPALITY',
-                prefixIcon: Icon(Icons.location_city),
+                prefixIcon: Icon(LucideIcons.building2),
               ),
               items: _pobCityList.isEmpty
                   ? []
@@ -2209,7 +2213,7 @@ class _AddResidentScreenState extends State<AddResidentScreen> {
                 textInputAction: TextInputAction.next,
                 decoration: const InputDecoration(
                   labelText: 'REFERRED BY *',
-                  prefixIcon: Icon(Icons.record_voice_over),
+                  prefixIcon: Icon(LucideIcons.mic),
                   hintText: 'Select or Type (e.g. CSWDO)',
                 ),
                 validator: (v) => v?.trim().isEmpty == true ? 'Required' : null,
@@ -2228,7 +2232,7 @@ class _AddResidentScreenState extends State<AddResidentScreen> {
             textInputAction: TextInputAction.next,
             decoration: const InputDecoration(
               labelText: 'REFERRING PERSON NAME',
-              prefixIcon: Icon(Icons.person),
+              prefixIcon: Icon(LucideIcons.user),
             ),
           ),
         ]),
@@ -2243,7 +2247,7 @@ class _AddResidentScreenState extends State<AddResidentScreen> {
               isExpanded: true,
               decoration: const InputDecoration(
                 labelText: 'PROVINCE',
-                prefixIcon: Icon(Icons.location_city),
+                prefixIcon: Icon(LucideIcons.building2),
               ),
               items: _provinceList.isEmpty
                   ? []
@@ -2261,7 +2265,7 @@ class _AddResidentScreenState extends State<AddResidentScreen> {
               isExpanded: true,
               decoration: const InputDecoration(
                 labelText: 'CITY/MUNICIPALITY',
-                prefixIcon: Icon(Icons.location_city),
+                prefixIcon: Icon(LucideIcons.building2),
               ),
               items: _referralCityList.isEmpty
                   ? []
@@ -2279,7 +2283,7 @@ class _AddResidentScreenState extends State<AddResidentScreen> {
               isExpanded: true,
               decoration: const InputDecoration(
                 labelText: 'BARANGAY',
-                prefixIcon: Icon(Icons.holiday_village),
+                prefixIcon: Icon(LucideIcons.house),
               ),
               items: _referralBarangayList.isEmpty
                   ? []
@@ -2315,7 +2319,7 @@ class _AddResidentScreenState extends State<AddResidentScreen> {
               textInputAction: TextInputAction.next,
               decoration: const InputDecoration(
                 labelText: 'STREET / BUILDING / OFFICE INFO',
-                prefixIcon: Icon(Icons.location_on),
+                prefixIcon: Icon(LucideIcons.mapPin),
               ),
               onEditingComplete: onEditingComplete,
             );
@@ -2418,7 +2422,7 @@ class _AddResidentScreenState extends State<AddResidentScreen> {
                 labelText: _admissionStatus == 'admitted'
                     ? 'ADMISSION DATE *'
                     : 'APPLICATION DATE',
-                prefixIcon: const Icon(Icons.calendar_today),
+                prefixIcon: const Icon(LucideIcons.calendar),
               ),
               child: Text(
                 (_admissionStatus == 'admitted'
@@ -2452,7 +2456,7 @@ class _AddResidentScreenState extends State<AddResidentScreen> {
               hintText: _admissionStatus == 'admitted'
                   ? 'e.g. C-250592'
                   : 'e.g. A-250592',
-              prefixIcon: const Icon(Icons.numbers),
+              prefixIcon: const Icon(LucideIcons.listOrdered),
               helperText: 'Format: [A/C]-YYMM + Sequence',
             ),
             validator: (value) {
@@ -2470,7 +2474,7 @@ class _AddResidentScreenState extends State<AddResidentScreen> {
             initialValue: _selectedCaseCategory?.toUpperCase(),
             decoration: const InputDecoration(
               labelText: 'CASE CATEGORY',
-              prefixIcon: Icon(Icons.category),
+              prefixIcon: Icon(LucideIcons.blocks),
             ),
             items: FormOptions.caseCategories
                 .map((c) => DropdownMenuItem(value: c, child: Text(c)))
@@ -2507,7 +2511,7 @@ class _AddResidentScreenState extends State<AddResidentScreen> {
                 textInputAction: TextInputAction.next,
                 decoration: const InputDecoration(
                   labelText: 'HEALTH STATUS / CONDITION *',
-                  prefixIcon: Icon(Icons.health_and_safety),
+                  prefixIcon: Icon(LucideIcons.shieldCheck),
                 ),
                 onEditingComplete: onEditingComplete,
                 validator: (v) => v?.trim().isEmpty == true
@@ -2550,7 +2554,7 @@ class _AddResidentScreenState extends State<AddResidentScreen> {
                 textInputAction: TextInputAction.next,
                 decoration: const InputDecoration(
                   labelText: 'NATURE OF DISABILITY (IF APPLICABLE)',
-                  prefixIcon: Icon(Icons.accessible),
+                  prefixIcon: Icon(LucideIcons.accessibility),
                 ),
                 onEditingComplete: onEditingComplete,
               );
@@ -2583,7 +2587,7 @@ class _AddResidentScreenState extends State<AddResidentScreen> {
                 textInputAction: TextInputAction.done,
                 decoration: const InputDecoration(
                   labelText: 'MENTAL HEALTH CONDITION (IF APPLICABLE)',
-                  prefixIcon: Icon(Icons.psychology),
+                  prefixIcon: Icon(LucideIcons.brain),
                 ),
                 onEditingComplete: onEditingComplete,
               );
@@ -2606,7 +2610,7 @@ class _AddResidentScreenState extends State<AddResidentScreen> {
               isExpanded: true,
               decoration: const InputDecoration(
                 labelText: 'PROVINCE',
-                prefixIcon: Icon(Icons.location_city),
+                prefixIcon: Icon(LucideIcons.building2),
               ),
               items: _provinceList.isEmpty
                   ? []
@@ -2623,7 +2627,7 @@ class _AddResidentScreenState extends State<AddResidentScreen> {
               isExpanded: true,
               decoration: const InputDecoration(
                 labelText: 'CITY/MUNICIPALITY',
-                prefixIcon: Icon(Icons.location_city),
+                prefixIcon: Icon(LucideIcons.building2),
               ),
               items: _cityList.isEmpty
                   ? []
@@ -2640,7 +2644,7 @@ class _AddResidentScreenState extends State<AddResidentScreen> {
               isExpanded: true,
               decoration: const InputDecoration(
                 labelText: 'BARANGAY',
-                prefixIcon: Icon(Icons.home_work),
+                prefixIcon: Icon(LucideIcons.building2),
               ),
               items: _barangayList.isEmpty
                   ? []
@@ -2675,7 +2679,7 @@ class _AddResidentScreenState extends State<AddResidentScreen> {
               textInputAction: TextInputAction.done,
               decoration: const InputDecoration(
                 labelText: 'HOUSE NO. / STREET / PUROK',
-                prefixIcon: Icon(Icons.home),
+                prefixIcon: Icon(LucideIcons.house),
               ),
               maxLines: 1,
               onEditingComplete: onEditingComplete,
@@ -2694,7 +2698,7 @@ class _AddResidentScreenState extends State<AddResidentScreen> {
         DropdownButtonFormField<String>(
           decoration: const InputDecoration(
             labelText: 'ASSIGNED SOCIAL WORKER',
-            prefixIcon: Icon(Icons.person_outline),
+            prefixIcon: Icon(LucideIcons.user),
             helperText:
                 'Assign a social worker for case management and intervention.',
           ),
@@ -2729,7 +2733,7 @@ class _AddResidentScreenState extends State<AddResidentScreen> {
           DropdownButtonFormField<String>(
             decoration: const InputDecoration(
               labelText: 'ASSIGNED HOUSEPARENT',
-              prefixIcon: Icon(Icons.manage_accounts),
+              prefixIcon: Icon(LucideIcons.usersRound),
             ),
             // Fix: Ensure value exists in items or is null
             initialValue:
@@ -2809,7 +2813,7 @@ class _AddResidentScreenState extends State<AddResidentScreen> {
                   textInputAction: TextInputAction.next,
                   decoration: InputDecoration(
                     labelText: 'PLEASE SPECIFY ($label)',
-                    prefixIcon: const Icon(Icons.edit),
+                    prefixIcon: const Icon(LucideIcons.pencil),
                   ),
                   validator: (v) =>
                       v?.isNotEmpty == true ? null : 'Please specify',
@@ -2829,7 +2833,7 @@ class _AddResidentScreenState extends State<AddResidentScreen> {
               textInputAction: TextInputAction.next,
               decoration: InputDecoration(
                 labelText: 'PLEASE SPECIFY ($label)',
-                prefixIcon: const Icon(Icons.edit),
+                prefixIcon: const Icon(LucideIcons.pencil),
               ),
               validator: (v) => v?.isNotEmpty == true ? null : 'Please specify',
             ),
@@ -2848,7 +2852,7 @@ class _AddResidentScreenState extends State<AddResidentScreen> {
               isExpanded: true,
               decoration: const InputDecoration(
                 labelText: 'WARD *',
-                prefixIcon: Icon(Icons.room),
+                prefixIcon: Icon(LucideIcons.mapPin),
               ),
               items: _wards
                   .map((ward) => DropdownMenuItem(
@@ -2878,7 +2882,7 @@ class _AddResidentScreenState extends State<AddResidentScreen> {
               initialValue: _selectedBed,
               decoration: const InputDecoration(
                 labelText: 'BED NUMBER',
-                prefixIcon: Icon(Icons.bed),
+                prefixIcon: Icon(LucideIcons.bed),
               ),
               items: _availableBeds
                   .map((bed) => DropdownMenuItem(value: bed, child: Text(bed)))
@@ -2913,7 +2917,7 @@ class _AddResidentScreenState extends State<AddResidentScreen> {
             initialValue: _selectedCivilStatus,
             decoration: const InputDecoration(
               labelText: 'CIVIL STATUS',
-              prefixIcon: Icon(Icons.people_outline),
+              prefixIcon: Icon(LucideIcons.users),
             ),
             items: FormOptions.civilStatuses
                 .map((s) => DropdownMenuItem(value: s, child: Text(s)))
@@ -2924,7 +2928,7 @@ class _AddResidentScreenState extends State<AddResidentScreen> {
             label: 'RELIGION',
             value: _selectedReligion,
             items: FormOptions.religions,
-            icon: Icons.church,
+            icon: LucideIcons.church,
             otherController: _religionOtherController,
             autocompleteColumn: 'religion',
             onChanged: (v) => setState(() => _selectedReligion = v),
@@ -2937,7 +2941,7 @@ class _AddResidentScreenState extends State<AddResidentScreen> {
             isExpanded: true,
             decoration: const InputDecoration(
               labelText: 'EDUCATIONAL ATTAINMENT',
-              prefixIcon: Icon(Icons.school),
+              prefixIcon: Icon(LucideIcons.graduationCap),
             ),
             items: FormOptions.educationLevels
                 .map((e) => DropdownMenuItem(value: e, child: Text(e)))
@@ -2995,7 +2999,7 @@ class _AddResidentScreenState extends State<AddResidentScreen> {
             isExpanded: true,
             decoration: const InputDecoration(
               labelText: 'HIGHEST GRADE/YEAR',
-              prefixIcon: Icon(Icons.stars),
+              prefixIcon: Icon(LucideIcons.sparkles),
             ),
             // Show options if available, or just empty list disabled
             items: _gradeLevelOptions.isEmpty
@@ -3016,7 +3020,7 @@ class _AddResidentScreenState extends State<AddResidentScreen> {
             readOnly: true,
             decoration: const InputDecoration(
               labelText: 'YEARS OF EDUCATION',
-              prefixIcon: Icon(Icons.timer),
+              prefixIcon: Icon(LucideIcons.timer),
               filled: true,
             ),
           ),
@@ -3035,7 +3039,7 @@ class _AddResidentScreenState extends State<AddResidentScreen> {
             const SizedBox(width: 8),
             TextButton.icon(
               onPressed: _showAddFamilyMemberDialog,
-              icon: const Icon(Icons.add),
+              icon: const Icon(LucideIcons.plus),
               label: const Text('ADD MEMBER'),
               // Remove fixed size or use shrink wrap if needed, mainly ensure Expanded sibling helps
             ),
@@ -3080,7 +3084,7 @@ class _AddResidentScreenState extends State<AddResidentScreen> {
                   ),
                   onTap: () => _showAddFamilyMemberDialog(index: index),
                   trailing: IconButton(
-                    icon: const Icon(Icons.delete, color: Colors.red),
+                    icon: const Icon(LucideIcons.trash2, color: Colors.red),
                     onPressed: () {
                       setState(() {
                         final name = _familyMembers[index]['name'];
@@ -3121,7 +3125,7 @@ class _AddResidentScreenState extends State<AddResidentScreen> {
               isExpanded: true,
               decoration: const InputDecoration(
                 labelText: 'NEAREST RELATIVE',
-                prefixIcon: Icon(Icons.person_pin),
+                prefixIcon: Icon(LucideIcons.userRound),
               ),
               items: options.map((name) {
                 return DropdownMenuItem(
@@ -3145,7 +3149,7 @@ class _AddResidentScreenState extends State<AddResidentScreen> {
               isExpanded: true,
               decoration: const InputDecoration(
                 labelText: 'CUSTODIAN',
-                prefixIcon: Icon(Icons.accessibility_new),
+                prefixIcon: Icon(LucideIcons.accessibility),
               ),
               items: options
                   .map((name) => DropdownMenuItem(
@@ -3165,7 +3169,7 @@ class _AddResidentScreenState extends State<AddResidentScreen> {
             textInputAction: TextInputAction.next,
             decoration: const InputDecoration(
               labelText: 'PLEASE SPECIFY (CUSTODIAN)',
-              prefixIcon: Icon(Icons.edit),
+              prefixIcon: Icon(LucideIcons.pencil),
             ),
           ),
         ],
@@ -3184,7 +3188,7 @@ class _AddResidentScreenState extends State<AddResidentScreen> {
               isExpanded: true,
               decoration: const InputDecoration(
                 labelText: 'CONTACT NAME',
-                prefixIcon: Icon(Icons.contact_phone),
+                prefixIcon: Icon(LucideIcons.contact),
               ),
               items: options
                   .map((name) => DropdownMenuItem(
@@ -3201,7 +3205,7 @@ class _AddResidentScreenState extends State<AddResidentScreen> {
               isExpanded: true,
               decoration: const InputDecoration(
                 labelText: 'RELATIONSHIP',
-                prefixIcon: Icon(Icons.link),
+                prefixIcon: Icon(LucideIcons.link),
               ),
               items: FormOptions.relationships
                   .map((item) => DropdownMenuItem(
@@ -3223,7 +3227,7 @@ class _AddResidentScreenState extends State<AddResidentScreen> {
             inputFormatters: [UpperCaseTextFormatter()],
             decoration: const InputDecoration(
               labelText: 'PLEASE SPECIFY (RELATIONSHIP)',
-              prefixIcon: Icon(Icons.edit),
+              prefixIcon: Icon(LucideIcons.pencil),
             ),
           ),
         ],
@@ -3237,7 +3241,7 @@ class _AddResidentScreenState extends State<AddResidentScreen> {
               textInputAction: TextInputAction.next,
               decoration: const InputDecoration(
                 labelText: 'NAME',
-                prefixIcon: Icon(Icons.person),
+                prefixIcon: Icon(LucideIcons.user),
               ),
             ),
             TextFormField(
@@ -3246,7 +3250,7 @@ class _AddResidentScreenState extends State<AddResidentScreen> {
               textInputAction: TextInputAction.done,
               decoration: const InputDecoration(
                 labelText: 'PHONE NUMBER',
-                prefixIcon: Icon(Icons.phone),
+                prefixIcon: Icon(LucideIcons.phone),
               ),
             ),
           ]),
@@ -3676,7 +3680,7 @@ class _AddResidentScreenState extends State<AddResidentScreen> {
                 trailing: isDefault
                     ? null
                     : IconButton(
-                        icon: const Icon(Icons.close, size: 16),
+                        icon: const Icon(LucideIcons.x, size: 16),
                         onPressed: () => _confirmHideOption(column, option),
                         tooltip: 'Remove suggestion',
                       ),
@@ -3750,7 +3754,7 @@ class _AddResidentScreenState extends State<AddResidentScreen> {
       builder: (context) => AlertDialog(
         title: const Row(
           children: [
-            Icon(Icons.assignment_turned_in, color: AppColors.primary),
+            Icon(LucideIcons.clipboardCheck, color: AppColors.primary),
             SizedBox(width: 8),
             Text('Requirements Checklist'),
           ],
@@ -3899,7 +3903,7 @@ class _RequirementItem extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Icon(Icons.check_circle_outline, size: 16, color: Colors.green),
+          const Icon(LucideIcons.circleCheck, size: 16, color: Colors.green),
           const SizedBox(width: 8),
           Expanded(child: Text(text, style: const TextStyle(fontSize: 14))),
         ],

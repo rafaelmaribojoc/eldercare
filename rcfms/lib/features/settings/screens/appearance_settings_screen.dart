@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../bloc/settings_bloc.dart';
 import '../bloc/settings_event.dart';
@@ -44,7 +45,7 @@ class AppearanceSettingsScreen extends StatelessWidget {
                         context,
                         title: 'System Default',
                         subtitle: 'Match your device settings',
-                        icon: Icons.brightness_auto,
+                        icon: LucideIcons.sunMedium,
                         value: ThemeMode.system,
                         groupValue: state.themeMode,
                       ),
@@ -53,7 +54,7 @@ class AppearanceSettingsScreen extends StatelessWidget {
                         context,
                         title: 'Light Mode',
                         subtitle: 'Clean and bright interface',
-                        icon: Icons.light_mode,
+                        icon: LucideIcons.sun,
                         value: ThemeMode.light,
                         groupValue: state.themeMode,
                       ),
@@ -62,7 +63,7 @@ class AppearanceSettingsScreen extends StatelessWidget {
                         context,
                         title: 'Dark Mode',
                         subtitle: 'Easier on the eyes in low light',
-                        icon: Icons.dark_mode,
+                        icon: LucideIcons.moon,
                         value: ThemeMode.dark,
                         groupValue: state.themeMode,
                       ),

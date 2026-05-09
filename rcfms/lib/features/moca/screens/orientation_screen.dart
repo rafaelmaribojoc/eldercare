@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
@@ -61,7 +62,7 @@ class _OrientationScreenState extends State<OrientationScreen> {
                       child: Row(
                         children: [
                           Icon(
-                            Icons.calendar_today,
+                            LucideIcons.calendar,
                             color: MocaColors.orientationColor,
                           ),
                           const SizedBox(width: 12),
@@ -258,7 +259,7 @@ class _OrientationScreenState extends State<OrientationScreen> {
             child: Row(
               children: [
                 Icon(
-                  value ? Icons.check_circle : Icons.circle_outlined,
+                  value ? LucideIcons.circleCheck : LucideIcons.circle,
                   color: value ? MocaColors.success : MocaColors.textSecondary,
                   size: 20,
                 ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
@@ -71,7 +72,7 @@ class _ApprovalsScreenState extends State<ApprovalsScreen> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
+          icon: const Icon(LucideIcons.arrowLeft),
           onPressed: () {
             if (Navigator.canPop(context)) {
               Navigator.pop(context);
@@ -83,7 +84,7 @@ class _ApprovalsScreenState extends State<ApprovalsScreen> {
         title: const Text('Forms for Review'),
         actions: [
           IconButton(
-            icon: const Icon(Icons.refresh),
+            icon: const Icon(LucideIcons.refreshCw),
             onPressed: _loadPendingApprovals,
           ),
         ],
@@ -101,7 +102,8 @@ class _ApprovalsScreenState extends State<ApprovalsScreen> {
       return Center(
         child: Column(
           children: [
-            const Icon(Icons.error, size: 64, color: AppColors.error),
+            const Icon(LucideIcons.circleAlert,
+                size: 64, color: AppColors.error),
             const SizedBox(height: 16),
             Text(_error!),
             const SizedBox(height: 16),
@@ -172,10 +174,9 @@ class _ApprovalCard extends StatelessWidget {
                     color: form.unitColor.withOpacity(0.1),
                     borderRadius: BorderRadius.circular(12),
                   ),
-                  child: Icon(Icons.description, color: form.unitColor),
+                  child: Icon(LucideIcons.fileText, color: form.unitColor),
                 ),
               ),
-
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,

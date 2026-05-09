@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../bloc/settings_bloc.dart';
 import '../bloc/settings_event.dart';
@@ -42,7 +43,7 @@ class NotificationSettingsScreen extends StatelessWidget {
                         context,
                         title: 'Email Notifications',
                         subtitle: 'Receive important updates via email',
-                        icon: Icons.email_outlined,
+                        icon: LucideIcons.mail,
                         value: state.emailNotificationsEnabled,
                         onChanged: (value) {
                           context
@@ -55,7 +56,7 @@ class NotificationSettingsScreen extends StatelessWidget {
                         context,
                         title: 'Push Notifications',
                         subtitle: 'Receive alerts on this device',
-                        icon: Icons.notifications_active_outlined,
+                        icon: LucideIcons.bellRing,
                         value: state.pushNotificationsEnabled,
                         onChanged: (value) {
                           context
@@ -72,10 +73,8 @@ class NotificationSettingsScreen extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
-                    color: Theme.of(context)
-                        .colorScheme
-                        .primary
-                        .withOpacity(0.1),
+                    color:
+                        Theme.of(context).colorScheme.primary.withOpacity(0.1),
                     borderRadius: BorderRadius.circular(12),
                     border: Border.all(
                       color: Theme.of(context)
@@ -88,7 +87,7 @@ class NotificationSettingsScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Icon(
-                        Icons.info_outline,
+                        LucideIcons.info,
                         color: Theme.of(context).colorScheme.primary,
                         size: 20,
                       ),

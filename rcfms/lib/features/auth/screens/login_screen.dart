@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
@@ -107,7 +108,7 @@ class _LoginScreenState extends State<LoginScreen> {
             ],
           ),
           child: const Icon(
-            Icons.elderly,
+            LucideIcons.personStanding,
             size: 40,
             color: Colors.white,
           ),
@@ -155,7 +156,7 @@ class _LoginScreenState extends State<LoginScreen> {
               textInputAction: TextInputAction.next,
               decoration: const InputDecoration(
                 hintText: 'you@example.com',
-                prefixIcon: Icon(Icons.mail_outline, size: 20),
+                prefixIcon: Icon(LucideIcons.mail, size: 20),
               ),
               validator: (value) {
                 if (value == null || value.isEmpty) {
@@ -182,12 +183,10 @@ class _LoginScreenState extends State<LoginScreen> {
               onFieldSubmitted: (_) => _handleLogin(),
               decoration: InputDecoration(
                 hintText: '••••••••',
-                prefixIcon: const Icon(Icons.lock_outline, size: 20),
+                prefixIcon: const Icon(LucideIcons.lockKeyhole, size: 20),
                 suffixIcon: IconButton(
                   icon: Icon(
-                    _isPasswordVisible
-                        ? Icons.visibility_off_outlined
-                        : Icons.visibility_outlined,
+                    _isPasswordVisible ? LucideIcons.eyeOff : LucideIcons.eye,
                     size: 20,
                     color: Theme.of(context).iconTheme.color?.withOpacity(0.7),
                   ),
@@ -244,7 +243,7 @@ class _LoginScreenState extends State<LoginScreen> {
           Row(
             children: [
               Icon(
-                Icons.info_outline,
+                LucideIcons.info,
                 size: 16,
                 color: Theme.of(context).iconTheme.color?.withOpacity(0.7),
               ),
@@ -339,7 +338,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
             Icon(
-              Icons.arrow_forward_ios,
+              LucideIcons.chevronRight,
               size: 14,
               color: Theme.of(context).iconTheme.color?.withOpacity(0.5),
             ),

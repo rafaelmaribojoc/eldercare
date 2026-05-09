@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:intl/intl.dart';
 
 import '../../../core/theme/app_colors.dart';
@@ -54,7 +55,7 @@ class _AuditLogsScreenState extends State<AuditLogsScreen> {
         title: const Text('Audit Logs'),
         actions: [
           IconButton(
-            icon: const Icon(Icons.refresh),
+            icon: const Icon(LucideIcons.refreshCw),
             onPressed: _loadLogs,
           ),
         ],
@@ -73,7 +74,8 @@ class _AuditLogsScreenState extends State<AuditLogsScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Icon(Icons.error_outline, size: 48, color: AppColors.error),
+            const Icon(LucideIcons.circleAlert,
+                size: 48, color: AppColors.error),
             const SizedBox(height: 16),
             Text(
               'Failed to load logs',
@@ -103,7 +105,7 @@ class _AuditLogsScreenState extends State<AuditLogsScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(
-              Icons.history,
+              LucideIcons.history,
               size: 48,
               color: Theme.of(context).hintColor.withOpacity(0.5),
             ),
@@ -129,21 +131,21 @@ class _AuditLogsScreenState extends State<AuditLogsScreen> {
 
   Widget _buildLogCard(Map<String, dynamic> log) {
     // Determine icon and color based on action/severity
-    IconData icon = Icons.info_outline;
+    IconData icon = LucideIcons.info;
     Color color = AppColors.primary;
 
     final action = (log['action'] as String? ?? '').toLowerCase();
     if (action.contains('delete') || action.contains('remove')) {
-      icon = Icons.delete_outline;
+      icon = LucideIcons.trash2;
       color = AppColors.error;
     } else if (action.contains('create') || action.contains('add')) {
-      icon = Icons.add_circle_outline;
+      icon = LucideIcons.circlePlus;
       color = AppColors.success;
     } else if (action.contains('update') || action.contains('edit')) {
-      icon = Icons.edit_outlined;
+      icon = LucideIcons.pencil;
       color = AppColors.warning;
     } else if (action.contains('login')) {
-      icon = Icons.login;
+      icon = LucideIcons.logIn;
       color = AppColors.secondary;
     }
 

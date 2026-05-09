@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
@@ -224,7 +225,7 @@ class _AdmitResidentDialogState extends State<AdmitResidentDialog> {
                       _selectedWard, // Use value instead of initialValue for dynamic updates
                   decoration: const InputDecoration(
                     labelText: 'WARD *',
-                    prefixIcon: Icon(Icons.room),
+                    prefixIcon: Icon(LucideIcons.mapPin),
                   ),
                   items: _wards
                       .map((ward) => DropdownMenuItem(
@@ -249,7 +250,7 @@ class _AdmitResidentDialogState extends State<AdmitResidentDialog> {
                   initialValue: _selectedBed,
                   decoration: const InputDecoration(
                     labelText: 'BED *',
-                    prefixIcon: Icon(Icons.bed),
+                    prefixIcon: Icon(LucideIcons.bed),
                   ),
                   items: _availableBeds
                       .map((bed) =>
@@ -269,7 +270,7 @@ class _AdmitResidentDialogState extends State<AdmitResidentDialog> {
                   child: InputDecorator(
                     decoration: const InputDecoration(
                       labelText: 'ADMISSION DATE *',
-                      prefixIcon: Icon(Icons.calendar_today),
+                      prefixIcon: Icon(LucideIcons.calendar),
                     ),
                     child: Text(
                       DateFormat('MMMM d, yyyy')

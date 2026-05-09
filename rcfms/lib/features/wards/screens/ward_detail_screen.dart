@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
@@ -137,7 +138,7 @@ class _WardDetailScreenState extends State<WardDetailScreen> {
                   initialValue: selectedBed,
                   decoration: const InputDecoration(
                     labelText: 'Bed Number',
-                    prefixIcon: Icon(Icons.bed),
+                    prefixIcon: Icon(LucideIcons.bed),
                   ),
                   items: beds
                       .map((bed) =>
@@ -221,7 +222,7 @@ class _WardDetailScreenState extends State<WardDetailScreen> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
+          icon: const Icon(LucideIcons.arrowLeft),
           onPressed: () {
             if (context.canPop()) {
               context.pop();
@@ -233,7 +234,7 @@ class _WardDetailScreenState extends State<WardDetailScreen> {
         title: Text(_ward?.name ?? 'Ward'),
         actions: [
           IconButton(
-            icon: const Icon(Icons.refresh),
+            icon: const Icon(LucideIcons.refreshCw),
             onPressed: _loadData,
           ),
         ],
@@ -251,13 +252,13 @@ class _WardDetailScreenState extends State<WardDetailScreen> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Icon(Icons.error_outline, size: 48, color: AppColors.error),
+          const Icon(LucideIcons.circleAlert, size: 48, color: AppColors.error),
           const SizedBox(height: 16),
           Text(_error!, style: Theme.of(context).textTheme.titleMedium),
           const SizedBox(height: 8),
           TextButton.icon(
             onPressed: _loadData,
-            icon: const Icon(Icons.refresh),
+            icon: const Icon(LucideIcons.refreshCw),
             label: const Text('Retry'),
           ),
         ],
@@ -299,7 +300,7 @@ class _WardDetailScreenState extends State<WardDetailScreen> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(Icons.people_outline,
+                    Icon(LucideIcons.users,
                         size: 48, color: AppColors.textTertiary),
                     const SizedBox(height: 12),
                     Text(
@@ -375,7 +376,7 @@ class _WardDetailScreenState extends State<WardDetailScreen> {
                   color: color.withOpacity(0.1),
                   borderRadius: BorderRadius.circular(AppTheme.radiusSm),
                 ),
-                child: Icon(Icons.meeting_room_rounded, color: color, size: 28),
+                child: Icon(LucideIcons.doorOpen, color: color, size: 28),
               ),
               const SizedBox(width: 16),
               Expanded(
@@ -405,21 +406,21 @@ class _WardDetailScreenState extends State<WardDetailScreen> {
           Row(
             children: [
               _StatChip(
-                icon: Icons.people,
+                icon: LucideIcons.users,
                 label: 'Occupied',
                 value: '${ward.currentOccupancy}',
                 color: AppColors.primary,
               ),
               const SizedBox(width: 12),
               _StatChip(
-                icon: Icons.bed,
+                icon: LucideIcons.bed,
                 label: 'Capacity',
                 value: '${ward.capacity}',
                 color: AppColors.textSecondary,
               ),
               const SizedBox(width: 12),
               _StatChip(
-                icon: Icons.check_circle_outline,
+                icon: LucideIcons.circleCheck,
                 label: 'Available',
                 value: '${ward.availableBeds}',
                 color: ward.availableBeds > 0
@@ -574,7 +575,7 @@ class _ResidentTile extends StatelessWidget {
                         Row(
                           children: [
                             if (resident.bedNumber != null) ...[
-                              Icon(Icons.bed,
+                              Icon(LucideIcons.bed,
                                   size: 14, color: AppColors.textTertiary),
                               const SizedBox(width: 4),
                               Text(
@@ -605,7 +606,7 @@ class _ResidentTile extends StatelessWidget {
                   // Actions menu
                   if (canManageResidents || canReassignStaff)
                     PopupMenuButton<String>(
-                      icon: const Icon(Icons.more_vert, size: 20),
+                      icon: const Icon(LucideIcons.ellipsisVertical, size: 20),
                       onSelected: (value) {
                         switch (value) {
                           case 'transfer':
@@ -627,7 +628,8 @@ class _ResidentTile extends StatelessWidget {
                           const PopupMenuItem(
                             value: 'transfer',
                             child: ListTile(
-                              leading: Icon(Icons.swap_horiz, size: 20),
+                              leading:
+                                  Icon(LucideIcons.arrowLeftRight, size: 20),
                               title: Text('Transfer Ward'),
                               dense: true,
                               contentPadding: EdgeInsets.zero,
@@ -636,7 +638,7 @@ class _ResidentTile extends StatelessWidget {
                           const PopupMenuItem(
                             value: 'bed',
                             child: ListTile(
-                              leading: Icon(Icons.bed, size: 20),
+                              leading: Icon(LucideIcons.bed, size: 20),
                               title: Text('Reassign Bed'),
                               dense: true,
                               contentPadding: EdgeInsets.zero,
@@ -647,7 +649,7 @@ class _ResidentTile extends StatelessWidget {
                           const PopupMenuItem(
                             value: 'social_worker',
                             child: ListTile(
-                              leading: Icon(Icons.social_distance, size: 20),
+                              leading: Icon(LucideIcons.users, size: 20),
                               title: Text('Reassign Social Worker'),
                               dense: true,
                               contentPadding: EdgeInsets.zero,
@@ -656,7 +658,7 @@ class _ResidentTile extends StatelessWidget {
                           const PopupMenuItem(
                             value: 'houseparent',
                             child: ListTile(
-                              leading: Icon(Icons.home, size: 20),
+                              leading: Icon(LucideIcons.house, size: 20),
                               title: Text('Reassign Houseparent'),
                               dense: true,
                               contentPadding: EdgeInsets.zero,
@@ -675,13 +677,13 @@ class _ResidentTile extends StatelessWidget {
                 runSpacing: 4,
                 children: [
                   _StaffTag(
-                    icon: Icons.social_distance,
+                    icon: LucideIcons.users,
                     label: 'SW',
                     name: resident.socialWorkerName ?? 'Unassigned',
                     isAssigned: resident.socialWorkerId != null,
                   ),
                   _StaffTag(
-                    icon: Icons.home,
+                    icon: LucideIcons.house,
                     label: 'HP',
                     name: resident.houseparentName ?? 'Unassigned',
                     isAssigned: resident.houseparentId != null,

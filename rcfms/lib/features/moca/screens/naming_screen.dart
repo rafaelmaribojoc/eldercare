@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
@@ -65,7 +66,7 @@ class _NamingScreenState extends State<NamingScreen> {
                     borderRadius: BorderRadius.circular(16),
                   ),
                   child: Icon(
-                    Icons.pets,
+                    LucideIcons.pawPrint,
                     size: 40,
                     color: MocaColors.namingColor,
                   ),
@@ -140,7 +141,7 @@ class _NamingScreenState extends State<NamingScreen> {
             child: Row(
               children: [
                 Icon(
-                  value ? Icons.check_circle : Icons.circle_outlined,
+                  value ? LucideIcons.circleCheck : LucideIcons.circle,
                   color: value ? MocaColors.success : MocaColors.textSecondary,
                   size: 20,
                 ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:flutter/services.dart';
 import 'form_field_builders.dart';
 
@@ -18,7 +19,8 @@ class HomeLifeServiceForms {
     List<String>? residentNames,
     List<dynamic>? residents,
   }) {
-    bool ro(String key) => readOnly || (readOnlyFieldKeys?.contains(key) ?? false);
+    bool ro(String key) =>
+        readOnly || (readOnlyFieldKeys?.contains(key) ?? false);
     switch (templateType) {
       case 'inventory_admission':
         return _inventoryUponAdmission(data, onChanged, ro: ro);
@@ -29,7 +31,8 @@ class HomeLifeServiceForms {
       case 'progress_notes':
         return _progressNotes(data, onChanged, ro: ro);
       case 'incident_report':
-        return _incidentReport(data, onChanged, residentNames: residentNames, ro: ro);
+        return _incidentReport(data, onChanged,
+            residentNames: residentNames, ro: ro);
       case 'out_on_pass':
         return _outOnPass(data, onChanged, ro: ro);
       default:
@@ -791,7 +794,7 @@ class _InventoryItemCardState extends State<InventoryItemCard> {
                 ),
               ),
               IconButton(
-                icon: const Icon(Icons.delete_outline, color: Colors.red),
+                icon: const Icon(LucideIcons.trash2, color: Colors.red),
                 onPressed: widget.onDelete,
               ),
             ],
@@ -973,7 +976,7 @@ class _ProgressEntryCardState extends State<ProgressEntryCard> {
                 ),
               ),
               IconButton(
-                icon: const Icon(Icons.delete_outline, color: Colors.red),
+                icon: const Icon(LucideIcons.trash2, color: Colors.red),
                 onPressed: widget.onDelete,
               ),
             ],
@@ -1089,7 +1092,7 @@ class _IncidentActionCardState extends State<IncidentActionCard> {
                 ),
               ),
               IconButton(
-                icon: const Icon(Icons.delete_outline, color: Colors.red),
+                icon: const Icon(LucideIcons.trash2, color: Colors.red),
                 onPressed: widget.onDelete,
               ),
             ],

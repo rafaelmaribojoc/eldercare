@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -112,7 +113,7 @@ class _SideMenuState extends State<SideMenu> {
               IconButton(
                 onPressed: _toggleCollapse,
                 icon: Icon(
-                  Icons.menu,
+                  LucideIcons.menu,
                   color: Theme.of(context).iconTheme.color,
                 ),
                 tooltip: _isCollapsed ? 'Expand menu' : 'Collapse menu',
@@ -187,7 +188,7 @@ class _SideMenuState extends State<SideMenu> {
             ),
             const SizedBox(height: 12),
             IconButton(
-              icon: const Icon(Icons.logout_rounded),
+              icon: const Icon(LucideIcons.logOut),
               splashRadius: 20,
               tooltip: 'Logout',
               color: AppColors.error,
@@ -256,7 +257,7 @@ class _SideMenuState extends State<SideMenu> {
             ),
           ),
           IconButton(
-            icon: const Icon(Icons.logout_rounded),
+            icon: const Icon(LucideIcons.logOut),
             splashRadius: 20,
             color: AppColors.error,
             tooltip: 'Logout',
@@ -310,7 +311,7 @@ class _AppLogo extends StatelessWidget {
         borderRadius: BorderRadius.circular(6),
       ),
       child: const Icon(
-        Icons.elderly,
+        LucideIcons.personStanding,
         color: Colors.white,
         size: 20,
       ),

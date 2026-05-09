@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:flutter/services.dart';
 
@@ -228,7 +229,7 @@ class FormFieldBuilders {
             const SizedBox(width: 6),
             InkWell(
               onTap: () => onChanged(''),
-              child: Icon(Icons.close, size: 14, color: serviceColor),
+              child: Icon(LucideIcons.x, size: 14, color: serviceColor),
             ),
           ],
         ),
@@ -296,7 +297,7 @@ class FormFieldBuilders {
               ),
             ),
             const SizedBox(width: 4),
-            Icon(Icons.arrow_drop_down,
+            Icon(LucideIcons.chevronDown,
                 size: 16, color: Theme.of(context).unselectedWidgetColor),
           ],
         ),
@@ -336,7 +337,7 @@ class FormFieldBuilders {
                     shape: BoxShape.circle,
                   ),
                   child: Icon(
-                    Icons.verified_user_outlined,
+                    LucideIcons.shieldCheck,
                     size: 18,
                     color: Theme.of(context).colorScheme.primary,
                   ),
@@ -664,46 +665,46 @@ class FormFieldBuilders {
                             vertical: screen.value(
                                 mobile: 10.0, tablet: 11.0, desktop: 12.0),
                           ),
-                          suffixIcon: const Icon(Icons.arrow_drop_down),
+                          suffixIcon: const Icon(LucideIcons.chevronDown),
                         ),
                         style: TextStyle(
-                          fontSize:
-                              screen.value(mobile: 14.0, tablet: 15.0, desktop: 16.0),
+                          fontSize: screen.value(
+                              mobile: 14.0, tablet: 15.0, desktop: 16.0),
                           color: Theme.of(context).textTheme.bodyMedium?.color,
                         ),
                         onChanged: onChanged,
                       );
                     },
-              optionsViewBuilder: (context, onSelected, options) {
-                return Align(
-                  alignment: Alignment.topLeft,
-                  child: Material(
-                    elevation: 4.0,
-                    child: SizedBox(
-                      width: constraints.maxWidth,
-                      child: ListView.builder(
-                        padding: EdgeInsets.zero,
-                        shrinkWrap: true,
-                        itemCount: options.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          final String option = options.elementAt(index);
-                          return InkWell(
-                            onTap: () {
-                              onSelected(option);
-                            },
-                            child: Padding(
-                              padding: const EdgeInsets.all(16.0),
-                              child: Text(option),
+                    optionsViewBuilder: (context, onSelected, options) {
+                      return Align(
+                        alignment: Alignment.topLeft,
+                        child: Material(
+                          elevation: 4.0,
+                          child: SizedBox(
+                            width: constraints.maxWidth,
+                            child: ListView.builder(
+                              padding: EdgeInsets.zero,
+                              shrinkWrap: true,
+                              itemCount: options.length,
+                              itemBuilder: (BuildContext context, int index) {
+                                final String option = options.elementAt(index);
+                                return InkWell(
+                                  onTap: () {
+                                    onSelected(option);
+                                  },
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(16.0),
+                                    child: Text(option),
+                                  ),
+                                );
+                              },
                             ),
-                          );
-                        },
-                      ),
-                    ),
-                  ),
-                );
-              },
-            );
-          }),
+                          ),
+                        ),
+                      );
+                    },
+                  );
+                }),
         );
       },
     );
@@ -751,7 +752,7 @@ class FormFieldBuilders {
                 labelText: required ? '$label *' : label,
                 border: const OutlineInputBorder(),
                 suffixIcon: Icon(
-                  Icons.calendar_today,
+                  LucideIcons.calendar,
                   size: screen.value(mobile: 20.0, tablet: 22.0, desktop: 24.0),
                 ),
                 contentPadding: EdgeInsets.symmetric(
@@ -826,7 +827,7 @@ class FormFieldBuilders {
                 labelText: required ? '$label *' : label,
                 border: const OutlineInputBorder(),
                 suffixIcon: Icon(
-                  Icons.access_time,
+                  LucideIcons.clock,
                   size: screen.value(mobile: 20.0, tablet: 22.0, desktop: 24.0),
                 ),
                 contentPadding: EdgeInsets.symmetric(
@@ -1191,7 +1192,7 @@ class FormFieldBuilders {
                       alignment: Alignment.centerRight,
                       child: TextButton.icon(
                         onPressed: onDelete,
-                        icon: const Icon(Icons.delete,
+                        icon: const Icon(LucideIcons.trash2,
                             size: 18, color: Colors.red),
                         label: const Text('Remove',
                             style: TextStyle(color: Colors.red)),
@@ -1232,7 +1233,8 @@ class FormFieldBuilders {
               }),
               if (onDelete != null)
                 IconButton(
-                  icon: const Icon(Icons.delete, size: 20, color: Colors.red),
+                  icon: const Icon(LucideIcons.trash2,
+                      size: 20, color: Colors.red),
                   onPressed: onDelete,
                   padding: EdgeInsets.zero,
                   constraints: const BoxConstraints(),
@@ -1287,7 +1289,7 @@ class FormFieldBuilders {
                               Padding(
                                 padding: const EdgeInsets.only(
                                     top: 12.0, right: 8.0),
-                                child: const Icon(Icons.circle, size: 8),
+                                child: const Icon(LucideIcons.circle, size: 8),
                               ),
                               Expanded(
                                 child: TextField(
@@ -1312,7 +1314,7 @@ class FormFieldBuilders {
                                 ),
                               ),
                               IconButton(
-                                icon: Icon(Icons.close,
+                                icon: Icon(LucideIcons.x,
                                     size: 20,
                                     color: Theme.of(context).disabledColor),
                                 onPressed: () {
@@ -1339,7 +1341,7 @@ class FormFieldBuilders {
                               controllers.add(TextEditingController());
                             });
                           },
-                          icon: const Icon(Icons.add, size: 18),
+                          icon: const Icon(LucideIcons.plus, size: 18),
                           label: const Text('Add Item'),
                           style: OutlinedButton.styleFrom(
                             padding: const EdgeInsets.symmetric(
@@ -1458,13 +1460,13 @@ class FormFieldBuilders {
                   width: double.infinity,
                   child: OutlinedButton.icon(
                     onPressed: onPressed,
-                    icon: const Icon(Icons.add),
+                    icon: const Icon(LucideIcons.plus),
                     label: const Text('Add Entry'),
                   ),
                 )
               : OutlinedButton.icon(
                   onPressed: onPressed,
-                  icon: const Icon(Icons.add),
+                  icon: const Icon(LucideIcons.plus),
                   label: const Text('Add Row'),
                 ),
         );
@@ -1504,7 +1506,7 @@ class FormFieldBuilders {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Icon(
-                  Icons.info_outline,
+                  LucideIcons.info,
                   color: Theme.of(context).colorScheme.primary,
                   size: screen.value(mobile: 18.0, tablet: 19.0, desktop: 20.0),
                 ),
@@ -1758,7 +1760,7 @@ class _BulletListInputState extends State<BulletListInput> {
                         contentPadding: const EdgeInsets.all(12),
                         suffixIcon: _controllers.length > 1
                             ? IconButton(
-                                icon: const Icon(Icons.clear, size: 18),
+                                icon: const Icon(LucideIcons.x, size: 18),
                                 onPressed: () => _removeItem(index),
                                 tooltip: 'Remove item',
                               )
@@ -1810,7 +1812,7 @@ class _BulletListInputState extends State<BulletListInput> {
                   contentPadding: const EdgeInsets.all(12),
                   suffixIcon: _controllers.length > 1
                       ? IconButton(
-                          icon: const Icon(Icons.clear, size: 18),
+                          icon: const Icon(LucideIcons.x, size: 18),
                           onPressed: () => _removeItem(index),
                           tooltip: 'Remove item',
                         )
@@ -1829,7 +1831,7 @@ class _BulletListInputState extends State<BulletListInput> {
                 children: [
                   Padding(
                     padding: const EdgeInsets.only(top: 14.0, right: 8.0),
-                    child: Icon(Icons.circle,
+                    child: Icon(LucideIcons.circle,
                         size: 6,
                         color: Theme.of(context).textTheme.bodyMedium?.color),
                   ),
@@ -1840,7 +1842,7 @@ class _BulletListInputState extends State<BulletListInput> {
           }),
           OutlinedButton.icon(
             onPressed: _addItem,
-            icon: const Icon(Icons.add, size: 18),
+            icon: const Icon(LucideIcons.plus, size: 18),
             label: const Text('Add Item'),
           ),
         ],
@@ -2145,7 +2147,7 @@ class _TypeAheadInputState extends State<TypeAheadInput> {
                 labelText: widget.required ? '${widget.label} *' : widget.label,
                 border: widget.inputBorder ?? const OutlineInputBorder(),
                 contentPadding: const EdgeInsets.all(12),
-                suffixIcon: const Icon(Icons.arrow_drop_down, size: 20),
+                suffixIcon: const Icon(LucideIcons.chevronDown, size: 20),
               ),
               validator: widget.required
                   ? (v) =>
@@ -2285,7 +2287,7 @@ class _MultiSelectDialogState extends State<_MultiSelectDialog> {
                       ),
                     ),
                     IconButton(
-                      icon: const Icon(Icons.add),
+                      icon: const Icon(LucideIcons.plus),
                       onPressed: () {
                         if (_customController.text.isNotEmpty) {
                           final val = _customController.text.trim();
@@ -2435,7 +2437,7 @@ class _RepeatableFormSectionState extends State<RepeatableFormSection> {
                   Padding(
                     padding: const EdgeInsets.only(top: 12.0, left: 8.0),
                     child: IconButton(
-                      icon: const Icon(Icons.remove_circle_outline,
+                      icon: const Icon(LucideIcons.circleMinus,
                           color: Colors.red),
                       onPressed: () => _removeItem(index),
                       tooltip: 'Remove item',
@@ -2447,7 +2449,7 @@ class _RepeatableFormSectionState extends State<RepeatableFormSection> {
         }),
         OutlinedButton.icon(
           onPressed: _addItem,
-          icon: const Icon(Icons.add),
+          icon: const Icon(LucideIcons.plus),
           label: Text(widget.addLabel ?? 'Add Item'),
         ),
         const SizedBox(height: 16),
@@ -2571,7 +2573,7 @@ class _DigitalSignatureFieldState extends State<_DigitalSignatureField> {
                             top: 4,
                             right: 4,
                             child: IconButton(
-                              icon: const Icon(Icons.edit, size: 18),
+                              icon: const Icon(LucideIcons.pencil, size: 18),
                               onPressed: _capture,
                               tooltip: 'Re-capture signature',
                             ),
@@ -2586,7 +2588,7 @@ class _DigitalSignatureFieldState extends State<_DigitalSignatureField> {
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               Icon(
-                                Icons.draw,
+                                LucideIcons.penLine,
                                 color: Theme.of(context).hintColor,
                                 size: screen.value(
                                     mobile: 24.0, tablet: 28.0, desktop: 32.0),

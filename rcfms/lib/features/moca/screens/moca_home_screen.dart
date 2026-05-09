@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
@@ -27,7 +28,7 @@ class MocaHomeScreen extends StatelessWidget {
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: AppColors.textPrimary),
+          icon: const Icon(LucideIcons.arrowLeft, color: AppColors.textPrimary),
           onPressed: () => context.pop(),
         ),
       ),
@@ -59,7 +60,7 @@ class MocaHomeScreen extends StatelessWidget {
                           child: Row(
                             children: [
                               const Icon(
-                                Icons.person,
+                                LucideIcons.user,
                                 color: MocaColors.primary,
                               ),
                               const SizedBox(width: 12),
@@ -107,19 +108,19 @@ class MocaHomeScreen extends StatelessWidget {
                               ),
                               const SizedBox(height: 12),
                               _buildInfoRow(
-                                Icons.timer_outlined,
+                                LucideIcons.timer,
                                 '10-15 minuto',
                                 'Tinatayang tagal',
                               ),
                               const Divider(height: 24),
                               _buildInfoRow(
-                                Icons.format_list_numbered,
+                                LucideIcons.listOrdered,
                                 '8 seksyon',
                                 'Mga cognitive domain na sinusubok',
                               ),
                               const Divider(height: 24),
                               _buildInfoRow(
-                                Icons.score_outlined,
+                                LucideIcons.gauge,
                                 '30 puntos',
                                 'Pinakamataas na iskor (≥26 normal)',
                               ),
@@ -327,7 +328,7 @@ class MocaHomeScreen extends StatelessWidget {
         children: [
           Row(
             children: [
-              const Icon(Icons.person, color: MocaColors.primary),
+              const Icon(LucideIcons.user, color: MocaColors.primary),
               const SizedBox(width: 12),
               Expanded(
                 child: Column(
@@ -379,21 +380,21 @@ class MocaHomeScreen extends StatelessWidget {
                 child: _buildInfoItem(
                   'Sex',
                   assessment.residentSex ?? 'N/A',
-                  Icons.wc,
+                  LucideIcons.toilet,
                 ),
               ),
               Expanded(
                 child: _buildInfoItem(
                   'Age',
                   age != null ? '$age years' : 'N/A',
-                  Icons.cake,
+                  LucideIcons.cake,
                 ),
               ),
               Expanded(
                 child: _buildInfoItem(
                   'Date',
                   DateFormat('MMM d, y').format(DateTime.now()),
-                  Icons.calendar_today,
+                  LucideIcons.calendar,
                 ),
               ),
             ],
@@ -402,7 +403,7 @@ class MocaHomeScreen extends StatelessWidget {
             const SizedBox(height: 8),
             Row(
               children: [
-                const Icon(Icons.school,
+                const Icon(LucideIcons.graduationCap,
                     size: 16, color: MocaColors.textSecondary),
                 const SizedBox(width: 8),
                 Text(

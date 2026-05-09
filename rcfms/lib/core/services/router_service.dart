@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -347,7 +348,7 @@ class RouterService {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            const Icon(Icons.error_outline,
+                            const Icon(LucideIcons.circleAlert,
                                 size: 64, color: Colors.red),
                             const SizedBox(height: 16),
                             Text('Template "$templateId" not found'),
@@ -544,7 +545,7 @@ class RouterService {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Icon(Icons.error_outline, size: 64, color: Colors.red),
+            const Icon(LucideIcons.circleAlert, size: 64, color: Colors.red),
             const SizedBox(height: 16),
             Text(
               'Page not found',
@@ -843,7 +844,7 @@ class _FormEditScreenState extends State<_FormEditScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Icon(Icons.error_outline, size: 64, color: Colors.red),
+              const Icon(LucideIcons.circleAlert, size: 64, color: Colors.red),
               const SizedBox(height: 16),
               Text(_error != null
                   ? 'Failed to load form: $_error'

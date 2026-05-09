@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
@@ -68,7 +69,7 @@ class _AssessmentCompleteScreenState extends State<AssessmentCompleteScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Icon(
-                    Icons.error_outline,
+                    LucideIcons.circleAlert,
                     size: 64,
                     color: MocaColors.error,
                   ),
@@ -109,7 +110,7 @@ class _AssessmentCompleteScreenState extends State<AssessmentCompleteScreen> {
                         shape: BoxShape.circle,
                       ),
                       child: Icon(
-                        isNormal ? Icons.check_circle : Icons.info,
+                        isNormal ? LucideIcons.circleCheck : LucideIcons.info,
                         size: 60,
                         color:
                             isNormal ? MocaColors.success : MocaColors.warning,
@@ -172,7 +173,7 @@ class _AssessmentCompleteScreenState extends State<AssessmentCompleteScreen> {
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
                                     Icon(
-                                      Icons.add_circle,
+                                      LucideIcons.circlePlus,
                                       size: 14,
                                       color: MocaColors.success,
                                     ),
@@ -211,7 +212,9 @@ class _AssessmentCompleteScreenState extends State<AssessmentCompleteScreen> {
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
                                   Icon(
-                                    isNormal ? Icons.check : Icons.warning,
+                                    isNormal
+                                        ? LucideIcons.check
+                                        : LucideIcons.triangleAlert,
                                     color: isNormal
                                         ? MocaColors.success
                                         : MocaColors.warning,
@@ -342,7 +345,8 @@ class _AssessmentCompleteScreenState extends State<AssessmentCompleteScreen> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Icon(Icons.check_circle, color: MocaColors.success),
+                            Icon(LucideIcons.circleCheck,
+                                color: MocaColors.success),
                             const SizedBox(width: 12),
                             const Text(
                               'Matagumpay na na-save ang pagtatasa',
@@ -367,7 +371,7 @@ class _AssessmentCompleteScreenState extends State<AssessmentCompleteScreen> {
                                         );
                                     context.go('/residents');
                                   },
-                            icon: const Icon(Icons.people),
+                            icon: const Icon(LucideIcons.users),
                             label: const Text('Bumalik sa Residente'),
                             style: OutlinedButton.styleFrom(
                               foregroundColor: AppColors.primary,
@@ -387,7 +391,7 @@ class _AssessmentCompleteScreenState extends State<AssessmentCompleteScreen> {
                                         );
                                     context.go('/dashboard');
                                   },
-                            icon: const Icon(Icons.home),
+                            icon: const Icon(LucideIcons.house),
                             label: const Text('Umuwi'),
                             style: ElevatedButton.styleFrom(
                               backgroundColor: AppColors.primary,

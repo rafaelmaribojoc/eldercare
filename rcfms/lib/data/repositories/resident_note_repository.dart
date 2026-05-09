@@ -5,7 +5,7 @@ class ResidentNoteRepository {
   final SupabaseClient _supabase;
 
   ResidentNoteRepository([SupabaseClient? supabase])
-    : _supabase = supabase ?? Supabase.instance.client;
+      : _supabase = supabase ?? Supabase.instance.client;
 
   Future<List<ResidentNote>> getNotesByResident(
     String residentId, {
@@ -120,13 +120,10 @@ class ResidentNoteRepository {
 
   Future<void> archiveNote(String noteId) async {
     try {
-      await _supabase
-          .from('resident_notes')
-          .update({
-            'is_archived': true,
-            'updated_at': DateTime.now().toIso8601String(),
-          })
-          .eq('id', noteId);
+      await _supabase.from('resident_notes').update({
+        'is_archived': true,
+        'updated_at': DateTime.now().toIso8601String(),
+      }).eq('id', noteId);
     } catch (e) {
       throw Exception('Failed to archive note: $e');
     }
@@ -134,13 +131,10 @@ class ResidentNoteRepository {
 
   Future<void> restoreNote(String noteId) async {
     try {
-      await _supabase
-          .from('resident_notes')
-          .update({
-            'is_archived': false,
-            'updated_at': DateTime.now().toIso8601String(),
-          })
-          .eq('id', noteId);
+      await _supabase.from('resident_notes').update({
+        'is_archived': false,
+        'updated_at': DateTime.now().toIso8601String(),
+      }).eq('id', noteId);
     } catch (e) {
       throw Exception('Failed to restore note: $e');
     }

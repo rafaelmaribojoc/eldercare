@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
@@ -47,7 +48,7 @@ class _MemoryScreenState extends State<MemoryScreen> {
                       child: Row(
                         children: [
                           const Icon(
-                            Icons.info_outline,
+                            LucideIcons.info,
                             color: MocaColors.info,
                           ),
                           const SizedBox(width: 12),
@@ -73,7 +74,7 @@ class _MemoryScreenState extends State<MemoryScreen> {
                     Center(
                       child: ElevatedButton.icon(
                         onPressed: () => setState(() => _wordsShown = true),
-                        icon: const Icon(Icons.visibility),
+                        icon: const Icon(LucideIcons.eye),
                         label: const Text('Ipakita ang mga Salita'),
                         style: ElevatedButton.styleFrom(
                           backgroundColor: MocaColors.memoryColor,
@@ -120,7 +121,7 @@ class _MemoryScreenState extends State<MemoryScreen> {
                         child: Row(
                           children: [
                             const Icon(
-                              Icons.warning_amber,
+                              LucideIcons.triangleAlert,
                               color: MocaColors.warning,
                             ),
                             const SizedBox(width: 12),
@@ -246,8 +247,8 @@ class _MemoryScreenState extends State<MemoryScreen> {
                       children: [
                         Icon(
                           isRecalled
-                              ? Icons.check_circle
-                              : Icons.circle_outlined,
+                              ? LucideIcons.circleCheck
+                              : LucideIcons.circle,
                           color: isRecalled
                               ? MocaColors.memoryColor
                               : MocaColors.textSecondary,

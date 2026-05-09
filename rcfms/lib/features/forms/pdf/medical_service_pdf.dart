@@ -204,14 +204,16 @@ class MedicalServicePdf {
                 children: [
                   PdfStyles.signatureBlock(
                     role: 'Nurse',
-                    signatureBytes: data['_prepared_by_signature_bytes'] as Uint8List?,
+                    signatureBytes:
+                        data['_prepared_by_signature_bytes'] as Uint8List?,
                     name: data['prepared_by'],
                     width: 200,
                   ),
                   PdfStyles.signatureBlock(
                     role:
                         'Center Head', // As per image "NOTED BY: CANDELARIA C. TINGSON, RSW"
-                    signatureBytes: data['_noted_by_signature_bytes'] as Uint8List?,
+                    signatureBytes:
+                        data['_noted_by_signature_bytes'] as Uint8List?,
                     name: data['noted_by'] ?? 'CANDELARIA C. TINGSON, RSW',
                     width: 200,
                   ),

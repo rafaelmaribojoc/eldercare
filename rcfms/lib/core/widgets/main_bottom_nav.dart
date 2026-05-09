@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
@@ -39,16 +40,16 @@ class MainBottomNav extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 _NavItem(
-                  icon: Icons.home_outlined,
-                  activeIcon: Icons.home_rounded,
+                  icon: LucideIcons.house,
+                  activeIcon: LucideIcons.house,
                   label: 'Home',
                   isSelected: currentIndex == 0,
                   isCompact: isCompact,
                   onTap: () => context.go('/dashboard'),
                 ),
                 _NavItem(
-                  icon: Icons.manage_accounts_outlined,
-                  activeIcon: Icons.manage_accounts_rounded,
+                  icon: LucideIcons.usersRound,
+                  activeIcon: LucideIcons.usersRound,
                   label: 'Users',
                   isSelected: currentIndex == 1,
                   isCompact: isCompact,
@@ -66,24 +67,24 @@ class MainBottomNav extends StatelessWidget {
                 // Let's keep 4 items evenly spaced.
 
                 _NavItem(
-                  icon: Icons.meeting_room_outlined,
-                  activeIcon: Icons.meeting_room_rounded,
+                  icon: LucideIcons.doorOpen,
+                  activeIcon: LucideIcons.doorOpen,
                   label: 'Wards',
                   isSelected: currentIndex == 2,
                   isCompact: isCompact,
                   onTap: () => context.go('/admin/wards'),
                 ),
                 _NavItem(
-                  icon: Icons.history_outlined,
-                  activeIcon: Icons.history_rounded,
+                  icon: LucideIcons.history,
+                  activeIcon: LucideIcons.history,
                   label: 'Audit Logs',
                   isSelected: currentIndex == 3,
                   isCompact: isCompact,
                   onTap: () => context.go('/admin/audit-logs'),
                 ),
                 _NavItem(
-                  icon: Icons.settings_outlined,
-                  activeIcon: Icons.settings_rounded,
+                  icon: LucideIcons.settings,
+                  activeIcon: LucideIcons.settings,
                   label: 'Settings', // Explicitly "Settings"
                   isSelected: currentIndex == 4,
                   isCompact: isCompact,
@@ -107,16 +108,16 @@ class MainBottomNav extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               _NavItem(
-                icon: Icons.home_outlined,
-                activeIcon: Icons.home_rounded,
+                icon: LucideIcons.house,
+                activeIcon: LucideIcons.house,
                 label: 'Home',
                 isSelected: currentIndex == 0,
                 isCompact: isCompact,
                 onTap: () => context.go('/dashboard'),
               ),
               _NavItem(
-                icon: Icons.people_outline,
-                activeIcon: Icons.people_rounded,
+                icon: LucideIcons.users,
+                activeIcon: LucideIcons.users,
                 label: 'Residents',
                 isSelected: currentIndex == 1,
                 isCompact: isCompact,
@@ -125,8 +126,8 @@ class MainBottomNav extends StatelessWidget {
               // Center spacer for FAB
               SizedBox(width: isCompact ? 40 : 56),
               _NavItem(
-                icon: Icons.description_outlined,
-                activeIcon: Icons.description_rounded,
+                icon: LucideIcons.fileText,
+                activeIcon: LucideIcons.fileText,
                 label: 'Forms',
                 isSelected: currentIndex == 2,
                 isCompact: isCompact,
@@ -134,21 +135,12 @@ class MainBottomNav extends StatelessWidget {
               ),
               if (isAdmin && !isSuperAdmin) // Center Head
                 _NavItem(
-                  icon: Icons.admin_panel_settings_outlined,
-                  activeIcon: Icons.admin_panel_settings_rounded,
+                  icon: LucideIcons.shield,
+                  activeIcon: LucideIcons.shield,
                   label: 'Admin',
                   isSelected: currentIndex == 3,
                   isCompact: isCompact,
                   onTap: () => context.go('/admin'),
-                )
-              else
-                _NavItem(
-                  icon: Icons.settings_outlined,
-                  activeIcon: Icons.settings_rounded,
-                  label: 'More',
-                  isSelected: currentIndex == 3,
-                  isCompact: isCompact,
-                  onTap: () => context.go('/settings'),
                 ),
             ],
           ),
@@ -171,7 +163,7 @@ class MainScanFab extends StatelessWidget {
         backgroundColor: AppColors.primary,
         elevation: 4,
         shape: const CircleBorder(),
-        child: const Icon(Icons.nfc_rounded, color: Colors.white, size: 28),
+        child: const Icon(LucideIcons.nfc, color: Colors.white, size: 28),
       ),
     );
   }
@@ -202,7 +194,7 @@ class MainScanFab extends StatelessWidget {
             ),
             const SizedBox(height: 24),
             _ScanModeTile(
-              icon: Icons.note_add,
+              icon: LucideIcons.filePlus,
               color: AppColors.warning,
               label: 'Quick Note',
               description: 'Scan to immediately add a note',
@@ -214,7 +206,7 @@ class MainScanFab extends StatelessWidget {
             if (isPsych) ...[
               const SizedBox(height: 16),
               _ScanModeTile(
-                icon: Icons.psychology,
+                icon: LucideIcons.brain,
                 color: Colors.purple,
                 label: 'MoCA Assessment',
                 description: 'Scan to start MoCA test',
@@ -283,7 +275,7 @@ class _ScanModeTile extends StatelessWidget {
               ],
             ),
           ),
-          const Icon(Icons.chevron_right, color: Colors.grey),
+          const Icon(LucideIcons.chevronRight, color: Colors.grey),
         ],
       ),
     );

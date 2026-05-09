@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import '../../../../core/theme/app_colors.dart';
 
 enum NoteFilterType { all, locked, favorites, trash, folder }
@@ -43,7 +44,8 @@ class ModernNotesSidebar extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
             child: Row(
               children: [
-                Icon(Icons.notes, color: AppColors.primary, size: 28),
+                Icon(LucideIcons.notebookTabs,
+                    color: AppColors.primary, size: 28),
                 const SizedBox(width: 10),
                 Text(
                   'Resident Notes',
@@ -62,18 +64,18 @@ class ModernNotesSidebar extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 10),
               children: [
                 _buildNavItem(
-                  icon: Icons.note_alt_outlined,
+                  icon: LucideIcons.notebookText,
                   label: 'All notes',
                   filter: const NoteFilter(type: NoteFilterType.all),
                   count: null, // TODO: Add counts
                 ),
                 _buildNavItem(
-                  icon: Icons.star_outline,
+                  icon: LucideIcons.star,
                   label: 'Favorites',
                   filter: const NoteFilter(type: NoteFilterType.favorites),
                 ),
                 _buildNavItem(
-                  icon: Icons.lock_outline,
+                  icon: LucideIcons.lockKeyhole,
                   label: 'Locked notes',
                   filter: const NoteFilter(type: NoteFilterType.locked),
                 ),
@@ -98,7 +100,7 @@ class ModernNotesSidebar extends StatelessWidget {
                 const SizedBox(height: 20),
                 const Divider(),
                 _buildNavItem(
-                  icon: Icons.delete_outline,
+                  icon: LucideIcons.trash2,
                   label: 'Recycle bin',
                   filter: const NoteFilter(type: NoteFilterType.trash),
                 ),
@@ -152,7 +154,7 @@ class ModernNotesSidebar extends StatelessWidget {
 
     return ListTile(
       leading: Icon(
-        Icons.folder,
+        LucideIcons.folder,
         color: isSelected ? color : color.withOpacity(0.7),
       ),
       title: Text(

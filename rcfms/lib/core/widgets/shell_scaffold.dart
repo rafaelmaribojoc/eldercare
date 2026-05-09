@@ -7,6 +7,7 @@ import '../theme/app_theme.dart';
 import 'nav_item.dart';
 import 'side_menu.dart';
 import 'top_bar.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 
 /// Shell scaffold with responsive navigation
 class ShellScaffold extends StatelessWidget {
@@ -63,38 +64,38 @@ class ShellScaffold extends StatelessWidget {
       return [
         const NavItem(
           label: 'Home',
-          icon: Icons.home_outlined,
-          activeIcon: Icons.home_rounded,
+          icon: LucideIcons.house,
+          activeIcon: LucideIcons.house,
           route: '/dashboard',
         ),
         const NavItem(
           label: 'Users',
-          icon: Icons.manage_accounts_outlined,
-          activeIcon: Icons.manage_accounts_rounded,
+          icon: LucideIcons.usersRound,
+          activeIcon: LucideIcons.usersRound,
           route: '/admin/users',
         ),
         const NavItem(
           label: 'Wards',
-          icon: Icons.meeting_room_outlined,
-          activeIcon: Icons.meeting_room_rounded,
+          icon: LucideIcons.doorOpen,
+          activeIcon: LucideIcons.doorOpen,
           route: '/admin/wards',
         ),
         const NavItem(
           label: 'Audit Logs',
-          icon: Icons.history_outlined,
-          activeIcon: Icons.history_rounded,
+          icon: LucideIcons.history,
+          activeIcon: LucideIcons.history,
           route: '/admin/audit-logs',
         ),
         const NavItem(
           label: 'Analytics',
-          icon: Icons.analytics_outlined,
-          activeIcon: Icons.analytics_rounded,
+          icon: LucideIcons.chartColumn,
+          activeIcon: LucideIcons.chartColumn,
           route: '/analytics',
         ),
         const NavItem(
           label: 'Settings',
-          icon: Icons.settings_outlined,
-          activeIcon: Icons.settings_rounded,
+          icon: LucideIcons.settings,
+          activeIcon: LucideIcons.settings,
           route: '/settings',
         ),
       ];
@@ -103,48 +104,41 @@ class ShellScaffold extends StatelessWidget {
     return [
       const NavItem(
         label: 'Home',
-        icon: Icons.home_outlined,
-        activeIcon: Icons.home_rounded,
+        icon: LucideIcons.house,
+        activeIcon: LucideIcons.house,
         route: '/dashboard',
       ),
       const NavItem(
         label: 'Residents',
-        icon: Icons.people_outline,
-        activeIcon: Icons.people_rounded,
+        icon: LucideIcons.users,
+        activeIcon: LucideIcons.users,
         route: '/residents',
       ),
       const NavItem(
         label: 'Forms',
-        icon: Icons.description_outlined,
-        activeIcon: Icons.description_rounded,
+        icon: LucideIcons.fileText,
+        activeIcon: LucideIcons.fileText,
         route: '/forms',
       ),
       const NavItem(
         label: 'Wards',
-        icon: Icons.meeting_room_outlined,
-        activeIcon: Icons.meeting_room_rounded,
+        icon: LucideIcons.doorOpen,
+        activeIcon: LucideIcons.doorOpen,
         route: '/wards',
       ),
       if (isAdmin)
         const NavItem(
           label: 'Analytics',
-          icon: Icons.analytics_outlined,
-          activeIcon: Icons.analytics_rounded,
+          icon: LucideIcons.chartColumn,
+          activeIcon: LucideIcons.chartColumn,
           route: '/analytics',
         ),
       if (isAdmin && !isSuperAdmin)
         const NavItem(
           label: 'Admin',
-          icon: Icons.admin_panel_settings_outlined,
-          activeIcon: Icons.admin_panel_settings_rounded,
+          icon: LucideIcons.shield,
+          activeIcon: LucideIcons.shield,
           route: '/admin',
-        )
-      else
-        const NavItem(
-          label: 'More',
-          icon: Icons.settings_outlined,
-          activeIcon: Icons.settings_rounded,
-          route: '/settings',
         ),
     ];
   }
@@ -238,7 +232,38 @@ class ShellScaffold extends StatelessWidget {
 
   Widget _buildBottomNav(
       BuildContext context, List<NavItem> navItems, int selectedIndex) {
-    final isCompact = navItems.length > 5;
+    // Show the centered NFC scan FAB for any user that has the residents
+    // route in their nav (i.e. clinical users, not super admin).
+    final showScanFab = navItems.any((n) => n.route == '/residents');
+    final isCompact = navItems.length > 4;
+
+    final children = <Widget>[];
+    final insertAt = showScanFab ? (navItems.length / 2).ceil() : -1;
+
+    for (var i = 0; i < navItems.length; i++) {
+      if (i == insertAt) {
+        children.add(_BottomScanItem(
+          compact: isCompact,
+          onTap: () => context.push('/scan'),
+        ));
+      }
+      final item = navItems[i];
+      children.add(Flexible(
+        child: _BottomNavItem(
+          item: item,
+          isSelected: i == selectedIndex,
+          compact: isCompact,
+          onTap: () => context.go(item.route),
+        ),
+      ));
+    }
+    if (showScanFab && insertAt == navItems.length) {
+      children.add(_BottomScanItem(
+        compact: isCompact,
+        onTap: () => context.push('/scan'),
+      ));
+    }
+
     return Container(
       decoration: BoxDecoration(
         color: Theme.of(context).cardColor,
@@ -247,7 +272,7 @@ class ShellScaffold extends StatelessWidget {
         ),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05), // Subtle shadow
+            color: Colors.black.withOpacity(0.05),
             blurRadius: 8,
             offset: const Offset(0, -2),
           ),
@@ -255,24 +280,227 @@ class ShellScaffold extends StatelessWidget {
       ),
       child: SafeArea(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: isCompact ? 4 : 8, vertical: 8),
+          padding:
+              EdgeInsets.symmetric(horizontal: isCompact ? 4 : 8, vertical: 8),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: navItems.asMap().entries.map((entry) {
-              final index = entry.key;
-              final item = entry.value;
-              final isSelected = index == selectedIndex;
-
-              return Flexible(
-                child: _BottomNavItem(
-                  item: item,
-                  isSelected: isSelected,
-                  compact: isCompact,
-                  onTap: () => context.go(item.route),
-                ),
-              );
-            }).toList(),
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: children,
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class _BottomScanItem extends StatelessWidget {
+  final bool compact;
+  final VoidCallback onTap;
+
+  const _BottomScanItem({
+    required this.compact,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final size = compact ? 48.0 : 56.0;
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8),
+      child: SizedBox(
+        width: size,
+        height: size,
+        child: GestureDetector(
+          onLongPress: () => _showScanModes(context),
+          child: FloatingActionButton(
+            heroTag: 'shell-bottom-scan-fab',
+            onPressed: onTap,
+            backgroundColor: AppColors.primary,
+            elevation: 6,
+            shape: const CircleBorder(),
+            tooltip: 'Tap to scan • Long-press for scan modes',
+            child: const Icon(
+              LucideIcons.nfc,
+              color: Colors.white,
+              size: 26,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  void _showScanModes(BuildContext context) {
+    final authState = context.read<AuthBloc>().state;
+    if (authState is! AuthAuthenticated) {
+      context.push('/scan');
+      return;
+    }
+    final user = authState.user;
+    final unit = (user.unit ?? '').toLowerCase();
+    final isPsych = unit == 'psych';
+    final isMedical = unit == 'medical';
+
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.transparent,
+      builder: (sheetContext) {
+        final tiles = <Widget>[
+          _ScanModeTile(
+            icon: LucideIcons.user,
+            color: AppColors.primary,
+            label: 'View Resident Profile',
+            description: 'Scan to open the resident\'s case file',
+            onTap: () {
+              Navigator.pop(sheetContext);
+              context.push('/scan');
+            },
+          ),
+          const SizedBox(height: 16),
+          _ScanModeTile(
+            icon: LucideIcons.filePlus,
+            color: AppColors.warning,
+            label: 'Quick Note',
+            description: 'Scan to immediately add a note',
+            onTap: () {
+              Navigator.pop(sheetContext);
+              context.push('/scan?mode=note');
+            },
+          ),
+          if (isPsych) ...[
+            const SizedBox(height: 16),
+            _ScanModeTile(
+              icon: LucideIcons.brain,
+              color: Colors.purple,
+              label: 'MoCA Assessment',
+              description: 'Scan to start a MoCA test',
+              onTap: () {
+                Navigator.pop(sheetContext);
+                context.push('/scan?mode=moca');
+              },
+            ),
+          ],
+          if (isMedical) ...[
+            const SizedBox(height: 16),
+            _ScanModeTile(
+              icon: LucideIcons.heartPulse,
+              color: Colors.teal,
+              label: 'Quick Vitals',
+              description: 'Scan to log vitals for the resident',
+              onTap: () {
+                Navigator.pop(sheetContext);
+                context.push('/scan?mode=vitals');
+              },
+            ),
+          ],
+        ];
+
+        return Container(
+          padding: const EdgeInsets.fromLTRB(20, 20, 20, 28),
+          decoration: BoxDecoration(
+            color: Theme.of(sheetContext).cardColor,
+            borderRadius:
+                const BorderRadius.vertical(top: Radius.circular(24)),
+          ),
+          child: SafeArea(
+            top: false,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Center(
+                  child: Container(
+                    width: 36,
+                    height: 4,
+                    margin: const EdgeInsets.only(bottom: 16),
+                    decoration: BoxDecoration(
+                      color: Colors.grey.shade300,
+                      borderRadius: BorderRadius.circular(2),
+                    ),
+                  ),
+                ),
+                Text(
+                  'Select Scan Mode',
+                  style: Theme.of(sheetContext)
+                      .textTheme
+                      .titleLarge
+                      ?.copyWith(fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  'Choose what to do after scanning the NFC card.',
+                  style: Theme.of(sheetContext).textTheme.bodySmall?.copyWith(
+                        color: AppColors.textSecondary,
+                      ),
+                ),
+                const SizedBox(height: 20),
+                ...tiles,
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+}
+
+class _ScanModeTile extends StatelessWidget {
+  final IconData icon;
+  final Color color;
+  final String label;
+  final String description;
+  final VoidCallback onTap;
+
+  const _ScanModeTile({
+    required this.icon,
+    required this.color,
+    required this.label,
+    required this.description,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(12),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 6),
+        child: Row(
+          children: [
+            Container(
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: color.withOpacity(0.12),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Icon(icon, color: color, size: 26),
+            ),
+            const SizedBox(width: 16),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    label,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                    ),
+                  ),
+                  const SizedBox(height: 2),
+                  Text(
+                    description,
+                    style: TextStyle(
+                      color: AppColors.textSecondary,
+                      fontSize: 13,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const Icon(LucideIcons.chevronRight, color: Colors.grey),
+          ],
         ),
       ),
     );

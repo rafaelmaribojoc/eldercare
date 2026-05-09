@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -356,7 +357,7 @@ class _SetupSignatureScreenState extends State<SetupSignatureScreen> {
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
+          icon: const Icon(LucideIcons.arrowLeft),
           onPressed: () {
             if (Navigator.canPop(context)) {
               Navigator.pop(context);
@@ -445,7 +446,7 @@ class _SetupSignatureScreenState extends State<SetupSignatureScreen> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Icon(
-                                    Icons.gesture,
+                                    LucideIcons.mousePointerClick,
                                     size: 48,
                                     color: Theme.of(context)
                                         .textTheme
@@ -497,7 +498,7 @@ class _SetupSignatureScreenState extends State<SetupSignatureScreen> {
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
                                       Icon(
-                                        Icons.refresh,
+                                        LucideIcons.refreshCw,
                                         size: 16,
                                         color: Theme.of(context)
                                             .textTheme
@@ -528,7 +529,7 @@ class _SetupSignatureScreenState extends State<SetupSignatureScreen> {
               Center(
                 child: TextButton.icon(
                   onPressed: _pickImage,
-                  icon: const Icon(Icons.upload_file),
+                  icon: const Icon(LucideIcons.fileUp),
                   label: const Text('Upload Signature Image'),
                 ),
               ),

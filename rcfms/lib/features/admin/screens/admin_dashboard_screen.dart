@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
@@ -100,7 +101,7 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
               leading: widget.isMainScreen
                   ? null
                   : IconButton(
-                      icon: const Icon(Icons.arrow_back),
+                      icon: const Icon(LucideIcons.arrowLeft),
                       onPressed: () {
                         if (Navigator.canPop(context)) {
                           Navigator.pop(context);
@@ -113,7 +114,7 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
               title: const Text('Admin Dashboard'),
               actions: [
                 IconButton(
-                  icon: const Icon(Icons.notifications_outlined),
+                  icon: const Icon(LucideIcons.bell),
                   onPressed: () {
                     showModalBottomSheet(
                       context: context,
@@ -124,14 +125,15 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
                   },
                 ),
                 IconButton(
-                  icon: const Icon(Icons.logout, color: AppColors.error),
+                  icon: const Icon(LucideIcons.logOut, color: AppColors.error),
                   tooltip: 'Sign Out',
                   onPressed: () {
                     showDialog(
                       context: context,
                       builder: (dialogContext) => AlertDialog(
                         title: const Text('Sign Out'),
-                        content: const Text('Are you sure you want to sign out?'),
+                        content:
+                            const Text('Are you sure you want to sign out?'),
                         actions: [
                           TextButton(
                             onPressed: () => Navigator.pop(dialogContext),
@@ -140,7 +142,9 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
                           ElevatedButton(
                             onPressed: () {
                               Navigator.pop(dialogContext);
-                              context.read<AuthBloc>().add(AuthLogoutRequested());
+                              context
+                                  .read<AuthBloc>()
+                                  .add(AuthLogoutRequested());
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: AppColors.error,
@@ -178,7 +182,7 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
                           borderRadius: BorderRadius.circular(16),
                         ),
                         child: const Icon(
-                          Icons.admin_panel_settings,
+                          LucideIcons.shield,
                           color: Colors.white,
                           size: 28,
                         ),
@@ -248,27 +252,27 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
       childAspectRatio: isDesktop ? 1.5 : 1.3,
       children: [
         _StatCard(
-          icon: Icons.people,
+          icon: LucideIcons.users,
           label: 'Total Residents',
           value: _stats?['total_residents']?.toString() ?? '0',
           color: AppColors.primary,
           onTap: () => context.go('/residents'),
         ),
         _StatCard(
-          icon: Icons.room,
+          icon: LucideIcons.mapPin,
           label: 'Active Wards',
           value: _stats?['total_wards']?.toString() ?? '0',
           color: AppColors.secondary,
           onTap: () => context.go('/wards'),
         ),
         _StatCard(
-          icon: Icons.person,
+          icon: LucideIcons.user,
           label: 'Staff Members',
           value: _stats?['total_users']?.toString() ?? '0',
           color: AppColors.accent,
         ),
         _StatCard(
-          icon: Icons.pending_actions,
+          icon: LucideIcons.clipboardClock,
           label: 'Pending Forms',
           value: _stats?['pending_forms']?.toString() ?? '0',
           color: AppColors.warning,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
@@ -44,7 +45,7 @@ class _AbstractionScreenState extends State<AbstractionScreen> {
                       child: Row(
                         children: [
                           const Icon(
-                            Icons.info_outline,
+                            LucideIcons.info,
                             color: MocaColors.info,
                           ),
                           const SizedBox(width: 12),
@@ -87,7 +88,8 @@ class _AbstractionScreenState extends State<AbstractionScreen> {
                             ),
                           ),
                           const SizedBox(height: 12),
-                          _buildItemPair(MocaConstants.abstractionExampleItem1, MocaConstants.abstractionExampleItem2),
+                          _buildItemPair(MocaConstants.abstractionExampleItem1,
+                              MocaConstants.abstractionExampleItem2),
                           const SizedBox(height: 12),
                           Container(
                             padding: const EdgeInsets.all(12),
@@ -97,11 +99,13 @@ class _AbstractionScreenState extends State<AbstractionScreen> {
                             ),
                             child: Row(
                               children: [
-                                const Icon(Icons.check, color: MocaColors.success),
+                                const Icon(LucideIcons.check,
+                                    color: MocaColors.success),
                                 const SizedBox(width: 8),
                                 Text(
                                   'Tamang sagot: "${MocaConstants.abstractionExampleAnswer}"',
-                                  style: const TextStyle(fontWeight: FontWeight.w500),
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.w500),
                                 ),
                               ],
                             ),
@@ -248,7 +252,7 @@ class _AbstractionScreenState extends State<AbstractionScreen> {
             child: Row(
               children: [
                 Icon(
-                  value ? Icons.check_circle : Icons.circle_outlined,
+                  value ? LucideIcons.circleCheck : LucideIcons.circle,
                   color: value ? MocaColors.success : MocaColors.textSecondary,
                   size: 20,
                 ),

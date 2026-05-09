@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:fl_chart/fl_chart.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_theme.dart';
@@ -77,21 +78,37 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
                         // Overview stat cards
                         SliverToBoxAdapter(child: _buildOverviewCards()),
                         // Ward Occupancy
-                        SliverToBoxAdapter(child: _buildSection('Ward Occupancy', _buildWardOccupancy())),
+                        SliverToBoxAdapter(
+                            child: _buildSection(
+                                'Ward Occupancy', _buildWardOccupancy())),
                         // Demographics
-                        SliverToBoxAdapter(child: _buildSection('Demographics', _buildDemographics())),
+                        SliverToBoxAdapter(
+                            child: _buildSection(
+                                'Demographics', _buildDemographics())),
                         // Form Statistics
-                        SliverToBoxAdapter(child: _buildSection('Form Statistics by Unit', _buildFormsByUnit())),
+                        SliverToBoxAdapter(
+                            child: _buildSection('Form Statistics by Unit',
+                                _buildFormsByUnit())),
                         // Turnaround Time
-                        SliverToBoxAdapter(child: _buildSection('Avg. Turnaround Time (hours)', _buildTurnaroundChart())),
+                        SliverToBoxAdapter(
+                            child: _buildSection('Avg. Turnaround Time (hours)',
+                                _buildTurnaroundChart())),
                         // Monthly Trends
-                        SliverToBoxAdapter(child: _buildSection('Monthly Form Submissions', _buildMonthlyTrend())),
+                        SliverToBoxAdapter(
+                            child: _buildSection('Monthly Form Submissions',
+                                _buildMonthlyTrend())),
                         // Admission / Discharge Trends
-                        SliverToBoxAdapter(child: _buildSection('Admission & Discharge Trends', _buildAdmissionTrend())),
+                        SliverToBoxAdapter(
+                            child: _buildSection('Admission & Discharge Trends',
+                                _buildAdmissionTrend())),
                         // Incidents
-                        SliverToBoxAdapter(child: _buildSection('Incident Reports', _buildIncidents())),
+                        SliverToBoxAdapter(
+                            child: _buildSection(
+                                'Incident Reports', _buildIncidents())),
                         // Case Categories
-                        SliverToBoxAdapter(child: _buildSection('Case Categories', _buildCaseCategories())),
+                        SliverToBoxAdapter(
+                            child: _buildSection(
+                                'Case Categories', _buildCaseCategories())),
                         const SliverToBoxAdapter(child: SizedBox(height: 80)),
                       ],
                     ),
@@ -107,7 +124,7 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(Icons.cloud_off, size: 48, color: AppColors.error),
+            Icon(LucideIcons.cloudOff, size: 48, color: AppColors.error),
             const SizedBox(height: 12),
             Text(
               'Unable to load analytics',
@@ -122,7 +139,7 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
             const SizedBox(height: 16),
             ElevatedButton.icon(
               onPressed: _loadAll,
-              icon: const Icon(Icons.refresh, size: 18),
+              icon: const Icon(LucideIcons.refreshCw, size: 18),
               label: const Text('Retry'),
             ),
           ],
@@ -142,7 +159,7 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
           if (MediaQuery.of(context).size.width < 1100) ...[
             Builder(
               builder: (context) => IconButton(
-                icon: const Icon(Icons.menu),
+                icon: const Icon(LucideIcons.menu),
                 onPressed: () => Scaffold.of(context).openDrawer(),
               ),
             ),
@@ -170,7 +187,7 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
           ),
           IconButton(
             onPressed: _loadAll,
-            icon: const Icon(Icons.refresh),
+            icon: const Icon(LucideIcons.refreshCw),
             tooltip: 'Refresh data',
           ),
         ],
@@ -189,10 +206,26 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
     final avgLos = res['avg_length_of_stay_days'] ?? 0;
 
     final cards = <_MiniStat>[
-      _MiniStat(icon: Icons.people, color: AppColors.primary, label: 'Admitted', value: '$admitted'),
-      _MiniStat(icon: Icons.person_add_outlined, color: AppColors.info, label: 'Pre-Admission', value: '$preAdmission'),
-      _MiniStat(icon: Icons.exit_to_app, color: AppColors.warning, label: 'Discharged', value: '$discharged'),
-      _MiniStat(icon: Icons.schedule, color: AppColors.unitPsych, label: 'Avg. Stay (days)', value: '$avgLos'),
+      _MiniStat(
+          icon: LucideIcons.users,
+          color: AppColors.primary,
+          label: 'Admitted',
+          value: '$admitted'),
+      _MiniStat(
+          icon: LucideIcons.userPlus,
+          color: AppColors.info,
+          label: 'Pre-Admission',
+          value: '$preAdmission'),
+      _MiniStat(
+          icon: LucideIcons.logOut,
+          color: AppColors.warning,
+          label: 'Discharged',
+          value: '$discharged'),
+      _MiniStat(
+          icon: LucideIcons.clock,
+          color: AppColors.unitPsych,
+          label: 'Avg. Stay (days)',
+          value: '$avgLos'),
     ];
 
     return Padding(
@@ -204,7 +237,8 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
             spacing: 12,
             runSpacing: 12,
             children: cards.map((c) {
-              final w = (constraints.maxWidth - (crossCount - 1) * 12) / crossCount;
+              final w =
+                  (constraints.maxWidth - (crossCount - 1) * 12) / crossCount;
               return SizedBox(width: w, child: c);
             }).toList(),
           );
@@ -226,14 +260,21 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
         BarChartData(
           alignment: BarChartAlignment.spaceAround,
           maxY: wards.fold<double>(
-              0, (prev, w) => (w['capacity'] as num? ?? 0).toDouble() > prev ? (w['capacity'] as num).toDouble() : prev) * 1.2,
+                  0,
+                  (prev, w) => (w['capacity'] as num? ?? 0).toDouble() > prev
+                      ? (w['capacity'] as num).toDouble()
+                      : prev) *
+              1.2,
           barTouchData: BarTouchData(
             touchTooltipData: BarTouchTooltipData(
               getTooltipItem: (group, groupIndex, rod, rodIndex) {
                 final ward = wards[groupIndex];
                 return BarTooltipItem(
                   '${ward['name']}\n${rod.toY.toInt()} / ${ward['capacity']}',
-                  const TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.w600),
+                  const TextStyle(
+                      color: Colors.white,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w600),
                 );
               },
             ),
@@ -244,20 +285,25 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
                 showTitles: true,
                 getTitlesWidget: (value, meta) {
                   final idx = value.toInt();
-                  if (idx < 0 || idx >= wards.length) return const SizedBox.shrink();
+                  if (idx < 0 || idx >= wards.length)
+                    return const SizedBox.shrink();
                   return Padding(
                     padding: const EdgeInsets.only(top: 8),
                     child: Text(
                       (wards[idx]['name'] as String).replaceAll('Ward ', ''),
-                      style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w500),
+                      style: const TextStyle(
+                          fontSize: 11, fontWeight: FontWeight.w500),
                     ),
                   );
                 },
               ),
             ),
-            leftTitles: AxisTitles(sideTitles: SideTitles(showTitles: true, reservedSize: 32)),
-            topTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
-            rightTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
+            leftTitles: AxisTitles(
+                sideTitles: SideTitles(showTitles: true, reservedSize: 32)),
+            topTitles:
+                const AxisTitles(sideTitles: SideTitles(showTitles: false)),
+            rightTitles:
+                const AxisTitles(sideTitles: SideTitles(showTitles: false)),
           ),
           borderData: FlBorderData(show: false),
           gridData: FlGridData(show: true, drawVerticalLine: false),
@@ -271,7 +317,8 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
                 BarChartRodData(
                   toY: current,
                   width: 22,
-                  borderRadius: const BorderRadius.vertical(top: Radius.circular(6)),
+                  borderRadius:
+                      const BorderRadius.vertical(top: Radius.circular(6)),
                   gradient: LinearGradient(
                     colors: pct > 0.9
                         ? [AppColors.error, AppColors.errorLight]
@@ -299,7 +346,8 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
   // DEMOGRAPHICS (Gender + Age PieCharts)
   // ---------------------------------------------------------------------------
   Widget _buildDemographics() {
-    final gender = (_overview['gender_distribution'] as Map<String, dynamic>?) ?? {};
+    final gender =
+        (_overview['gender_distribution'] as Map<String, dynamic>?) ?? {};
     final age = (_overview['age_distribution'] as Map<String, dynamic>?) ?? {};
 
     return LayoutBuilder(
@@ -309,26 +357,48 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
             ? Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Expanded(child: _pieSection('Gender', gender, [AppColors.primary, AppColors.accent, AppColors.unitPsych])),
+                  Expanded(
+                      child: _pieSection('Gender', gender, [
+                    AppColors.primary,
+                    AppColors.accent,
+                    AppColors.unitPsych
+                  ])),
                   const SizedBox(width: 16),
-                  Expanded(child: _pieSection('Age Groups', age, [AppColors.info, AppColors.success, AppColors.warning, AppColors.error])),
+                  Expanded(
+                      child: _pieSection('Age Groups', age, [
+                    AppColors.info,
+                    AppColors.success,
+                    AppColors.warning,
+                    AppColors.error
+                  ])),
                 ],
               )
             : Column(
                 children: [
-                  _pieSection('Gender', gender, [AppColors.primary, AppColors.accent, AppColors.unitPsych]),
+                  _pieSection('Gender', gender, [
+                    AppColors.primary,
+                    AppColors.accent,
+                    AppColors.unitPsych
+                  ]),
                   const SizedBox(height: 16),
-                  _pieSection('Age Groups', age, [AppColors.info, AppColors.success, AppColors.warning, AppColors.error]),
+                  _pieSection('Age Groups', age, [
+                    AppColors.info,
+                    AppColors.success,
+                    AppColors.warning,
+                    AppColors.error
+                  ]),
                 ],
               );
       },
     );
   }
 
-  Widget _pieSection(String label, Map<String, dynamic> data, List<Color> colors) {
+  Widget _pieSection(
+      String label, Map<String, dynamic> data, List<Color> colors) {
     final entries = data.entries.where((e) => (e.value as num) > 0).toList();
     if (entries.isEmpty) return _emptyPlaceholder('No $label data');
-    final total = entries.fold<double>(0, (p, e) => p + (e.value as num).toDouble());
+    final total =
+        entries.fold<double>(0, (p, e) => p + (e.value as num).toDouble());
 
     return Column(
       children: [
@@ -349,7 +419,10 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
                   color: colors[i % colors.length],
                   radius: 40,
                   title: '$pct%',
-                  titleStyle: const TextStyle(fontSize: 11, fontWeight: FontWeight.w700, color: Colors.white),
+                  titleStyle: const TextStyle(
+                      fontSize: 11,
+                      fontWeight: FontWeight.w700,
+                      color: Colors.white),
                 );
               }),
             ),
@@ -365,9 +438,15 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
             return Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Container(width: 10, height: 10, decoration: BoxDecoration(color: colors[i % colors.length], borderRadius: BorderRadius.circular(3))),
+                Container(
+                    width: 10,
+                    height: 10,
+                    decoration: BoxDecoration(
+                        color: colors[i % colors.length],
+                        borderRadius: BorderRadius.circular(3))),
                 const SizedBox(width: 4),
-                Text('${_capitalize(e.key)} (${e.value})', style: Theme.of(context).textTheme.bodySmall),
+                Text('${_capitalize(e.key)} (${e.value})',
+                    style: Theme.of(context).textTheme.bodySmall),
               ],
             );
           }),
@@ -383,7 +462,8 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
     final byUnit = (_formStats['by_unit'] as Map<String, dynamic>?) ?? {};
     if (byUnit.isEmpty) return _emptyPlaceholder('No form data');
 
-    final units = byUnit.entries.toList()..sort((a, b) => (b.value as num).compareTo(a.value as num));
+    final units = byUnit.entries.toList()
+      ..sort((a, b) => (b.value as num).compareTo(a.value as num));
     final maxVal = units.first.value as num;
     final unitColors = {
       'social': AppColors.unitSocial,
@@ -403,7 +483,11 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
             children: [
               SizedBox(
                 width: 80,
-                child: Text(_capitalize(e.key), style: Theme.of(context).textTheme.bodySmall?.copyWith(fontWeight: FontWeight.w600)),
+                child: Text(_capitalize(e.key),
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodySmall
+                        ?.copyWith(fontWeight: FontWeight.w600)),
               ),
               const SizedBox(width: 8),
               Expanded(
@@ -421,14 +505,18 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
                       child: Container(
                         height: 24,
                         decoration: BoxDecoration(
-                          gradient: LinearGradient(colors: [color, color.withOpacity(0.7)]),
+                          gradient: LinearGradient(
+                              colors: [color, color.withOpacity(0.7)]),
                           borderRadius: BorderRadius.circular(6),
                         ),
                         alignment: Alignment.centerRight,
                         padding: const EdgeInsets.only(right: 8),
                         child: Text(
                           '${e.value}',
-                          style: const TextStyle(color: Colors.white, fontSize: 11, fontWeight: FontWeight.w700),
+                          style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 11,
+                              fontWeight: FontWeight.w700),
                         ),
                       ),
                     ),
@@ -446,11 +534,16 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
   // TURNAROUND TIME BAR CHART
   // ---------------------------------------------------------------------------
   Widget _buildTurnaroundChart() {
-    final tat = (_formStats['avg_turnaround_hours'] as Map<String, dynamic>?) ?? {};
-    if (tat.isEmpty) return _emptyPlaceholder('Not enough approved forms to calculate');
+    final tat =
+        (_formStats['avg_turnaround_hours'] as Map<String, dynamic>?) ?? {};
+    if (tat.isEmpty)
+      return _emptyPlaceholder('Not enough approved forms to calculate');
 
     final entries = tat.entries.toList();
-    final maxVal = entries.fold<double>(0, (p, e) => (e.value as num).toDouble() > p ? (e.value as num).toDouble() : p);
+    final maxVal = entries.fold<double>(
+        0,
+        (p, e) =>
+            (e.value as num).toDouble() > p ? (e.value as num).toDouble() : p);
 
     return SizedBox(
       height: 200,
@@ -474,17 +567,23 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
                 showTitles: true,
                 getTitlesWidget: (value, _) {
                   final idx = value.toInt();
-                  if (idx < 0 || idx >= entries.length) return const SizedBox.shrink();
+                  if (idx < 0 || idx >= entries.length)
+                    return const SizedBox.shrink();
                   return Padding(
                     padding: const EdgeInsets.only(top: 8),
-                    child: Text(_capitalize(entries[idx].key), style: const TextStyle(fontSize: 10, fontWeight: FontWeight.w500)),
+                    child: Text(_capitalize(entries[idx].key),
+                        style: const TextStyle(
+                            fontSize: 10, fontWeight: FontWeight.w500)),
                   );
                 },
               ),
             ),
-            leftTitles: AxisTitles(sideTitles: SideTitles(showTitles: true, reservedSize: 36)),
-            topTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
-            rightTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
+            leftTitles: AxisTitles(
+                sideTitles: SideTitles(showTitles: true, reservedSize: 36)),
+            topTitles:
+                const AxisTitles(sideTitles: SideTitles(showTitles: false)),
+            rightTitles:
+                const AxisTitles(sideTitles: SideTitles(showTitles: false)),
           ),
           borderData: FlBorderData(show: false),
           gridData: FlGridData(show: true, drawVerticalLine: false),
@@ -495,7 +594,8 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
                 BarChartRodData(
                   toY: (entries[i].value as num).toDouble(),
                   width: 28,
-                  borderRadius: const BorderRadius.vertical(top: Radius.circular(6)),
+                  borderRadius:
+                      const BorderRadius.vertical(top: Radius.circular(6)),
                   gradient: LinearGradient(
                     colors: [AppColors.accent, AppColors.accentLight],
                     begin: Alignment.bottomCenter,
@@ -514,7 +614,8 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
   // MONTHLY SUBMISSION TREND (Line Chart)
   // ---------------------------------------------------------------------------
   Widget _buildMonthlyTrend() {
-    final monthly = (_formStats['monthly_submissions'] as Map<String, dynamic>?) ?? {};
+    final monthly =
+        (_formStats['monthly_submissions'] as Map<String, dynamic>?) ?? {};
     if (monthly.isEmpty) return _emptyPlaceholder('No monthly data');
 
     return _lineChartFromMap(monthly, AppColors.primary);
@@ -524,13 +625,18 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
   // ADMISSION & DISCHARGE TREND
   // ---------------------------------------------------------------------------
   Widget _buildAdmissionTrend() {
-    final admissions = (_residentStats['monthly_admissions'] as Map<String, dynamic>?) ?? {};
-    final discharges = (_residentStats['monthly_discharges'] as Map<String, dynamic>?) ?? {};
+    final admissions =
+        (_residentStats['monthly_admissions'] as Map<String, dynamic>?) ?? {};
+    final discharges =
+        (_residentStats['monthly_discharges'] as Map<String, dynamic>?) ?? {};
     if (admissions.isEmpty) return _emptyPlaceholder('No admission data');
 
     final keys = admissions.keys.toList();
-    final maxY = [...admissions.values, ...discharges.values].fold<double>(
-        0, (p, v) { final n = (v as num).toDouble(); return n > p ? n : p; });
+    final maxY =
+        [...admissions.values, ...discharges.values].fold<double>(0, (p, v) {
+      final n = (v as num).toDouble();
+      return n > p ? n : p;
+    });
 
     return Column(
       children: [
@@ -544,7 +650,8 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
                 touchTooltipData: LineTouchTooltipData(
                   getTooltipItems: (spots) => spots.map((s) {
                     final label = s.barIndex == 0 ? 'Admitted' : 'Discharged';
-                    return LineTooltipItem('$label: ${s.y.toInt()}', const TextStyle(color: Colors.white, fontSize: 12));
+                    return LineTooltipItem('$label: ${s.y.toInt()}',
+                        const TextStyle(color: Colors.white, fontSize: 12));
                   }).toList(),
                 ),
               ),
@@ -552,8 +659,16 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
               borderData: FlBorderData(show: false),
               gridData: FlGridData(show: true, drawVerticalLine: false),
               lineBarsData: [
-                _lineBarData(keys.map((k) => (admissions[k] as num? ?? 0).toDouble()).toList(), AppColors.success),
-                _lineBarData(keys.map((k) => (discharges[k] as num? ?? 0).toDouble()).toList(), AppColors.error),
+                _lineBarData(
+                    keys
+                        .map((k) => (admissions[k] as num? ?? 0).toDouble())
+                        .toList(),
+                    AppColors.success),
+                _lineBarData(
+                    keys
+                        .map((k) => (discharges[k] as num? ?? 0).toDouble())
+                        .toList(),
+                    AppColors.error),
               ],
             ),
           ),
@@ -579,7 +694,8 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
     final current = _incidentStats['current_month'] ?? 0;
     final prev = _incidentStats['previous_month'] ?? 0;
     final delta = _incidentStats['delta'] ?? 0;
-    final monthly = (_incidentStats['monthly_trend'] as Map<String, dynamic>?) ?? {};
+    final monthly =
+        (_incidentStats['monthly_trend'] as Map<String, dynamic>?) ?? {};
     final byWard = (_incidentStats['by_ward'] as Map<String, dynamic>?) ?? {};
     final byType = (_incidentStats['by_type'] as Map<String, dynamic>?) ?? {};
 
@@ -592,7 +708,8 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
           runSpacing: 8,
           children: [
             _miniChip('Total', '$total', AppColors.textSecondary),
-            _miniChip('This Month', '$current', delta > 0 ? AppColors.error : AppColors.success),
+            _miniChip('This Month', '$current',
+                delta > 0 ? AppColors.error : AppColors.success),
             _miniChip('Last Month', '$prev', AppColors.textSecondary),
             _miniChip(
               delta >= 0 ? '▲ $delta' : '▼ ${delta.abs()}',
@@ -613,8 +730,14 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
                 padding: const EdgeInsets.only(bottom: 4),
                 child: Row(
                   children: [
-                    Expanded(child: Text(e.key, style: Theme.of(context).textTheme.bodySmall)),
-                    Text('${e.value}', style: Theme.of(context).textTheme.bodySmall?.copyWith(fontWeight: FontWeight.w700)),
+                    Expanded(
+                        child: Text(e.key,
+                            style: Theme.of(context).textTheme.bodySmall)),
+                    Text('${e.value}',
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodySmall
+                            ?.copyWith(fontWeight: FontWeight.w700)),
                   ],
                 ),
               )),
@@ -627,8 +750,14 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
                 padding: const EdgeInsets.only(bottom: 4),
                 child: Row(
                   children: [
-                    Expanded(child: Text(e.key, style: Theme.of(context).textTheme.bodySmall)),
-                    Text('${e.value}', style: Theme.of(context).textTheme.bodySmall?.copyWith(fontWeight: FontWeight.w700)),
+                    Expanded(
+                        child: Text(e.key,
+                            style: Theme.of(context).textTheme.bodySmall)),
+                    Text('${e.value}',
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodySmall
+                            ?.copyWith(fontWeight: FontWeight.w700)),
                   ],
                 ),
               )),
@@ -641,10 +770,18 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
   // CASE CATEGORIES
   // ---------------------------------------------------------------------------
   Widget _buildCaseCategories() {
-    final cats = (_residentStats['case_categories'] as Map<String, dynamic>?) ?? {};
+    final cats =
+        (_residentStats['case_categories'] as Map<String, dynamic>?) ?? {};
     if (cats.isEmpty) return _emptyPlaceholder('No case category data');
 
-    final colorList = [AppColors.unitSocial, AppColors.unitMedical, AppColors.unitPsych, AppColors.unitHomelife, AppColors.accent, AppColors.info];
+    final colorList = [
+      AppColors.unitSocial,
+      AppColors.unitMedical,
+      AppColors.unitPsych,
+      AppColors.unitHomelife,
+      AppColors.accent,
+      AppColors.info
+    ];
     return _pieSection('', cats, colorList);
   }
 
@@ -696,7 +833,8 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
 
   LineChartBarData _lineBarData(List<double> values, Color color) {
     return LineChartBarData(
-      spots: List.generate(values.length, (i) => FlSpot(i.toDouble(), values[i])),
+      spots:
+          List.generate(values.length, (i) => FlSpot(i.toDouble(), values[i])),
       isCurved: true,
       color: color,
       barWidth: 3,
@@ -725,15 +863,19 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
             // Show every other month to prevent overlap
             if (keys.length > 6 && idx % 2 != 0) return const SizedBox.shrink();
             final parts = keys[idx].split('-');
-            final month = _monthAbbr(int.tryParse(parts.length > 1 ? parts[1] : '0') ?? 0);
+            final month = _monthAbbr(
+                int.tryParse(parts.length > 1 ? parts[1] : '0') ?? 0);
             return Padding(
               padding: const EdgeInsets.only(top: 8),
-              child: Text(month, style: const TextStyle(fontSize: 10, fontWeight: FontWeight.w500)),
+              child: Text(month,
+                  style: const TextStyle(
+                      fontSize: 10, fontWeight: FontWeight.w500)),
             );
           },
         ),
       ),
-      leftTitles: AxisTitles(sideTitles: SideTitles(showTitles: true, reservedSize: 32)),
+      leftTitles: AxisTitles(
+          sideTitles: SideTitles(showTitles: true, reservedSize: 32)),
       topTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
       rightTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
     );
@@ -743,7 +885,10 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Container(width: 10, height: 10, decoration: BoxDecoration(color: color, shape: BoxShape.circle)),
+        Container(
+            width: 10,
+            height: 10,
+            decoration: BoxDecoration(color: color, shape: BoxShape.circle)),
         const SizedBox(width: 4),
         Text(label, style: Theme.of(context).textTheme.bodySmall),
       ],
@@ -759,7 +904,8 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
       ),
       child: Text(
         value.isEmpty ? label : '$label: $value',
-        style: TextStyle(color: color, fontSize: 12, fontWeight: FontWeight.w600),
+        style:
+            TextStyle(color: color, fontSize: 12, fontWeight: FontWeight.w600),
       ),
     );
   }
@@ -773,10 +919,25 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
     );
   }
 
-  String _capitalize(String s) => s.isEmpty ? s : '${s[0].toUpperCase()}${s.substring(1)}';
+  String _capitalize(String s) =>
+      s.isEmpty ? s : '${s[0].toUpperCase()}${s.substring(1)}';
 
   String _monthAbbr(int month) {
-    const months = ['', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    const months = [
+      '',
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'May',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Dec'
+    ];
     return month >= 1 && month <= 12 ? months[month] : '';
   }
 }
@@ -791,7 +952,11 @@ class _MiniStat extends StatelessWidget {
   final String label;
   final String value;
 
-  const _MiniStat({required this.icon, required this.color, required this.label, required this.value});
+  const _MiniStat(
+      {required this.icon,
+      required this.color,
+      required this.label,
+      required this.value});
 
   @override
   Widget build(BuildContext context) {
@@ -818,8 +983,14 @@ class _MiniStat extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(value, style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.w700)),
-                Text(label, style: Theme.of(context).textTheme.bodySmall?.copyWith(color: Theme.of(context).colorScheme.onSurfaceVariant)),
+                Text(value,
+                    style: Theme.of(context)
+                        .textTheme
+                        .headlineSmall
+                        ?.copyWith(fontWeight: FontWeight.w700)),
+                Text(label,
+                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        color: Theme.of(context).colorScheme.onSurfaceVariant)),
               ],
             ),
           ),

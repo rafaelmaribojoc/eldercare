@@ -53,8 +53,7 @@ class CaseFilePermissions {
     final isCustodian = isCaseFolderCustodian(userRole, userUnit);
     final isOwnUnit = userUnit == formUnit;
     final isOwnForm = formSubmitterId == currentUserId;
-    final isEditableStatus =
-        formStatus == AppConstants.statusDraft ||
+    final isEditableStatus = formStatus == AppConstants.statusDraft ||
         formStatus == AppConstants.statusReturned;
     final isApproved = formStatus == AppConstants.statusApproved;
 

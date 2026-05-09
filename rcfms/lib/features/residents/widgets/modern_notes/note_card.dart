@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:intl/intl.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../data/models/resident_note.dart';
@@ -122,7 +123,7 @@ class NoteCard extends StatelessWidget {
                     child: Padding(
                       padding: const EdgeInsets.only(left: 8, right: 4),
                       child: Icon(
-                        note.isFavorite ? Icons.star : Icons.star_border,
+                        note.isFavorite ? LucideIcons.star : LucideIcons.star,
                         size: 20,
                         color: note.isFavorite
                             ? Colors.amber
@@ -133,15 +134,14 @@ class NoteCard extends StatelessWidget {
                 if (note.isConfidential)
                   const Padding(
                     padding: EdgeInsets.only(left: 4),
-                    child: Icon(Icons.lock, size: 16, color: Colors.grey),
+                    child: Icon(LucideIcons.lockKeyhole,
+                        size: 16, color: Colors.grey),
                   ),
                 if (selectionMode)
                   Padding(
                     padding: const EdgeInsets.only(left: 8),
                     child: Icon(
-                      isSelected
-                          ? Icons.check_circle
-                          : Icons.radio_button_unchecked,
+                      isSelected ? LucideIcons.circleCheck : LucideIcons.circle,
                       color: isSelected ? AppColors.primary : Colors.grey,
                       size: 20,
                     ),
@@ -157,7 +157,7 @@ class NoteCard extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(vertical: 24),
                 child: const Column(
                   children: [
-                    Icon(Icons.lock_outline, size: 32, color: Colors.grey),
+                    Icon(LucideIcons.lockKeyhole, size: 32, color: Colors.grey),
                     SizedBox(height: 8),
                     Text(
                       'Confidential',

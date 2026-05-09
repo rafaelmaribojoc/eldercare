@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import '../../core/theme/app_colors.dart';
 
 /// Timeline entry model for resident's digital timeline
@@ -36,15 +37,15 @@ class TimelineEntryModel extends Equatable {
   IconData get icon {
     switch (entryType) {
       case 'form':
-        return Icons.description;
+        return LucideIcons.fileText;
       case 'note':
-        return Icons.note_alt;
+        return LucideIcons.notebookText;
       case 'alert':
-        return Icons.warning_amber;
+        return LucideIcons.triangleAlert;
       case 'milestone':
-        return Icons.flag;
+        return LucideIcons.flag;
       default:
-        return Icons.circle;
+        return LucideIcons.circle;
     }
   }
 

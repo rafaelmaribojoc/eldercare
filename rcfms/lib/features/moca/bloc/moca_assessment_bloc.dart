@@ -197,7 +197,8 @@ class MocaAssessmentBloc
         memoryWordsRecalled: [],
       ));
     } catch (e) {
-      emit(state.copyWith(isLoading: false, error: ErrorHandler.getUserFriendlyMessage(e)));
+      emit(state.copyWith(
+          isLoading: false, error: ErrorHandler.getUserFriendlyMessage(e)));
     }
   }
 

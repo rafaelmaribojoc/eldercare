@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
@@ -53,9 +54,8 @@ class _CaseCompletenessScreenState extends State<CaseCompletenessScreen> {
         }).toList();
 
         final total = expectedTemplates.length;
-        final completed = expectedTemplates
-            .where((t) => existingIds.contains(t.id))
-            .length;
+        final completed =
+            expectedTemplates.where((t) => existingIds.contains(t.id)).length;
         final missing = expectedTemplates
             .where((t) => !existingIds.contains(t.id))
             .map((t) => t.name)
@@ -99,7 +99,7 @@ class _CaseCompletenessScreenState extends State<CaseCompletenessScreen> {
         title: const Text('Case Completeness'),
         actions: [
           PopupMenuButton<String>(
-            icon: const Icon(Icons.sort),
+            icon: const Icon(LucideIcons.arrowUpDown),
             tooltip: 'Sort',
             onSelected: (value) {
               setState(() => _sortBy = value);
@@ -110,8 +110,7 @@ class _CaseCompletenessScreenState extends State<CaseCompletenessScreen> {
                   value: 'completion_asc',
                   child: Text('Most incomplete first')),
               const PopupMenuItem(
-                  value: 'completion_desc',
-                  child: Text('Most complete first')),
+                  value: 'completion_desc', child: Text('Most complete first')),
             ],
           ),
         ],
@@ -161,7 +160,7 @@ class _CaseCompletenessScreenState extends State<CaseCompletenessScreen> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(Icons.error_outline, size: 48, color: AppColors.error),
+            Icon(LucideIcons.circleAlert, size: 48, color: AppColors.error),
             const SizedBox(height: 12),
             const Text('Failed to load data'),
             const SizedBox(height: 8),
@@ -183,8 +182,7 @@ class _CaseCompletenessScreenState extends State<CaseCompletenessScreen> {
       child: ListView.builder(
         padding: const EdgeInsets.symmetric(horizontal: 12),
         itemCount: _items.length,
-        itemBuilder: (context, index) =>
-            _buildResidentCard(_items[index]),
+        itemBuilder: (context, index) => _buildResidentCard(_items[index]),
       ),
     );
   }
@@ -202,8 +200,7 @@ class _CaseCompletenessScreenState extends State<CaseCompletenessScreen> {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       child: ExpansionTile(
         tilePadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-        childrenPadding:
-            const EdgeInsets.only(left: 16, right: 16, bottom: 12),
+        childrenPadding: const EdgeInsets.only(left: 16, right: 16, bottom: 12),
         leading: CircleAvatar(
           radius: 18,
           backgroundColor: color.withOpacity(0.15),
@@ -243,7 +240,7 @@ class _CaseCompletenessScreenState extends State<CaseCompletenessScreen> {
           ],
         ),
         trailing: IconButton(
-          icon: const Icon(Icons.folder_open, size: 20),
+          icon: const Icon(LucideIcons.folderOpen, size: 20),
           tooltip: 'View Case Files',
           onPressed: () => context.push(
             '/residents/${item.resident.id}/case-files',
@@ -270,7 +267,7 @@ class _CaseCompletenessScreenState extends State<CaseCompletenessScreen> {
                 padding: const EdgeInsets.symmetric(vertical: 2),
                 child: Row(
                   children: [
-                    Icon(Icons.check_box_outline_blank,
+                    Icon(LucideIcons.square,
                         size: 14, color: Colors.orange.shade700),
                     const SizedBox(width: 8),
                     Text(

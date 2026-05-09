@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import '../../data/models/resident_model.dart';
@@ -108,7 +109,7 @@ class _GlobalSearchDialogState extends State<GlobalSearchDialog> {
                 style: Theme.of(context).textTheme.titleMedium,
                 decoration: InputDecoration(
                   hintText: 'Search residents...',
-                  prefixIcon: const Icon(Icons.search),
+                  prefixIcon: const Icon(LucideIcons.search),
                   border: InputBorder.none,
                   suffixIcon: _isLoading
                       ? const SizedBox(
@@ -166,7 +167,7 @@ class _GlobalSearchDialogState extends State<GlobalSearchDialog> {
                                 borderRadius: BorderRadius.circular(8),
                               ),
                               child: Icon(
-                                Icons.description_outlined,
+                                LucideIcons.fileText,
                                 color: AppColors.getServiceUnitColor(form.unit),
                                 size: 20,
                               ),

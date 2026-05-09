@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -126,7 +127,7 @@ class _ProfileCompletionScreenState extends State<ProfileCompletionScreen> {
             centerTitle: isDesktop,
             actions: [
               IconButton(
-                icon: const Icon(Icons.logout),
+                icon: const Icon(LucideIcons.logOut),
                 onPressed: () =>
                     context.read<AuthBloc>().add(AuthLogoutRequested()),
                 tooltip: 'Logout',
@@ -172,7 +173,7 @@ class _ProfileCompletionScreenState extends State<ProfileCompletionScreen> {
                             borderRadius: BorderRadius.circular(16),
                           ),
                           child: const Icon(
-                            Icons.person_pin_rounded,
+                            LucideIcons.userRound,
                             size: 32,
                             color: AppColors.primary,
                           ),
@@ -212,7 +213,7 @@ class _ProfileCompletionScreenState extends State<ProfileCompletionScreen> {
                         enabled: false,
                         decoration: InputDecoration(
                           labelText: 'Full Name (Locked)',
-                          prefixIcon: const Icon(Icons.person_outline),
+                          prefixIcon: const Icon(LucideIcons.user),
                           filled: true,
                           fillColor: AppColors.surface,
                           border: OutlineInputBorder(
@@ -229,7 +230,7 @@ class _ProfileCompletionScreenState extends State<ProfileCompletionScreen> {
                         controller: _titleController,
                         decoration: InputDecoration(
                           labelText: 'Designation / Job Title *',
-                          prefixIcon: const Icon(Icons.badge_outlined),
+                          prefixIcon: const Icon(LucideIcons.badge),
                           hintText:
                               'e.g., Social Worker I, Houseparent II, Nurse',
                           helperText: 'This will appear on all forms you sign.',
@@ -303,7 +304,9 @@ class _ProfileCompletionScreenState extends State<ProfileCompletionScreen> {
           Row(
             children: [
               Icon(
-                hasSignature ? Icons.check_circle : Icons.warning_rounded,
+                hasSignature
+                    ? LucideIcons.circleCheck
+                    : LucideIcons.triangleAlert,
                 color: hasSignature ? AppColors.success : AppColors.warning,
               ),
               const SizedBox(width: 12),
@@ -330,7 +333,7 @@ class _ProfileCompletionScreenState extends State<ProfileCompletionScreen> {
                     imageUrl: user.signatureUrl!,
                     fit: BoxFit.contain,
                     errorWidget: (context, url, error) =>
-                        const Icon(Icons.broken_image),
+                        const Icon(LucideIcons.imageOff),
                   ),
                 ),
               ),
@@ -345,7 +348,7 @@ class _ProfileCompletionScreenState extends State<ProfileCompletionScreen> {
             width: double.infinity,
             child: OutlinedButton.icon(
               onPressed: () => context.push('/setup-signature'),
-              icon: Icon(hasSignature ? Icons.edit : Icons.add_rounded),
+              icon: Icon(hasSignature ? LucideIcons.pencil : LucideIcons.plus),
               label: Text(
                   hasSignature ? 'Update Signature' : 'Setup Signature Now'),
               style: OutlinedButton.styleFrom(

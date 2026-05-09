@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:nfc_manager/nfc_manager.dart';
@@ -40,7 +41,7 @@ class _NFCScanScreenState extends State<NFCScanScreen>
   late AnimationController _pulseController;
   late Animation<double> _pulseAnimation;
   bool _isLoopMode = false;
-  
+
   // QR Fallback State
   bool _isQrScanning = false;
   final MobileScannerController _qrController = MobileScannerController();
@@ -137,7 +138,7 @@ class _NFCScanScreenState extends State<NFCScanScreen>
             SnackBar(
               content: Row(
                 children: [
-                  const Icon(Icons.check_circle, color: Colors.white),
+                  const Icon(LucideIcons.circleCheck, color: Colors.white),
                   const SizedBox(width: 12),
                   Text('Identified: ${resident.fullName}'),
                 ],
@@ -310,7 +311,7 @@ class _NFCScanScreenState extends State<NFCScanScreen>
     });
 
     final wardId = rawValue.replaceFirst('rcfms:ward:', '');
-    
+
     try {
       final residentRepo = context.read<ResidentRepository>();
       final ward = await residentRepo.getWardById(wardId);
@@ -344,7 +345,7 @@ class _NFCScanScreenState extends State<NFCScanScreen>
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
+          icon: const Icon(LucideIcons.arrowLeft),
           onPressed: () {
             if (Navigator.canPop(context)) {
               Navigator.pop(context);
@@ -373,7 +374,7 @@ class _NFCScanScreenState extends State<NFCScanScreen>
             ),
           if (_scannedWard != null)
             IconButton(
-              icon: const Icon(Icons.refresh),
+              icon: const Icon(LucideIcons.refreshCw),
               onPressed: _resetScan,
               tooltip: 'Scan Again',
             ),
@@ -414,7 +415,7 @@ class _NFCScanScreenState extends State<NFCScanScreen>
                 shape: BoxShape.circle,
               ),
               child: const Icon(
-                Icons.nfc,
+                LucideIcons.nfc,
                 size: 50,
                 color: AppColors.error,
               ),
@@ -438,12 +439,13 @@ class _NFCScanScreenState extends State<NFCScanScreen>
             const SizedBox(height: 32),
             ElevatedButton.icon(
               onPressed: _startQrScan,
-              icon: const Icon(Icons.qr_code_scanner),
+              icon: const Icon(LucideIcons.scanQrCode),
               label: const Text('Scan QR Code'),
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.primary,
                 foregroundColor: Colors.white,
-                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
               ),
             ),
           ],
@@ -482,7 +484,7 @@ class _NFCScanScreenState extends State<NFCScanScreen>
                         ),
                       ),
                       child: Icon(
-                        Icons.nfc,
+                        LucideIcons.nfc,
                         size: 70,
                         color: _isScanning ? AppColors.primary : Colors.grey,
                       ),
@@ -517,7 +519,8 @@ class _NFCScanScreenState extends State<NFCScanScreen>
                   ),
                   child: Row(
                     children: [
-                      const Icon(Icons.error, color: AppColors.error),
+                      const Icon(LucideIcons.circleAlert,
+                          color: AppColors.error),
                       const SizedBox(width: 12),
                       Expanded(
                         child: Text(
@@ -533,7 +536,7 @@ class _NFCScanScreenState extends State<NFCScanScreen>
               if (!_isScanning) ...[
                 ElevatedButton.icon(
                   onPressed: _startNfcSession,
-                  icon: const Icon(Icons.nfc),
+                  icon: const Icon(LucideIcons.nfc),
                   label: const Text('Start Scan'),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.primary,
@@ -548,10 +551,11 @@ class _NFCScanScreenState extends State<NFCScanScreen>
               ],
               OutlinedButton.icon(
                 onPressed: _startQrScan,
-                icon: const Icon(Icons.qr_code),
+                icon: const Icon(LucideIcons.qrCode),
                 label: const Text('Scan QR Code Instead'),
                 style: OutlinedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
                 ),
               ),
             ],
@@ -596,7 +600,7 @@ class _NFCScanScreenState extends State<NFCScanScreen>
               const SizedBox(height: 16),
               ElevatedButton.icon(
                 onPressed: _stopQrScan,
-                icon: const Icon(Icons.close),
+                icon: const Icon(LucideIcons.x),
                 label: const Text('Cancel'),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.white,
@@ -636,7 +640,7 @@ class _NFCScanScreenState extends State<NFCScanScreen>
                     borderRadius: BorderRadius.circular(16),
                   ),
                   child: const Icon(
-                    Icons.room,
+                    LucideIcons.mapPin,
                     color: Colors.white,
                     size: 28,
                   ),
@@ -682,7 +686,7 @@ class _NFCScanScreenState extends State<NFCScanScreen>
                   ),
                 ),
                 IconButton(
-                  icon: const Icon(Icons.refresh, color: Colors.white),
+                  icon: const Icon(LucideIcons.refreshCw, color: Colors.white),
                   onPressed: _resetScan,
                 ),
               ],
@@ -697,10 +701,9 @@ class _NFCScanScreenState extends State<NFCScanScreen>
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Icon(
-                        Icons.people_outline,
+                        LucideIcons.users,
                         size: 64,
-                        color:
-                            AppColors.textSecondaryLight.withOpacity(0.5),
+                        color: AppColors.textSecondaryLight.withOpacity(0.5),
                       ),
                       const SizedBox(height: 16),
                       Text(
@@ -837,8 +840,7 @@ class _ResidentTile extends StatelessWidget {
                 children: [
                   CircleAvatar(
                     radius: 28,
-                    backgroundColor:
-                        AppColors.primaryLight.withOpacity(0.2),
+                    backgroundColor: AppColors.primaryLight.withOpacity(0.2),
                     child: Text(
                       resident.firstName[0] + resident.lastName[0],
                       style: const TextStyle(
@@ -864,7 +866,7 @@ class _ResidentTile extends StatelessWidget {
                         Row(
                           children: [
                             Icon(
-                              Icons.cake,
+                              LucideIcons.cake,
                               size: 14,
                               color: AppColors.textSecondaryLight,
                             ),
@@ -884,7 +886,7 @@ class _ResidentTile extends StatelessWidget {
                             if (resident.roomNumber != null) ...[
                               const SizedBox(width: 8),
                               Icon(
-                                Icons.meeting_room,
+                                LucideIcons.doorOpen,
                                 size: 14,
                                 color: AppColors.textSecondaryLight,
                               ),
@@ -908,7 +910,7 @@ class _ResidentTile extends StatelessWidget {
                     ),
                   ),
                   const Icon(
-                    Icons.chevron_right,
+                    LucideIcons.chevronRight,
                     color: AppColors.textSecondaryLight,
                   ),
                 ],
@@ -921,7 +923,7 @@ class _ResidentTile extends StatelessWidget {
                     Expanded(
                       child: OutlinedButton.icon(
                         onPressed: onNewForm,
-                        icon: const Icon(Icons.description, size: 16),
+                        icon: const Icon(LucideIcons.fileText, size: 16),
                         label: const Text('New Form'),
                         style: OutlinedButton.styleFrom(
                           foregroundColor: AppColors.primary,
@@ -936,13 +938,12 @@ class _ResidentTile extends StatelessWidget {
                       Expanded(
                         child: OutlinedButton.icon(
                           onPressed: onNewAssessment,
-                          icon: const Icon(Icons.psychology, size: 16),
+                          icon: const Icon(LucideIcons.brain, size: 16),
                           label: const Text('Assessment'),
                           style: OutlinedButton.styleFrom(
                             foregroundColor: MocaColors.primary,
                             side: BorderSide(
-                                color:
-                                    MocaColors.primary.withOpacity(0.5)),
+                                color: MocaColors.primary.withOpacity(0.5)),
                             padding: const EdgeInsets.symmetric(vertical: 8),
                           ),
                         ),

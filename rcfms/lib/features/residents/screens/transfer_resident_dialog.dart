@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/theme/app_colors.dart';
@@ -161,7 +162,7 @@ class _TransferResidentDialogState extends State<TransferResidentDialog> {
                   initialValue: _selectedWard,
                   decoration: const InputDecoration(
                     labelText: 'WARD *',
-                    prefixIcon: Icon(Icons.room),
+                    prefixIcon: Icon(LucideIcons.mapPin),
                   ),
                   items: _wards
                       .map((ward) => DropdownMenuItem(
@@ -184,7 +185,7 @@ class _TransferResidentDialogState extends State<TransferResidentDialog> {
                   initialValue: _selectedBed,
                   decoration: const InputDecoration(
                     labelText: 'BED *',
-                    prefixIcon: Icon(Icons.bed),
+                    prefixIcon: Icon(LucideIcons.bed),
                   ),
                   items: _availableBeds
                       .map((bed) =>

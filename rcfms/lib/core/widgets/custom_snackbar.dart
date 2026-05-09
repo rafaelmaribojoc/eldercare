@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import '../theme/app_colors.dart';
 import '../utils/error_handler.dart';
 
@@ -12,11 +13,12 @@ class CustomSnackBar {
   }) {
     // Clear existing snackbars first to avoid queue buildup
     ScaffoldMessenger.of(context).hideCurrentSnackBar();
-    
+
     // Default icons
-    final displayIcon = icon ?? (isError ? Icons.error_outline : Icons.check_circle_outline);
+    final displayIcon =
+        icon ?? (isError ? LucideIcons.circleAlert : LucideIcons.circleCheck);
     final bgColor = isError ? AppColors.error : AppColors.success;
-    
+
     final snackBar = SnackBar(
       content: Row(
         children: [
@@ -52,11 +54,12 @@ class CustomSnackBar {
     String? fallbackMessage,
   }) {
     final bool isNetwork = ErrorHandler.isNetworkError(error);
-    
+
     // Format error using centralized ErrorHandler
     String displayMessage = ErrorHandler.getUserFriendlyMessage(error);
-    
-    if (displayMessage.toLowerCase().contains('unknown error') && fallbackMessage != null) {
+
+    if (displayMessage.toLowerCase().contains('unknown error') &&
+        fallbackMessage != null) {
       displayMessage = fallbackMessage;
     }
 
@@ -64,9 +67,10 @@ class CustomSnackBar {
       context,
       message: displayMessage,
       isError: true,
-      icon: isNetwork ? Icons.wifi_off : Icons.error_outline,
+      icon: isNetwork ? LucideIcons.wifiOff : LucideIcons.circleAlert,
       // Longer duration to give user time to read the network error message
-      duration: isNetwork ? const Duration(seconds: 5) : const Duration(seconds: 4),
+      duration:
+          isNetwork ? const Duration(seconds: 5) : const Duration(seconds: 4),
     );
   }
 }

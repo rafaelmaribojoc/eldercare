@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_theme.dart';
@@ -82,17 +83,17 @@ class _NotificationsPanelState extends State<NotificationsPanel> {
   IconData _getNotificationIcon(String type) {
     switch (type) {
       case 'approval_request':
-        return Icons.assignment_outlined;
+        return LucideIcons.clipboardList;
       case 'approval_approved':
-        return Icons.check_circle_outline;
+        return LucideIcons.circleCheck;
       case 'approval_rejected':
-        return Icons.cancel_outlined;
+        return LucideIcons.circleX;
       case 'form_submitted':
-        return Icons.description_outlined;
+        return LucideIcons.fileText;
       case 'admission':
-        return Icons.person_add_outlined;
+        return LucideIcons.userPlus;
       default:
-        return Icons.notifications_outlined;
+        return LucideIcons.bell;
     }
   }
 
@@ -180,10 +181,9 @@ class _NotificationsPanelState extends State<NotificationsPanel> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Icon(
-                              Icons.notifications_none_outlined,
+                              LucideIcons.bell,
                               size: 64,
-                              color:
-                                  AppColors.textTertiary.withOpacity(0.5),
+                              color: AppColors.textTertiary.withOpacity(0.5),
                             ),
                             const SizedBox(height: 16),
                             Text(

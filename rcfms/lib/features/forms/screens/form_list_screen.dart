@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
@@ -8,7 +9,6 @@ import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../core/utils/error_handler.dart';
 import '../../../core/constants/app_constants.dart';
-import '../../../core/widgets/main_bottom_nav.dart';
 import '../../../data/models/form_submission_model.dart';
 import '../../../data/models/resident_model.dart';
 import '../../../data/repositories/form_repository.dart';
@@ -131,8 +131,8 @@ class _FormListScreenState extends State<FormListScreen>
     });
 
     try {
-      final tabName = _tabs.isNotEmpty && _tabController.index < _tabs.length 
-          ? _tabs[_tabController.index] 
+      final tabName = _tabs.isNotEmpty && _tabController.index < _tabs.length
+          ? _tabs[_tabController.index]
           : '';
 
       if (tabName == 'For Review') {
@@ -155,7 +155,7 @@ class _FormListScreenState extends State<FormListScreen>
   Future<void> _loadArchivedForms() async {
     final authState = context.read<AuthBloc>().state;
     if (authState is! AuthAuthenticated) return;
-    
+
     // Admins see all archived, unit heads see their unit
     final unit = _isAdmin ? null : authState.user.unit;
     final forms = await _formRepo.getArchivedForms(unit: unit);
@@ -227,17 +227,19 @@ class _FormListScreenState extends State<FormListScreen>
     } else if (tabName == 'Draft') {
       return _forms.where((f) => f.status == 'draft').toList();
     } else if (tabName == 'For Signing') {
-      return _forms.where((f) => [
-            AppConstants.statusSubmitted,
-            AppConstants.statusPendingReview,
-            AppConstants.statusPendingMedicalReview,
-            AppConstants.statusPendingFinalApproval,
-            AppConstants.statusPendingSupervisor,
-            AppConstants.statusPendingMultiApproval,
-            AppConstants.statusPendingHeadApproval,
-            AppConstants.statusPendingDoctorReview,
-            AppConstants.statusPendingSocialWorker,
-          ].contains(f.status)).toList();
+      return _forms
+          .where((f) => [
+                AppConstants.statusSubmitted,
+                AppConstants.statusPendingReview,
+                AppConstants.statusPendingMedicalReview,
+                AppConstants.statusPendingFinalApproval,
+                AppConstants.statusPendingSupervisor,
+                AppConstants.statusPendingMultiApproval,
+                AppConstants.statusPendingHeadApproval,
+                AppConstants.statusPendingDoctorReview,
+                AppConstants.statusPendingSocialWorker,
+              ].contains(f.status))
+          .toList();
     } else if (tabName == 'Signed') {
       return _forms.where((f) => f.status == 'approved').toList();
     } else if (tabName == 'Returned') {
@@ -255,16 +257,18 @@ class _FormListScreenState extends State<FormListScreen>
     List<FormSubmissionModel> forSigningForms;
     try {
       final all = await _formRepo.getForms();
-      forSigningForms = all.where((f) =>
-          f.status == AppConstants.statusSubmitted ||
-          f.status == AppConstants.statusPendingReview ||
-          f.status == AppConstants.statusPendingMedicalReview ||
-          f.status == AppConstants.statusPendingFinalApproval ||
-          f.status == AppConstants.statusPendingSupervisor ||
-          f.status == AppConstants.statusPendingMultiApproval ||
-          f.status == AppConstants.statusPendingHeadApproval ||
-          f.status == AppConstants.statusPendingDoctorReview ||
-          f.status == AppConstants.statusPendingSocialWorker).toList();
+      forSigningForms = all
+          .where((f) =>
+              f.status == AppConstants.statusSubmitted ||
+              f.status == AppConstants.statusPendingReview ||
+              f.status == AppConstants.statusPendingMedicalReview ||
+              f.status == AppConstants.statusPendingFinalApproval ||
+              f.status == AppConstants.statusPendingSupervisor ||
+              f.status == AppConstants.statusPendingMultiApproval ||
+              f.status == AppConstants.statusPendingHeadApproval ||
+              f.status == AppConstants.statusPendingDoctorReview ||
+              f.status == AppConstants.statusPendingSocialWorker)
+          .toList();
     } finally {
       if (mounted) setState(() => _isLoading = false);
     }
@@ -586,7 +590,8 @@ class _FormListScreenState extends State<FormListScreen>
       context: context,
       builder: (context) => AlertDialog(
         title: const Text('Restore Form'),
-        content: const Text('Are you sure you want to restore this form to the active list?'),
+        content: const Text(
+            'Are you sure you want to restore this form to the active list?'),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
@@ -638,8 +643,10 @@ class _FormListScreenState extends State<FormListScreen>
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Permanently Delete Form', style: TextStyle(color: AppColors.error)),
-        content: const Text('This action is irreversible. Are you sure you want to permanently delete this form?'),
+        title: const Text('Permanently Delete Form',
+            style: TextStyle(color: AppColors.error)),
+        content: const Text(
+            'This action is irreversible. Are you sure you want to permanently delete this form?'),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
@@ -709,20 +716,21 @@ class _FormListScreenState extends State<FormListScreen>
                     children: [
                       Text(
                         'Forms',
-                        style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                          fontWeight: FontWeight.bold,
-                        ),
+                        style:
+                            Theme.of(context).textTheme.headlineSmall?.copyWith(
+                                  fontWeight: FontWeight.bold,
+                                ),
                       ),
                       const Spacer(),
                       // Actions
                       AppIconButton(
-                        icon: Icons.refresh,
+                        icon: LucideIcons.refreshCw,
                         tooltip: 'Refresh',
                         onPressed: _loadData,
                       ),
                       if (!_isAdmin && showSidebar)
                         AppIconButton(
-                          icon: Icons.file_upload_outlined,
+                          icon: LucideIcons.fileUp,
                           tooltip: 'Upload signed form image',
                           onPressed: _uploadSignedForm,
                         ),
@@ -738,7 +746,7 @@ class _FormListScreenState extends State<FormListScreen>
                             }
 
                             return AppIconButton(
-                              icon: Icons.add_circle_outline,
+                              icon: LucideIcons.circlePlus,
                               tooltip: 'New Form',
                               onPressed: _showNewFormSheet,
                             );
@@ -777,10 +785,7 @@ class _FormListScreenState extends State<FormListScreen>
           ),
         ],
       ),
-      // bottomNavigationBar: handled by ShellScaffold
-      floatingActionButton:
-          MediaQuery.of(context).size.width < 800 ? const MainScanFab() : null,
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      // bottomNavigationBar / scan FAB: handled by ShellScaffold
     );
   }
 
@@ -814,7 +819,7 @@ class _FormListScreenState extends State<FormListScreen>
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Icon(
-                Icons.check_circle_outline,
+                LucideIcons.circleCheck,
                 size: 80,
                 color: AppColors.success.withValues(alpha: 0.5),
               ),
@@ -857,7 +862,7 @@ class _FormListScreenState extends State<FormListScreen>
                   padding: const EdgeInsets.only(bottom: 8.0),
                   child: OutlinedButton.icon(
                     onPressed: _uploadSignedForm,
-                    icon: const Icon(Icons.upload_file),
+                    icon: const Icon(LucideIcons.fileUp),
                     label: const Text('Upload Signed Form'),
                     style: OutlinedButton.styleFrom(
                       padding: const EdgeInsets.all(16),
@@ -884,7 +889,9 @@ class _FormListScreenState extends State<FormListScreen>
                 );
               }
 
-              final tabName = _tabs.isNotEmpty && tabIndex < _tabs.length ? _tabs[tabIndex] : '';
+              final tabName = _tabs.isNotEmpty && tabIndex < _tabs.length
+                  ? _tabs[tabIndex]
+                  : '';
               final isArchivedTab = tabName == 'Archived';
               final canManageArchive = _isUnitHead || _isAdmin;
 
@@ -973,7 +980,7 @@ class _FormListScreenState extends State<FormListScreen>
               borderRadius: BorderRadius.circular(AppTheme.radiusLg),
             ),
             child: const Icon(
-              Icons.description_outlined,
+              LucideIcons.fileText,
               size: 40,
               color: AppColors.textTertiary,
             ),
@@ -988,7 +995,7 @@ class _FormListScreenState extends State<FormListScreen>
             const SizedBox(height: 16),
             OutlinedButton.icon(
               onPressed: _uploadSignedForm,
-              icon: const Icon(Icons.upload_file),
+              icon: const Icon(LucideIcons.fileUp),
               label: const Text('Upload Signed Form'),
             ),
           ] else if (!_isApprover)
@@ -1018,7 +1025,7 @@ class _FormListScreenState extends State<FormListScreen>
                 borderRadius: BorderRadius.circular(AppTheme.radiusLg),
               ),
               child: const Icon(
-                Icons.error_outline,
+                LucideIcons.circleAlert,
                 size: 40,
                 color: AppColors.error,
               ),
@@ -1033,8 +1040,8 @@ class _FormListScreenState extends State<FormListScreen>
               Text(
                 _error!,
                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                  color: AppColors.textSecondary,
-                ),
+                      color: AppColors.textSecondary,
+                    ),
                 textAlign: TextAlign.center,
                 maxLines: 3,
                 overflow: TextOverflow.ellipsis,
@@ -1043,7 +1050,7 @@ class _FormListScreenState extends State<FormListScreen>
             const SizedBox(height: 24),
             OutlinedButton.icon(
               onPressed: _loadData,
-              icon: const Icon(Icons.refresh),
+              icon: const Icon(LucideIcons.refreshCw),
               label: const Text('Try again'),
             ),
           ],
@@ -1249,7 +1256,7 @@ class _ActionableFormCard extends StatelessWidget {
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: Icon(
-                          Icons.description,
+                          LucideIcons.fileText,
                           color: form.unitColor,
                         ),
                       ),
@@ -1305,7 +1312,7 @@ class _ActionableFormCard extends StatelessWidget {
                   Row(
                     children: [
                       const Icon(
-                        Icons.person,
+                        LucideIcons.user,
                         size: 16,
                         color: AppColors.textSecondaryLight,
                       ),
@@ -1318,7 +1325,7 @@ class _ActionableFormCard extends StatelessWidget {
                       ),
                       const Spacer(),
                       const Icon(
-                        Icons.access_time,
+                        LucideIcons.clock,
                         size: 16,
                         color: AppColors.textSecondaryLight,
                       ),
@@ -1352,7 +1359,7 @@ class _ActionableFormCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Icon(
-                      Icons.info_outline,
+                      LucideIcons.info,
                       color: AppColors.error,
                       size: 16,
                     ),
@@ -1483,7 +1490,7 @@ class _ResidentPickerDialogState extends State<_ResidentPickerDialog> {
                     ),
                   ),
                   IconButton(
-                    icon: const Icon(Icons.close),
+                    icon: const Icon(LucideIcons.x),
                     onPressed: () => Navigator.pop(context),
                   ),
                 ],
@@ -1500,10 +1507,10 @@ class _ResidentPickerDialogState extends State<_ResidentPickerDialog> {
                 autofocus: true,
                 decoration: InputDecoration(
                   hintText: 'Search by name or code...',
-                  prefixIcon: const Icon(Icons.search),
+                  prefixIcon: const Icon(LucideIcons.search),
                   suffixIcon: _searchController.text.isNotEmpty
                       ? IconButton(
-                          icon: const Icon(Icons.clear, size: 20),
+                          icon: const Icon(LucideIcons.x, size: 20),
                           onPressed: () {
                             _searchController.clear();
                             setState(() {});
@@ -1583,7 +1590,7 @@ class _ResidentPickerDialogState extends State<_ResidentPickerDialog> {
                                               ],
                                             ),
                                           ),
-                                          const Icon(Icons.chevron_right,
+                                          const Icon(LucideIcons.chevronRight,
                                               color: Colors.grey),
                                         ],
                                       ),
@@ -1691,7 +1698,7 @@ class _FormCard extends StatelessWidget {
                   borderRadius: BorderRadius.circular(AppTheme.radiusSm),
                 ),
                 child: Icon(
-                  Icons.description_outlined,
+                  LucideIcons.fileText,
                   color: form.unitColor,
                   size: 22,
                 ),
@@ -1746,32 +1753,32 @@ class _FormCard extends StatelessWidget {
               if (onArchive != null) ...[
                 const SizedBox(width: 4),
                 IconButton(
-                  icon:
-                      const Icon(Icons.archive_outlined, color: AppColors.error),
+                  icon: const Icon(LucideIcons.archive, color: AppColors.error),
                   onPressed: onArchive,
                   tooltip: 'Archive',
                 )
               ] else if (onRestore != null) ...[
                 const SizedBox(width: 4),
                 IconButton(
-                  icon:
-                      const Icon(Icons.restore, color: AppColors.primary),
+                  icon: const Icon(LucideIcons.rotateCcw,
+                      color: AppColors.primary),
                   onPressed: onRestore,
                   tooltip: 'Restore',
                 )
               ],
               if (onPermanentDelete != null) ...[
                 IconButton(
-                  icon:
-                      const Icon(Icons.delete_forever, color: AppColors.error),
+                  icon: const Icon(LucideIcons.trash2, color: AppColors.error),
                   onPressed: onPermanentDelete,
                   tooltip: 'Delete Permanently',
                 )
               ],
-              if (onArchive == null && onRestore == null && onPermanentDelete == null) ...[
+              if (onArchive == null &&
+                  onRestore == null &&
+                  onPermanentDelete == null) ...[
                 const SizedBox(width: 8),
                 Icon(
-                  Icons.chevron_right,
+                  LucideIcons.chevronRight,
                   color: AppColors.textTertiary.withValues(alpha: 0.3),
                   size: 20,
                 ),
@@ -1907,7 +1914,7 @@ class _FormTypeCard extends StatelessWidget {
               ),
               const SizedBox(width: 8),
               Icon(
-                Icons.chevron_right,
+                LucideIcons.chevronRight,
                 color: AppColors.textTertiary.withValues(alpha: 0.5),
               ),
             ],
@@ -1931,35 +1938,35 @@ class _FormTypeCard extends StatelessWidget {
     // Fallback with smart defaults
     if (templateId.startsWith('ss_')) {
       return (
-        Icons.social_distance,
+        LucideIcons.users,
         AppColors.unitSocial,
         _formatTemplateName(templateId),
         'Social Service'
       );
     } else if (templateId.startsWith('hl_')) {
       return (
-        Icons.home,
+        LucideIcons.house,
         AppColors.unitHomelife,
         _formatTemplateName(templateId),
         'Home Life Service'
       );
     } else if (templateId.startsWith('ps_')) {
       return (
-        Icons.psychology,
+        LucideIcons.brain,
         AppColors.unitPsych,
         _formatTemplateName(templateId),
         'Psychological Service'
       );
     } else if (templateId.startsWith('med_')) {
       return (
-        Icons.medical_services,
+        LucideIcons.stethoscope,
         AppColors.unitMedical,
         _formatTemplateName(templateId),
         'Medical Service'
       );
     } else if (templateId.startsWith('rehab_')) {
       return (
-        Icons.accessibility_new,
+        LucideIcons.accessibility,
         AppColors.unitRehab,
         _formatTemplateName(templateId),
         'Rehabilitation'
@@ -1967,7 +1974,7 @@ class _FormTypeCard extends StatelessWidget {
     }
 
     return (
-      Icons.description,
+      LucideIcons.fileText,
       AppColors.primary,
       _formatTemplateName(templateId),
       'Generic'

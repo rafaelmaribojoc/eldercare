@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import '../../../core/theme/app_colors.dart';
@@ -99,7 +100,7 @@ class _NotesSidecarWidgetState extends State<NotesSidecarWidget> {
                 Row(
                   children: [
                     const Icon(
-                      Icons.import_contacts,
+                      LucideIcons.bookOpen,
                       size: 20,
                       color: AppColors.primary,
                     ),
@@ -114,7 +115,7 @@ class _NotesSidecarWidgetState extends State<NotesSidecarWidget> {
                     ),
                     const Spacer(),
                     IconButton(
-                      icon: const Icon(Icons.refresh, size: 18),
+                      icon: const Icon(LucideIcons.refreshCw, size: 18),
                       onPressed: _refreshNotes,
                       tooltip: 'Refresh',
                       padding: EdgeInsets.zero,
@@ -374,7 +375,7 @@ class _NotesSidecarWidgetState extends State<NotesSidecarWidget> {
                   ),
                 );
               },
-              icon: const Icon(Icons.copy, size: 14),
+              icon: const Icon(LucideIcons.copy, size: 14),
               label: const Text('Copy'),
               style: TextButton.styleFrom(
                 visualDensity: VisualDensity.compact,

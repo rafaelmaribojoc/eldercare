@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:intl/intl.dart';
 
@@ -145,7 +146,7 @@ class FormContentWidget extends StatelessWidget {
           ),
           Row(
             children: [
-              const Icon(Icons.person,
+              const Icon(LucideIcons.user,
                   size: 16, color: AppColors.textSecondary),
               const SizedBox(width: 8),
               Text(
@@ -158,7 +159,7 @@ class FormContentWidget extends StatelessWidget {
               ),
               if (caseNumber != null) ...[
                 const SizedBox(width: 16),
-                const Icon(Icons.folder,
+                const Icon(LucideIcons.folder,
                     size: 16, color: AppColors.textSecondary),
                 const SizedBox(width: 8),
                 Text(
@@ -423,7 +424,7 @@ class FormContentWidget extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(Icons.broken_image,
+                    Icon(LucideIcons.imageOff,
                         size: 20, color: AppColors.textSecondaryLight),
                     Text('Load failed',
                         style: TextStyle(

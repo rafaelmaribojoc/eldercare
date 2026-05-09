@@ -26,9 +26,15 @@ class WardIdCardGenerator {
 
     try {
       final assets = await Future.wait([
-        rootBundle.load('assets/fonts/Outfit-Regular.ttf').catchError((_) => ByteData(0)),
-        rootBundle.load('assets/fonts/Outfit-Bold.ttf').catchError((_) => ByteData(0)),
-        rootBundle.load('assets/fonts/Outfit-Medium.ttf').catchError((_) => ByteData(0)),
+        rootBundle
+            .load('assets/fonts/Outfit-Regular.ttf')
+            .catchError((_) => ByteData(0)),
+        rootBundle
+            .load('assets/fonts/Outfit-Bold.ttf')
+            .catchError((_) => ByteData(0)),
+        rootBundle
+            .load('assets/fonts/Outfit-Medium.ttf')
+            .catchError((_) => ByteData(0)),
       ]);
 
       if (assets[0].lengthInBytes > 0) _regularFont = pw.Font.ttf(assets[0]);
@@ -39,7 +45,7 @@ class WardIdCardGenerator {
     } catch (e) {
       print('Warning: Failed to load fonts/logos for Ward ID Card: $e');
     }
-    
+
     // Fallbacks
     _regularFont ??= pw.Font.helvetica();
     _boldFont ??= pw.Font.helveticaBold();
@@ -47,7 +53,8 @@ class WardIdCardGenerator {
   }
 
   /// Generates the PDF document for the Ward ID Card
-  static Future<Uint8List> generate(WardModel ward, PdfPageFormat format) async {
+  static Future<Uint8List> generate(
+      WardModel ward, PdfPageFormat format) async {
     await _initialize();
 
     final pdf = pw.Document(
@@ -64,7 +71,11 @@ class WardIdCardGenerator {
               mainAxisAlignment: pw.MainAxisAlignment.center,
               crossAxisAlignment: pw.CrossAxisAlignment.center,
               children: [
-                pw.Text('FRONT', style: pw.TextStyle(font: _mediumFont, fontSize: 8, color: PdfColors.grey600)),
+                pw.Text('FRONT',
+                    style: pw.TextStyle(
+                        font: _mediumFont,
+                        fontSize: 8,
+                        color: PdfColors.grey600)),
                 pw.SizedBox(height: 4),
                 pw.SizedBox(
                   width: cr80Format.width,
@@ -74,10 +85,16 @@ class WardIdCardGenerator {
                 pw.SizedBox(height: 16),
                 pw.SizedBox(
                   width: cr80Format.width + 40,
-                  child: pw.Divider(color: PdfColors.grey400, borderStyle: pw.BorderStyle.dashed),
+                  child: pw.Divider(
+                      color: PdfColors.grey400,
+                      borderStyle: pw.BorderStyle.dashed),
                 ),
                 pw.SizedBox(height: 12),
-                pw.Text('BACK (FOLD OR CUT ALONG DOTTED LINE)', style: pw.TextStyle(font: _mediumFont, fontSize: 8, color: PdfColors.grey600)),
+                pw.Text('BACK (FOLD OR CUT ALONG DOTTED LINE)',
+                    style: pw.TextStyle(
+                        font: _mediumFont,
+                        fontSize: 8,
+                        color: PdfColors.grey600)),
                 pw.SizedBox(height: 4),
                 pw.SizedBox(
                   width: cr80Format.width,
@@ -125,14 +142,16 @@ class WardIdCardGenerator {
                       height: 22,
                       decoration: pw.BoxDecoration(
                         color: PdfColors.white,
-                        borderRadius: const pw.BorderRadius.all(pw.Radius.circular(5)),
+                        borderRadius:
+                            const pw.BorderRadius.all(pw.Radius.circular(5)),
                       ),
                       child: pw.Center(
-                        child: pw.Text('+', style: pw.TextStyle(
-                          font: _boldFont,
-                          fontSize: 14,
-                          color: _frontColor,
-                        )),
+                        child: pw.Text('+',
+                            style: pw.TextStyle(
+                              font: _boldFont,
+                              fontSize: 14,
+                              color: _frontColor,
+                            )),
                       ),
                     ),
                     pw.SizedBox(width: 6),
@@ -186,11 +205,13 @@ class WardIdCardGenerator {
                 pw.Spacer(),
                 // NFC Badge — use solid blended colors since PDF doesn't support alpha well
                 pw.Container(
-                  padding: const pw.EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  padding:
+                      const pw.EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                   decoration: pw.BoxDecoration(
                     // Solid lighter blue simulating white@15% on top of the blue background
                     color: const PdfColor.fromInt(0xFF2962FF),
-                    borderRadius: const pw.BorderRadius.all(pw.Radius.circular(12)),
+                    borderRadius:
+                        const pw.BorderRadius.all(pw.Radius.circular(12)),
                     border: pw.Border.all(
                       // Solid light blue simulating white@30% border
                       color: const PdfColor.fromInt(0xFF5C8AFF),
@@ -202,7 +223,10 @@ class WardIdCardGenerator {
                     children: [
                       pw.Text(
                         '\u{25CF} ))',
-                        style: pw.TextStyle(font: _boldFont, fontSize: 8, color: PdfColors.white),
+                        style: pw.TextStyle(
+                            font: _boldFont,
+                            fontSize: 8,
+                            color: PdfColors.white),
                       ),
                       pw.SizedBox(width: 4),
                       pw.Text(
@@ -231,7 +255,8 @@ class WardIdCardGenerator {
                 padding: const pw.EdgeInsets.all(5),
                 decoration: pw.BoxDecoration(
                   color: PdfColors.white,
-                  borderRadius: const pw.BorderRadius.all(pw.Radius.circular(6)),
+                  borderRadius:
+                      const pw.BorderRadius.all(pw.Radius.circular(6)),
                 ),
                 child: pw.BarcodeWidget(
                   barcode: pw.Barcode.qrCode(),
@@ -288,7 +313,8 @@ class WardIdCardGenerator {
                 pw.SizedBox(height: 4),
                 _instructionStep('2', 'Select NFC Scan or Scan QR.'),
                 pw.SizedBox(height: 4),
-                _instructionStep('3', 'Hold phone flat against the card\nor scan the front QR code.'),
+                _instructionStep('3',
+                    'Hold phone flat against the card\nor scan the front QR code.'),
               ],
             ),
           ),
@@ -310,7 +336,10 @@ class WardIdCardGenerator {
                 children: [
                   pw.Text(
                     '((•))',
-                    style: pw.TextStyle(font: _boldFont, fontSize: 10, color: const PdfColor.fromInt(0xFF8DA4B5)),
+                    style: pw.TextStyle(
+                        font: _boldFont,
+                        fontSize: 10,
+                        color: const PdfColor.fromInt(0xFF8DA4B5)),
                   ),
                   pw.SizedBox(height: 2),
                   pw.Text(
@@ -346,7 +375,8 @@ class WardIdCardGenerator {
           child: pw.Center(
             child: pw.Text(
               number,
-              style: pw.TextStyle(font: _boldFont, fontSize: 7, color: PdfColors.white),
+              style: pw.TextStyle(
+                  font: _boldFont, fontSize: 7, color: PdfColors.white),
             ),
           ),
         ),

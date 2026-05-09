@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -246,7 +247,8 @@ class _FormFillScreenState extends State<FormFillScreen> {
       });
     } else {
       // Guard: Homelife and social staff can only create forms for residents assigned to them
-      WidgetsBinding.instance.addPostFrameCallback((_) => _checkAssignedResidentRestriction());
+      WidgetsBinding.instance
+          .addPostFrameCallback((_) => _checkAssignedResidentRestriction());
     }
 
     // Auto-populate Prepared By with current user
@@ -268,14 +270,15 @@ class _FormFillScreenState extends State<FormFillScreen> {
     if (authState is! AuthAuthenticated || !authState.user.isStaff) return;
 
     final user = authState.user;
-    final isSocialWorker = user.unit == AppConstants.unitSocial ||
-        user.role == 'social_worker';
+    final isSocialWorker =
+        user.unit == AppConstants.unitSocial || user.role == 'social_worker';
     final isHouseparent = user.unit == AppConstants.unitHomelife ||
         user.role.startsWith('homelife');
     if (!isSocialWorker && !isHouseparent) return;
 
     try {
-      final resident = await ResidentRepository().getResidentById(widget.residentId);
+      final resident =
+          await ResidentRepository().getResidentById(widget.residentId);
       if (!mounted) return;
       final allowed = (isSocialWorker && resident.socialWorkerId == user.id) ||
           (isHouseparent && resident.houseparentId == user.id);
@@ -622,8 +625,7 @@ class _FormFillScreenState extends State<FormFillScreen> {
 
           // 8. Psych Service: populate psych head name for banner display
           if (psychHead != null &&
-              widget.template.serviceUnit ==
-                  ServiceUnit.psychologicalService) {
+              widget.template.serviceUnit == ServiceUnit.psychologicalService) {
             if (_formData['psych_head_name'] == null ||
                 _formData['psych_head_name'].toString().isEmpty) {
               _formData['psych_head_name'] = psychHead.fullName;
@@ -770,13 +772,13 @@ class _FormFillScreenState extends State<FormFillScreen> {
     if (screen.isMobile) {
       return [
         PopupMenuButton<String>(
-          icon: const Icon(Icons.more_vert),
+          icon: const Icon(LucideIcons.ellipsisVertical),
           onSelected: _handleMenuAction,
           itemBuilder: (context) => [
             const PopupMenuItem(
               value: 'preview',
               child: ListTile(
-                leading: Icon(Icons.preview),
+                leading: Icon(LucideIcons.eye),
                 title: Text('Preview PDF'),
                 dense: true,
                 contentPadding: EdgeInsets.zero,
@@ -785,7 +787,7 @@ class _FormFillScreenState extends State<FormFillScreen> {
             const PopupMenuItem(
               value: 'save_draft',
               child: ListTile(
-                leading: Icon(Icons.save_outlined),
+                leading: Icon(LucideIcons.save),
                 title: Text('Save Draft'),
                 dense: true,
                 contentPadding: EdgeInsets.zero,
@@ -795,7 +797,7 @@ class _FormFillScreenState extends State<FormFillScreen> {
               const PopupMenuItem(
                 value: 'discard',
                 child: ListTile(
-                  leading: Icon(Icons.restore, color: Colors.red),
+                  leading: Icon(LucideIcons.rotateCcw, color: Colors.red),
                   title: Text('Discard Changes',
                       style: TextStyle(color: Colors.red)),
                   dense: true,
@@ -810,7 +812,7 @@ class _FormFillScreenState extends State<FormFillScreen> {
     return [
       TextButton.icon(
         onPressed: () => _saveDraft(shouldPop: true, finalize: false),
-        icon: const Icon(Icons.save_outlined, color: Colors.white),
+        icon: const Icon(LucideIcons.save, color: Colors.white),
         label: Text(
           _isSigned ? 'Save Changes' : 'Save Draft',
           style: TextStyle(
@@ -1278,8 +1280,7 @@ class _FormFillScreenState extends State<FormFillScreen> {
                         ),
                       ],
                     )
-                  else if (widget.template.templateType ==
-                      'termination_report')
+                  else if (widget.template.templateType == 'termination_report')
                     Wrap(
                       spacing: 8,
                       runSpacing: 8,
@@ -1303,9 +1304,8 @@ class _FormFillScreenState extends State<FormFillScreen> {
                         FormFieldBuilders.selectableSignatoryTag(
                           context: context,
                           label: 'Division Chief',
-                          value:
-                              _formData['division_chief_name']?.toString() ??
-                                  '',
+                          value: _formData['division_chief_name']?.toString() ??
+                              '',
                           serviceColor: AppColors.getServiceUnitColor(
                               widget.template.serviceUnit.name),
                           onManualTap: () async {
@@ -1313,10 +1313,9 @@ class _FormFillScreenState extends State<FormFillScreen> {
                               context,
                               title: 'Protective Services Division Chief',
                               label: 'Name',
-                              initialValue:
-                                  _formData['division_chief_name']
-                                          ?.toString() ??
-                                      '',
+                              initialValue: _formData['division_chief_name']
+                                      ?.toString() ??
+                                  '',
                             );
                             if (result != null) {
                               _updateField('division_chief_name', result);
@@ -1341,10 +1340,9 @@ class _FormFillScreenState extends State<FormFillScreen> {
                               context,
                               title: 'Regional Director',
                               label: 'Name',
-                              initialValue:
-                                  _formData['regional_director_name']
-                                          ?.toString() ??
-                                      '',
+                              initialValue: _formData['regional_director_name']
+                                      ?.toString() ??
+                                  '',
                             );
                             if (result != null) {
                               _updateField('regional_director_name', result);
@@ -1432,8 +1430,7 @@ class _FormFillScreenState extends State<FormFillScreen> {
                         FormFieldBuilders.selectableSignatoryTag(
                           context: context,
                           label: 'Endorsed By',
-                          value:
-                              _formData['endorsed_by']?.toString() ?? '',
+                          value: _formData['endorsed_by']?.toString() ?? '',
                           serviceColor: AppColors.getServiceUnitColor(
                               widget.template.serviceUnit.name),
                           onManualTap: () async {
@@ -1456,14 +1453,12 @@ class _FormFillScreenState extends State<FormFillScreen> {
                         ),
                       ],
                     )
-                  else if (widget.template.templateType ==
-                      'clients_contract')
+                  else if (widget.template.templateType == 'clients_contract')
                     FormFieldBuilders.signatoryBanner(
                       serviceColor: AppColors.getServiceUnitColor(
                           widget.template.serviceUnit.name),
                       centerHeadName:
-                          _formData['center_head_name']?.toString() ??
-                              '',
+                          _formData['center_head_name']?.toString() ?? '',
                       disablePadding: true,
                       names: [
                         _formData['prepared_by']?.toString() ??
@@ -1471,8 +1466,7 @@ class _FormFillScreenState extends State<FormFillScreen> {
                             '',
                       ],
                     )
-                  else if (widget.template.templateType ==
-                          'admission_slip' ||
+                  else if (widget.template.templateType == 'admission_slip' ||
                       widget.template.templateType == 'discharge_slip')
                     Wrap(
                       spacing: 8,
@@ -1483,8 +1477,7 @@ class _FormFillScreenState extends State<FormFillScreen> {
                           serviceColor: AppColors.getServiceUnitColor(
                               widget.template.serviceUnit.name),
                           centerHeadName:
-                              _formData['center_head_name']?.toString() ??
-                                  '',
+                              _formData['center_head_name']?.toString() ?? '',
                           disablePadding: true,
                           names: [
                             _formData['prepared_by']?.toString() ??
@@ -1496,8 +1489,7 @@ class _FormFillScreenState extends State<FormFillScreen> {
                           context: context,
                           label: 'Medical Staff',
                           value:
-                              _formData['medical_staff_name']?.toString() ??
-                                  '',
+                              _formData['medical_staff_name']?.toString() ?? '',
                           serviceColor: AppColors.getServiceUnitColor(
                               widget.template.serviceUnit.name),
                           onChanged: (v) {
@@ -1507,8 +1499,7 @@ class _FormFillScreenState extends State<FormFillScreen> {
                         ),
                       ],
                     )
-                  else if (widget.template.templateType ==
-                      'after_care_plan')
+                  else if (widget.template.templateType == 'after_care_plan')
                     Wrap(
                       spacing: 8,
                       runSpacing: 8,
@@ -1518,8 +1509,7 @@ class _FormFillScreenState extends State<FormFillScreen> {
                           serviceColor: AppColors.getServiceUnitColor(
                               widget.template.serviceUnit.name),
                           centerHeadName:
-                              _formData['center_head_name']?.toString() ??
-                                  '',
+                              _formData['center_head_name']?.toString() ?? '',
                           disablePadding: true,
                           names: [
                             _formData['prepared_by']?.toString() ??
@@ -1529,16 +1519,16 @@ class _FormFillScreenState extends State<FormFillScreen> {
                           ],
                         ),
                         FormFieldBuilders.signatoryBanner(
-                          serviceColor: AppColors.getServiceUnitColor(
-                              'homeLifeService'),
+                          serviceColor:
+                              AppColors.getServiceUnitColor('homeLifeService'),
                           disablePadding: true,
                           names: [
                             _formData['confirmed_homelife']?.toString() ?? '',
                           ],
                         ),
                         FormFieldBuilders.signatoryBanner(
-                          serviceColor: AppColors.getServiceUnitColor(
-                              'medicalService'),
+                          serviceColor:
+                              AppColors.getServiceUnitColor('medicalService'),
                           disablePadding: true,
                           names: [
                             _formData['confirmed_medical']?.toString() ?? '',
@@ -1555,8 +1545,7 @@ class _FormFillScreenState extends State<FormFillScreen> {
                         FormFieldBuilders.selectableSignatoryTag(
                           context: context,
                           label: 'C/MSWDO',
-                          value:
-                              _formData['cmswdo_name']?.toString() ?? '',
+                          value: _formData['cmswdo_name']?.toString() ?? '',
                           serviceColor: AppColors.getServiceUnitColor(
                               widget.template.serviceUnit.name),
                           onManualTap: () async {
@@ -1601,11 +1590,10 @@ class _FormFillScreenState extends State<FormFillScreen> {
                     FormFieldBuilders.signatoryBanner(
                       serviceColor: AppColors.getServiceUnitColor(
                           widget.template.serviceUnit.name),
-                      centerHeadName:
-                          _formData['approved_by']?.toString() ??
-                              _formData['center_head']?.toString() ??
-                              _formData['noted_by']?.toString() ??
-                              '',
+                      centerHeadName: _formData['approved_by']?.toString() ??
+                          _formData['center_head']?.toString() ??
+                          _formData['noted_by']?.toString() ??
+                          '',
                       names: [
                         _formData['prepared_by']?.toString() ?? '',
                         _formData['medical_head_name']?.toString() ??
@@ -1617,10 +1605,9 @@ class _FormFillScreenState extends State<FormFillScreen> {
                     FormFieldBuilders.signatoryBanner(
                       serviceColor: AppColors.getServiceUnitColor(
                           widget.template.serviceUnit.name),
-                      centerHeadName:
-                          _formData['center_head']?.toString() ??
-                              _formData['noted_by']?.toString() ??
-                              '',
+                      centerHeadName: _formData['center_head']?.toString() ??
+                          _formData['noted_by']?.toString() ??
+                          '',
                       names: [
                         _formData['prepared_by']?.toString() ?? '',
                       ],
@@ -1629,8 +1616,7 @@ class _FormFillScreenState extends State<FormFillScreen> {
                 // Signatory Banner for Psychological Service forms
                 if (widget.template.serviceUnit ==
                     ServiceUnit.psychologicalService)
-                  if (widget.template.templateType ==
-                      'inter_service_referral')
+                  if (widget.template.templateType == 'inter_service_referral')
                     FormFieldBuilders.signatoryBanner(
                       serviceColor: AppColors.getServiceUnitColor(
                           widget.template.serviceUnit.name),
@@ -1644,10 +1630,9 @@ class _FormFillScreenState extends State<FormFillScreen> {
                     FormFieldBuilders.signatoryBanner(
                       serviceColor: AppColors.getServiceUnitColor(
                           widget.template.serviceUnit.name),
-                      centerHeadName:
-                          _formData['center_head']?.toString() ??
-                              _formData['noted_by']?.toString() ??
-                              '',
+                      centerHeadName: _formData['center_head']?.toString() ??
+                          _formData['noted_by']?.toString() ??
+                          '',
                       names: [
                         _formData['prepared_by']?.toString() ??
                             _formData['user_name']?.toString() ??
@@ -1867,7 +1852,7 @@ class _FormFillScreenState extends State<FormFillScreen> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(Icons.edit, size: 14, color: AppColors.warning),
+                Icon(LucideIcons.pencil, size: 14, color: AppColors.warning),
                 const SizedBox(width: 4),
                 Text(
                   'Unsaved changes',
@@ -1890,16 +1875,19 @@ class _FormFillScreenState extends State<FormFillScreen> {
                   Expanded(
                     child: OutlinedButton.icon(
                       onPressed: _previewPdf,
-                      icon: const Icon(Icons.print, size: 18),
-                      label: const Text('Print', overflow: TextOverflow.ellipsis),
+                      icon: const Icon(LucideIcons.printer, size: 18),
+                      label:
+                          const Text('Print', overflow: TextOverflow.ellipsis),
                     ),
                   ),
                   const SizedBox(width: 8),
                   Expanded(
                     child: OutlinedButton.icon(
-                      onPressed: () => _saveDraft(shouldPop: true, finalize: true),
-                      icon: const Icon(Icons.assignment_turned_in_outlined, size: 18),
-                      label: const Text('Save', overflow: TextOverflow.ellipsis),
+                      onPressed: () =>
+                          _saveDraft(shouldPop: true, finalize: true),
+                      icon: const Icon(LucideIcons.clipboardCheck, size: 18),
+                      label:
+                          const Text('Save', overflow: TextOverflow.ellipsis),
                     ),
                   ),
                 ],
@@ -1918,7 +1906,7 @@ class _FormFillScreenState extends State<FormFillScreen> {
                             color: Colors.white,
                           ),
                         )
-                      : const Icon(Icons.send),
+                      : const Icon(LucideIcons.send),
                   label: const Text('Submit for Approval'),
                 ),
               ),
@@ -1931,7 +1919,7 @@ class _FormFillScreenState extends State<FormFillScreen> {
               Expanded(
                 child: OutlinedButton.icon(
                   onPressed: _previewPdf,
-                  icon: const Icon(Icons.print),
+                  icon: const Icon(LucideIcons.printer),
                   label: const Text('Print / Preview',
                       textAlign: TextAlign.center,
                       overflow: TextOverflow.ellipsis),
@@ -1953,7 +1941,7 @@ class _FormFillScreenState extends State<FormFillScreen> {
                             color: Colors.white,
                           ),
                         )
-                      : const Icon(Icons.check_circle_outline),
+                      : const Icon(LucideIcons.circleCheck),
                   label: const Text('Save & Complete'),
                 ),
               ),
@@ -1969,9 +1957,9 @@ class _FormFillScreenState extends State<FormFillScreen> {
                   Expanded(
                     child: OutlinedButton.icon(
                       onPressed: _previewPdf,
-                      icon: const Icon(Icons.print, size: 18),
-                      label: const Text('Print',
-                          overflow: TextOverflow.ellipsis),
+                      icon: const Icon(LucideIcons.printer, size: 18),
+                      label:
+                          const Text('Print', overflow: TextOverflow.ellipsis),
                     ),
                   ),
                   const SizedBox(width: 8),
@@ -1979,7 +1967,7 @@ class _FormFillScreenState extends State<FormFillScreen> {
                     child: OutlinedButton.icon(
                       onPressed: () =>
                           _saveDraft(shouldPop: true, finalize: true),
-                      icon: const Icon(Icons.assignment_turned_in_outlined, size: 18),
+                      icon: const Icon(LucideIcons.clipboardCheck, size: 18),
                       label: const Text('Save for Signing',
                           overflow: TextOverflow.ellipsis),
                     ),
@@ -1991,7 +1979,7 @@ class _FormFillScreenState extends State<FormFillScreen> {
                 width: double.infinity,
                 child: ElevatedButton.icon(
                   onPressed: _submitForm,
-                  icon: const Icon(Icons.send),
+                  icon: const Icon(LucideIcons.send),
                   label: const Text('Submit'),
                 ),
               ),
@@ -2033,7 +2021,7 @@ class _FormFillScreenState extends State<FormFillScreen> {
         if (_isDirty)
           Row(
             children: [
-              Icon(Icons.edit, size: 16, color: AppColors.warning),
+              Icon(LucideIcons.pencil, size: 16, color: AppColors.warning),
               const SizedBox(width: 6),
               Text(
                 'Unsaved changes',
@@ -2052,7 +2040,7 @@ class _FormFillScreenState extends State<FormFillScreen> {
         // Print/Preview Button
         OutlinedButton.icon(
           onPressed: _previewPdf,
-          icon: const Icon(Icons.print),
+          icon: const Icon(LucideIcons.printer),
           label: const Text('Print / Preview'),
         ),
         const SizedBox(width: 12),
@@ -2064,7 +2052,7 @@ class _FormFillScreenState extends State<FormFillScreen> {
           OutlinedButton.icon(
             onPressed: () => _saveDraft(shouldPop: true, finalize: true),
             icon: Icon(
-                _isSigned ? Icons.update : Icons.assignment_turned_in_outlined),
+                _isSigned ? LucideIcons.refreshCw : LucideIcons.clipboardCheck),
             label: Text(_isSigned ? 'Update Submission' : 'Save for Signing'),
           ),
 
@@ -2081,7 +2069,7 @@ class _FormFillScreenState extends State<FormFillScreen> {
                     child: CircularProgressIndicator(
                         strokeWidth: 2, color: Colors.white),
                   )
-                : const Icon(Icons.send),
+                : const Icon(LucideIcons.send),
             label: const Text('Submit for Approval'),
           ),
 
@@ -2099,7 +2087,7 @@ class _FormFillScreenState extends State<FormFillScreen> {
                     height: 16,
                     child: CircularProgressIndicator(
                         color: Colors.white, strokeWidth: 2))
-                : const Icon(Icons.verified),
+                : const Icon(LucideIcons.badgeCheck),
             label: const Text('Approve Medical Review'),
           ),
         ],
@@ -2171,7 +2159,8 @@ class _FormFillScreenState extends State<FormFillScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-              content: Text(ErrorHandler.getUserFriendlyMessage(e)), backgroundColor: AppColors.error),
+              content: Text(ErrorHandler.getUserFriendlyMessage(e)),
+              backgroundColor: AppColors.error),
         );
       }
     }
@@ -2334,9 +2323,8 @@ class _FormFillScreenState extends State<FormFillScreen> {
               .replaceAll('_signature_url', '')
               .replaceAll('_', ' ')
               .split(' ')
-              .map((w) => w.isNotEmpty
-                  ? '${w[0].toUpperCase()}${w.substring(1)}'
-                  : w)
+              .map((w) =>
+                  w.isNotEmpty ? '${w[0].toUpperCase()}${w.substring(1)}' : w)
               .join(' ');
           missingLabels.add(label);
         }
@@ -2383,8 +2371,7 @@ class _FormFillScreenState extends State<FormFillScreen> {
       final target = medicalUsers
           .where((u) =>
               (currentUserId == null || u.id != currentUserId) &&
-              u.fullName.trim().toUpperCase() ==
-                  medicalStaffName.toUpperCase())
+              u.fullName.trim().toUpperCase() == medicalStaffName.toUpperCase())
           .firstOrNull;
 
       if (target != null) {
@@ -2524,7 +2511,7 @@ class _FormFillScreenState extends State<FormFillScreen> {
           ),
           child: Row(
             children: [
-              Icon(Icons.history, color: AppColors.primary),
+              Icon(LucideIcons.history, color: AppColors.primary),
               const SizedBox(width: 12),
               Expanded(
                 child: Column(
@@ -2549,7 +2536,7 @@ class _FormFillScreenState extends State<FormFillScreen> {
               ),
               ElevatedButton.icon(
                 onPressed: () => _copyPreviousData(previousForm.formData),
-                icon: const Icon(Icons.copy, size: 16),
+                icon: const Icon(LucideIcons.copy, size: 16),
                 label: const Text('Copy Data'),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppColors.primary,
@@ -2745,7 +2732,7 @@ class _FormFillScreenState extends State<FormFillScreen> {
           context: context,
           barrierDismissible: false,
           builder: (ctx) => AlertDialog(
-            icon: const Icon(Icons.check_circle,
+            icon: const Icon(LucideIcons.circleCheck,
                 color: AppColors.success, size: 48),
             title: const Text('Form Submitted'),
             content: Column(

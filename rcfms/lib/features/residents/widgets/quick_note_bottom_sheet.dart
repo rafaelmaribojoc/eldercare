@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import '../../../../data/models/resident_note.dart';
 import '../../../../data/repositories/resident_note_repository.dart';
 import '../../../../data/repositories/auth_repository.dart';
@@ -319,7 +320,9 @@ class _QuickNoteBottomSheetState extends State<QuickNoteBottomSheet> {
       } catch (e) {
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(ErrorHandler.getUserFriendlyMessage(e)), backgroundColor: Colors.red),
+            SnackBar(
+                content: Text(ErrorHandler.getUserFriendlyMessage(e)),
+                backgroundColor: Colors.red),
           );
         }
       }
@@ -453,12 +456,12 @@ class _QuickNoteBottomSheetState extends State<QuickNoteBottomSheet> {
                 children: [
                   if (widget.existingNote != null && _canEdit)
                     IconButton(
-                      icon: const Icon(Icons.delete_outline, color: Colors.red),
+                      icon: const Icon(LucideIcons.trash2, color: Colors.red),
                       tooltip: 'Delete Note',
                       onPressed: _deleteNote,
                     ),
                   IconButton(
-                    icon: const Icon(Icons.close),
+                    icon: const Icon(LucideIcons.x),
                     onPressed: () => Navigator.pop(context),
                   ),
                 ],
@@ -607,7 +610,7 @@ class _QuickNoteBottomSheetState extends State<QuickNoteBottomSheet> {
               ),
               child: Row(
                 children: [
-                  Icon(Icons.lock_outline,
+                  Icon(LucideIcons.lockKeyhole,
                       size: 20, color: _getCategoryColor(_selectedCategory)),
                   const SizedBox(width: 12),
                   Column(

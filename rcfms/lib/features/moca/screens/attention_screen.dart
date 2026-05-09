@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
@@ -145,7 +146,8 @@ class _AttentionScreenState extends State<AttentionScreen>
                 ),
           ),
           const SizedBox(height: 8),
-          const Text('Uulitin ng pasyente ang mga numero sa PABALIKTAD na pagkakasunod.'),
+          const Text(
+              'Uulitin ng pasyente ang mga numero sa PABALIKTAD na pagkakasunod.'),
           const SizedBox(height: 16),
           Card(
             color: MocaColors.attentionColor.withOpacity(0.1),
@@ -283,7 +285,7 @@ class _AttentionScreenState extends State<AttentionScreen>
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Icon(Icons.info_outline, color: MocaColors.info),
+                  const Icon(LucideIcons.info, color: MocaColors.info),
                   const SizedBox(width: 12),
                   Expanded(
                     child: Text(
@@ -373,8 +375,8 @@ class _AttentionScreenState extends State<AttentionScreen>
                             children: [
                               Icon(
                                 isCorrect
-                                    ? Icons.check_circle
-                                    : Icons.circle_outlined,
+                                    ? LucideIcons.circleCheck
+                                    : LucideIcons.circle,
                                 color: isCorrect
                                     ? MocaColors.attentionColor
                                     : MocaColors.textSecondary,
@@ -471,7 +473,7 @@ class _AttentionScreenState extends State<AttentionScreen>
             child: Row(
               children: [
                 Icon(
-                  value ? Icons.check_circle : Icons.circle_outlined,
+                  value ? LucideIcons.circleCheck : LucideIcons.circle,
                   color: value ? MocaColors.success : MocaColors.textSecondary,
                   size: 20,
                 ),

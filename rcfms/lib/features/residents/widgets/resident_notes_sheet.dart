@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:intl/intl.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../data/models/resident_note.dart';
@@ -50,7 +51,7 @@ class _ResidentNotesSheetState extends State<ResidentNotesSheet> {
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             child: Row(
               children: [
-                const Icon(Icons.note_alt, color: AppColors.primary),
+                const Icon(LucideIcons.notebookText, color: AppColors.primary),
                 const SizedBox(width: 8),
                 const Text(
                   'Notes History',
@@ -58,7 +59,7 @@ class _ResidentNotesSheetState extends State<ResidentNotesSheet> {
                 ),
                 const Spacer(),
                 IconButton(
-                  icon: const Icon(Icons.add_circle,
+                  icon: const Icon(LucideIcons.circlePlus,
                       color: AppColors.primary, size: 28),
                   onPressed: () async {
                     await showModalBottomSheet(
@@ -74,7 +75,7 @@ class _ResidentNotesSheetState extends State<ResidentNotesSheet> {
                   },
                 ),
                 IconButton(
-                  icon: const Icon(Icons.close),
+                  icon: const Icon(LucideIcons.x),
                   onPressed: () => Navigator.pop(context),
                 ),
               ],
@@ -100,7 +101,7 @@ class _ResidentNotesSheetState extends State<ResidentNotesSheet> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(Icons.note_alt_outlined,
+                        Icon(LucideIcons.notebookText,
                             size: 64, color: Colors.grey.shade300),
                         const SizedBox(height: 16),
                         Text(
@@ -134,61 +135,61 @@ class _ResidentNotesSheetState extends State<ResidentNotesSheet> {
       switch (cat) {
         // --- MEDICAL (Pink/Red) ---
         case 'vitals':
-          return ('Vitals', Colors.pink, Icons.monitor_heart);
+          return ('Vitals', Colors.pink, LucideIcons.heartPulse);
         case 'medication':
-          return ('Meds', Colors.pink, Icons.medication);
+          return ('Meds', Colors.pink, LucideIcons.pill);
         case 'physical':
-          return ('Physical', Colors.pink, Icons.accessibility_new);
+          return ('Physical', Colors.pink, LucideIcons.accessibility);
         case 'body_map':
-          return ('Body Map', Colors.pink, Icons.personal_injury);
+          return ('Body Map', Colors.pink, LucideIcons.userRoundX);
         case 'complaint':
         case 'medical_complaint':
-          return ('Complaint', Colors.pink, Icons.sick);
+          return ('Complaint', Colors.pink, LucideIcons.thermometer);
         case 'treatment':
-          return ('Treatment', Colors.pink, Icons.healing);
+          return ('Treatment', Colors.pink, LucideIcons.heartPulse);
         case 'dietary':
-          return ('Dietary', Colors.pink, Icons.restaurant);
+          return ('Dietary', Colors.pink, LucideIcons.utensils);
 
         // --- SOCIAL (Indigo/Blue) ---
         case 'behavior':
-          return ('Behavior', Colors.indigo, Icons.psychology);
+          return ('Behavior', Colors.indigo, LucideIcons.brain);
         case 'interaction':
-          return ('Interaction', Colors.indigo, Icons.groups);
+          return ('Interaction', Colors.indigo, LucideIcons.users);
         case 'counseling':
-          return ('Counseling', Colors.indigo, Icons.record_voice_over);
+          return ('Counseling', Colors.indigo, LucideIcons.mic);
         case 'case_note':
-          return ('Case Note', Colors.indigo, Icons.folder_shared);
+          return ('Case Note', Colors.indigo, LucideIcons.folderOpen);
         case 'goal':
-          return ('Goal/Plan', Colors.indigo, Icons.flag);
+          return ('Goal/Plan', Colors.indigo, LucideIcons.flag);
 
         // --- HOMELIFE (Teal/Green) ---
         case 'activity':
-          return ('Activity', Colors.teal, Icons.local_activity);
+          return ('Activity', Colors.teal, LucideIcons.ticket);
         case 'hygiene':
-          return ('Hygiene', Colors.teal, Icons.clean_hands);
+          return ('Hygiene', Colors.teal, LucideIcons.hand);
         case 'inventory':
-          return ('Inventory', Colors.teal, Icons.inventory_2);
+          return ('Inventory', Colors.teal, LucideIcons.packageOpen);
         case 'incident':
-          return ('Incident', Colors.teal, Icons.warning);
+          return ('Incident', Colors.teal, LucideIcons.triangleAlert);
         case 'movement':
-          return ('Movement', Colors.teal, Icons.directions_walk);
+          return ('Movement', Colors.teal, LucideIcons.footprints);
 
         // --- LEGACY / OTHER ---
         case 'general':
         case 'other':
-          return ('General', Colors.blueGrey, Icons.note);
+          return ('General', Colors.blueGrey, LucideIcons.notebook);
 
         case 'medical':
-          return ('Medical', Colors.pink, Icons.medical_services);
+          return ('Medical', Colors.pink, LucideIcons.stethoscope);
         case 'social':
-          return ('Social', Colors.indigo, Icons.people);
+          return ('Social', Colors.indigo, LucideIcons.users);
         case 'homelife':
-          return ('Homelife', Colors.teal, Icons.home);
+          return ('Homelife', Colors.teal, LucideIcons.house);
         case 'behavioral':
-          return ('Behavioral', Colors.indigo, Icons.psychology);
+          return ('Behavioral', Colors.indigo, LucideIcons.brain);
 
         default:
-          return (cat.toUpperCase(), Colors.grey, Icons.circle);
+          return (cat.toUpperCase(), Colors.grey, LucideIcons.circle);
       }
     }
 
@@ -250,7 +251,8 @@ class _ResidentNotesSheetState extends State<ResidentNotesSheet> {
                   ),
                   const Spacer(),
                   if (note.isConfidential) ...[
-                    const Icon(Icons.lock, size: 14, color: Colors.grey),
+                    const Icon(LucideIcons.lockKeyhole,
+                        size: 14, color: Colors.grey),
                     const SizedBox(width: 4),
                   ],
                   Column(
@@ -276,7 +278,7 @@ class _ResidentNotesSheetState extends State<ResidentNotesSheet> {
                     ],
                   ),
                   PopupMenuButton<String>(
-                    icon: const Icon(Icons.more_vert, size: 18),
+                    icon: const Icon(LucideIcons.ellipsisVertical, size: 18),
                     padding: EdgeInsets.zero,
                     constraints: const BoxConstraints(),
                     onSelected: (value) async {
@@ -336,7 +338,7 @@ class _ResidentNotesSheetState extends State<ResidentNotesSheet> {
                         value: 'edit',
                         child: Row(
                           children: [
-                            Icon(Icons.edit, size: 16),
+                            Icon(LucideIcons.pencil, size: 16),
                             SizedBox(width: 8),
                             Text('Edit'),
                           ],
@@ -346,7 +348,8 @@ class _ResidentNotesSheetState extends State<ResidentNotesSheet> {
                         value: 'delete',
                         child: Row(
                           children: [
-                            Icon(Icons.delete, size: 16, color: Colors.red),
+                            Icon(LucideIcons.trash2,
+                                size: 16, color: Colors.red),
                             SizedBox(width: 8),
                             Text('Delete', style: TextStyle(color: Colors.red)),
                           ],

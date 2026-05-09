@@ -1,5 +1,6 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
@@ -68,7 +69,7 @@ class _MocaAnalyticsScreenState extends State<MocaAnalyticsScreen> {
         appBar: AppBar(
           title: const Text('MoCA Analytics'),
           leading: IconButton(
-            icon: const Icon(Icons.arrow_back),
+            icon: const Icon(LucideIcons.arrowLeft),
             onPressed: () {
               if (context.canPop()) {
                 context.pop();
@@ -88,7 +89,7 @@ class _MocaAnalyticsScreenState extends State<MocaAnalyticsScreen> {
       appBar: AppBar(
         title: const Text('MoCA Analytics'),
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
+          icon: const Icon(LucideIcons.arrowLeft),
           tooltip: 'Back',
           onPressed: () {
             if (context.canPop()) {
@@ -154,9 +155,7 @@ class _MocaAnalyticsScreenState extends State<MocaAnalyticsScreen> {
     final count = _assessments.length;
     final avg = count == 0
         ? 0.0
-        : _assessments
-                .map((a) => a.adjustedScore)
-                .reduce((a, b) => a + b) /
+        : _assessments.map((a) => a.adjustedScore).reduce((a, b) => a + b) /
             count;
     final below = _assessments.where((a) => a.adjustedScore < 26).length;
     final belowPct = count == 0 ? 0 : ((below / count) * 100).round();
@@ -169,7 +168,7 @@ class _MocaAnalyticsScreenState extends State<MocaAnalyticsScreen> {
             value: '$count',
             subtitle: 'Last $_days days',
             color: MocaColors.primary,
-            icon: Icons.assignment_turned_in_outlined,
+            icon: LucideIcons.clipboardCheck,
           ),
         ),
         const SizedBox(width: 12),
@@ -179,7 +178,7 @@ class _MocaAnalyticsScreenState extends State<MocaAnalyticsScreen> {
             value: avg.toStringAsFixed(1),
             subtitle: 'Adjusted (0–30)',
             color: MocaColors.success,
-            icon: Icons.show_chart,
+            icon: LucideIcons.chartNoAxesColumnIncreasing,
           ),
         ),
         const SizedBox(width: 12),
@@ -189,7 +188,7 @@ class _MocaAnalyticsScreenState extends State<MocaAnalyticsScreen> {
             value: '$belowPct%',
             subtitle: '$below cases',
             color: MocaColors.warning,
-            icon: Icons.warning_amber_rounded,
+            icon: LucideIcons.triangleAlert,
           ),
         ),
       ],
@@ -378,7 +377,8 @@ class _MocaAnalyticsScreenState extends State<MocaAnalyticsScreen> {
                   padding: const EdgeInsets.only(bottom: 10),
                   child: Row(
                     children: [
-                      Expanded(child: Text(name, overflow: TextOverflow.ellipsis)),
+                      Expanded(
+                          child: Text(name, overflow: TextOverflow.ellipsis)),
                       const SizedBox(width: 12),
                       Container(
                         padding: const EdgeInsets.symmetric(
@@ -405,9 +405,7 @@ class _MocaAnalyticsScreenState extends State<MocaAnalyticsScreen> {
   }
 
   Widget _buildRecentLowScores() {
-    final lows = _assessments
-        .where((a) => a.adjustedScore < 26)
-        .toList()
+    final lows = _assessments.where((a) => a.adjustedScore < 26).toList()
       ..sort((a, b) {
         final ad = a.completedAt ?? a.createdAt;
         final bd = b.completedAt ?? b.createdAt;
@@ -612,7 +610,8 @@ class _ErrorState extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Icon(Icons.error_outline, size: 56, color: MocaColors.error),
+            const Icon(LucideIcons.circleAlert,
+                size: 56, color: MocaColors.error),
             const SizedBox(height: 12),
             const Text('Failed to load analytics'),
             const SizedBox(height: 8),
@@ -624,7 +623,8 @@ class _ErrorState extends StatelessWidget {
             const SizedBox(height: 16),
             ElevatedButton(
               onPressed: onRetry,
-              style: ElevatedButton.styleFrom(backgroundColor: MocaColors.primary),
+              style:
+                  ElevatedButton.styleFrom(backgroundColor: MocaColors.primary),
               child: const Text('Retry'),
             ),
           ],
@@ -633,4 +633,3 @@ class _ErrorState extends StatelessWidget {
     );
   }
 }
-

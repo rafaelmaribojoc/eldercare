@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
@@ -109,7 +110,7 @@ class _WardsScreenState extends State<WardsScreen> {
               title: const Text('Wards'),
               actions: [
                 IconButton(
-                  icon: const Icon(Icons.refresh),
+                  icon: const Icon(LucideIcons.refreshCw),
                   onPressed: _loadWards,
                 ),
               ],
@@ -127,10 +128,10 @@ class _WardsScreenState extends State<WardsScreen> {
                 onChanged: _filterWards,
                 decoration: InputDecoration(
                   hintText: 'Search wards...',
-                  prefixIcon: const Icon(Icons.search, size: 20),
+                  prefixIcon: const Icon(LucideIcons.search, size: 20),
                   suffixIcon: _searchController.text.isNotEmpty
                       ? IconButton(
-                          icon: const Icon(Icons.clear, size: 20),
+                          icon: const Icon(LucideIcons.x, size: 20),
                           onPressed: () {
                             _searchController.clear();
                             _filterWards('');
@@ -199,14 +200,15 @@ class _WardsScreenState extends State<WardsScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Icon(Icons.error_outline, size: 48, color: AppColors.error),
+            const Icon(LucideIcons.circleAlert,
+                size: 48, color: AppColors.error),
             const SizedBox(height: 16),
             Text('Failed to load wards',
                 style: Theme.of(context).textTheme.titleMedium),
             const SizedBox(height: 8),
             TextButton.icon(
               onPressed: _loadWards,
-              icon: const Icon(Icons.refresh),
+              icon: const Icon(LucideIcons.refreshCw),
               label: const Text('Retry'),
             ),
           ],
@@ -219,8 +221,7 @@ class _WardsScreenState extends State<WardsScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.meeting_room_outlined,
-                size: 64, color: AppColors.textTertiary),
+            Icon(LucideIcons.doorOpen, size: 64, color: AppColors.textTertiary),
             const SizedBox(height: 16),
             Text(
               _searchController.text.isNotEmpty
@@ -302,7 +303,7 @@ class _WardCard extends StatelessWidget {
                       borderRadius: BorderRadius.circular(AppTheme.radiusSm),
                     ),
                     child: Icon(
-                      Icons.meeting_room_rounded,
+                      LucideIcons.doorOpen,
                       color: occupancyColor,
                       size: 22,
                     ),
@@ -402,11 +403,11 @@ class _WardCard extends StatelessWidget {
                   if (ward.hasNfcTag)
                     Padding(
                       padding: const EdgeInsets.only(right: 8),
-                      child: Icon(Icons.nfc,
+                      child: Icon(LucideIcons.nfc,
                           size: 16, color: AppColors.textTertiary),
                     ),
                   const Spacer(),
-                  Icon(Icons.arrow_forward_ios,
+                  Icon(LucideIcons.chevronRight,
                       size: 14, color: AppColors.textTertiary),
                 ],
               ),

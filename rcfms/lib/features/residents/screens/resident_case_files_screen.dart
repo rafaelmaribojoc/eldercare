@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
@@ -69,10 +70,7 @@ class _CaseFilesViewState extends State<_CaseFilesView> {
               residentName,
               style: TextStyle(
                 fontSize: 13,
-                color: Theme.of(context)
-                    .colorScheme
-                    .onSurface
-                    .withOpacity(0.7),
+                color: Theme.of(context).colorScheme.onSurface.withOpacity(0.7),
               ),
             ),
           ],
@@ -82,7 +80,9 @@ class _CaseFilesViewState extends State<_CaseFilesView> {
             builder: (context, state) {
               return IconButton(
                 icon: Icon(
-                  state.showArchived ? Icons.archive : Icons.archive_outlined,
+                  state.showArchived
+                      ? LucideIcons.archive
+                      : LucideIcons.archive,
                   color: state.showArchived ? AppColors.warning : null,
                 ),
                 tooltip:
@@ -108,7 +108,7 @@ class _CaseFilesViewState extends State<_CaseFilesView> {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Icon(Icons.error_outline,
+                        Icon(LucideIcons.circleAlert,
                             size: 48, color: AppColors.error),
                         const SizedBox(height: 12),
                         Text('Error loading case files'),
@@ -144,10 +144,10 @@ class _CaseFilesViewState extends State<_CaseFilesView> {
             controller: _searchController,
             decoration: InputDecoration(
               hintText: 'Search forms...',
-              prefixIcon: const Icon(Icons.search, size: 20),
+              prefixIcon: const Icon(LucideIcons.search, size: 20),
               suffixIcon: _searchController.text.isNotEmpty
                   ? IconButton(
-                      icon: const Icon(Icons.clear, size: 18),
+                      icon: const Icon(LucideIcons.x, size: 18),
                       onPressed: () {
                         _searchController.clear();
                         context.read<CaseFilesCubit>().setSearchQuery('');
@@ -211,8 +211,7 @@ class _CaseFilesViewState extends State<_CaseFilesView> {
       child: FilterChip(
         label: Text(label, style: const TextStyle(fontSize: 12)),
         selected: selected,
-        onSelected: (_) =>
-            context.read<CaseFilesCubit>().setUnitFilter(unit),
+        onSelected: (_) => context.read<CaseFilesCubit>().setUnitFilter(unit),
         visualDensity: VisualDensity.compact,
         padding: EdgeInsets.zero,
         materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
@@ -223,7 +222,8 @@ class _CaseFilesViewState extends State<_CaseFilesView> {
   Widget _buildCategoryList(BuildContext context, CaseFilesState state) {
     final cubit = context.read<CaseFilesCubit>();
     final categories = CaseFileCategory.values
-        .where((c) => c != CaseFileCategory.uploadedScanned || 
+        .where((c) =>
+            c != CaseFileCategory.uploadedScanned ||
             cubit.getFilteredForms(c).isNotEmpty)
         .toList()
       ..sort((a, b) => a.sortOrder.compareTo(b.sortOrder));
@@ -245,11 +245,13 @@ class _CaseFilesViewState extends State<_CaseFilesView> {
   Widget _buildCategorySection(BuildContext context, CaseFilesCubit cubit,
       CaseFilesState state, CaseFileCategory category) {
     final forms = cubit.getFilteredForms(category);
-    final missingTemplates =
-        state.showArchived ? <FormTemplate>[] : cubit.getMissingTemplates(category);
+    final missingTemplates = state.showArchived
+        ? <FormTemplate>[]
+        : cubit.getMissingTemplates(category);
     final isExpanded = state.expandedSections[category] ?? true;
 
-    if (forms.isEmpty && missingTemplates.isEmpty) return const SizedBox.shrink();
+    if (forms.isEmpty && missingTemplates.isEmpty)
+      return const SizedBox.shrink();
 
     return Card(
       margin: const EdgeInsets.symmetric(vertical: 4),
@@ -294,7 +296,9 @@ class _CaseFilesViewState extends State<_CaseFilesView> {
                     ),
                   const SizedBox(width: 4),
                   Icon(
-                    isExpanded ? Icons.expand_less : Icons.expand_more,
+                    isExpanded
+                        ? LucideIcons.chevronUp
+                        : LucideIcons.chevronDown,
                     size: 20,
                   ),
                 ],
@@ -304,8 +308,8 @@ class _CaseFilesViewState extends State<_CaseFilesView> {
           if (isExpanded) ...[
             const Divider(height: 1),
             ...forms.map((form) => _buildFormTile(context, form)),
-            ...missingTemplates.map(
-                (template) => _buildMissingTile(context, template)),
+            ...missingTemplates
+                .map((template) => _buildMissingTile(context, template)),
           ],
         ],
       ),
@@ -349,8 +353,8 @@ class _CaseFilesViewState extends State<_CaseFilesView> {
               ),
               child: Icon(
                 form.isArchived
-                    ? Icons.archive_outlined
-                    : (template?.icon ?? Icons.description),
+                    ? LucideIcons.archive
+                    : (template?.icon ?? LucideIcons.fileText),
                 color: form.isArchived
                     ? AppColors.textSecondary
                     : form.statusColor,
@@ -381,8 +385,7 @@ class _CaseFilesViewState extends State<_CaseFilesView> {
         style: TextStyle(
           fontWeight: FontWeight.w600,
           fontSize: 13,
-          decoration:
-              form.isArchived ? TextDecoration.lineThrough : null,
+          decoration: form.isArchived ? TextDecoration.lineThrough : null,
         ),
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
@@ -430,9 +433,11 @@ class _CaseFilesViewState extends State<_CaseFilesView> {
             ),
           ],
           if (permissions != null &&
-              (permissions.canArchive || permissions.canRestore || permissions.canPermanentDelete))
+              (permissions.canArchive ||
+                  permissions.canRestore ||
+                  permissions.canPermanentDelete))
             PopupMenuButton<String>(
-              icon: const Icon(Icons.more_vert, size: 18),
+              icon: const Icon(LucideIcons.ellipsisVertical, size: 18),
               padding: EdgeInsets.zero,
               itemBuilder: (context) => [
                 if (permissions!.canArchive && !form.isArchived)
@@ -440,7 +445,7 @@ class _CaseFilesViewState extends State<_CaseFilesView> {
                     value: 'archive',
                     child: Row(
                       children: [
-                        Icon(Icons.archive_outlined, size: 18),
+                        Icon(LucideIcons.archive, size: 18),
                         SizedBox(width: 8),
                         Text('Archive'),
                       ],
@@ -451,7 +456,7 @@ class _CaseFilesViewState extends State<_CaseFilesView> {
                     value: 'restore',
                     child: Row(
                       children: [
-                        Icon(Icons.unarchive_outlined, size: 18),
+                        Icon(LucideIcons.archiveRestore, size: 18),
                         SizedBox(width: 8),
                         Text('Restore'),
                       ],
@@ -462,9 +467,11 @@ class _CaseFilesViewState extends State<_CaseFilesView> {
                     value: 'permanentDelete',
                     child: Row(
                       children: [
-                        Icon(Icons.delete_forever, size: 18, color: AppColors.error),
+                        Icon(LucideIcons.trash2,
+                            size: 18, color: AppColors.error),
                         SizedBox(width: 8),
-                        Text('Permanently Delete', style: TextStyle(color: AppColors.error)),
+                        Text('Permanently Delete',
+                            style: TextStyle(color: AppColors.error)),
                       ],
                     ),
                   ),
@@ -473,7 +480,8 @@ class _CaseFilesViewState extends State<_CaseFilesView> {
             ),
         ],
       ),
-      onTap: form.isArchived ? null : () => context.push('/forms/view/${form.id}'),
+      onTap:
+          form.isArchived ? null : () => context.push('/forms/view/${form.id}'),
     );
   }
 
@@ -483,12 +491,11 @@ class _CaseFilesViewState extends State<_CaseFilesView> {
         CaseFilePermissions.canCreateFormType(
           userRole: authState.user.role,
           userUnit: authState.user.unit,
-          templateUnit: AppConstants.getUnitFromServiceUnit(
-              template.serviceUnit.name),
+          templateUnit:
+              AppConstants.getUnitFromServiceUnit(template.serviceUnit.name),
         );
 
-    final residentId =
-        context.read<CaseFilesCubit>().residentId;
+    final residentId = context.read<CaseFilesCubit>().residentId;
 
     return ListTile(
       dense: true,
@@ -502,7 +509,7 @@ class _CaseFilesViewState extends State<_CaseFilesView> {
           border: Border.all(color: Colors.grey.shade300, width: 1),
         ),
         child: Icon(
-          Icons.check_box_outline_blank,
+          LucideIcons.square,
           color: Colors.grey.shade400,
           size: 18,
         ),
@@ -526,7 +533,7 @@ class _CaseFilesViewState extends State<_CaseFilesView> {
       ),
       trailing: canCreate
           ? IconButton(
-              icon: Icon(Icons.add_circle_outline,
+              icon: Icon(LucideIcons.circlePlus,
                   size: 20, color: AppColors.primary),
               tooltip: 'Create this form',
               onPressed: () => context.push(
@@ -536,7 +543,7 @@ class _CaseFilesViewState extends State<_CaseFilesView> {
           : Tooltip(
               message:
                   'Only ${template.serviceUnit.displayName} staff can create this form',
-              child: Icon(Icons.lock_outline,
+              child: Icon(LucideIcons.lockKeyhole,
                   size: 16, color: Colors.grey.shade400),
             ),
     );
@@ -551,8 +558,7 @@ class _CaseFilesViewState extends State<_CaseFilesView> {
       final isCustodian = authState is AuthAuthenticated &&
           CaseFilePermissions.isCaseFolderCustodian(
               authState.user.role, authState.user.unit);
-      final isCrossUnit = isCustodian &&
-          authState.user.unit != form.unit;
+      final isCrossUnit = isCustodian && authState.user.unit != form.unit;
 
       if (isCrossUnit) {
         _showConfirmArchiveWithTyping(context, form, cubit);
@@ -592,14 +598,14 @@ class _CaseFilesViewState extends State<_CaseFilesView> {
                 ),
                 child: Row(
                   children: [
-                    Icon(Icons.warning_amber,
+                    Icon(LucideIcons.triangleAlert,
                         size: 18, color: AppColors.warning),
                     const SizedBox(width: 8),
                     Expanded(
                       child: Text(
                         'This form has pending approvals. Archiving will cancel them.',
-                        style: TextStyle(
-                            fontSize: 12, color: AppColors.warning),
+                        style:
+                            TextStyle(fontSize: 12, color: AppColors.warning),
                       ),
                     ),
                   ],
@@ -633,8 +639,10 @@ class _CaseFilesViewState extends State<_CaseFilesView> {
     showDialog(
       context: context,
       builder: (ctx) => AlertDialog(
-        title: const Text('Permanently Delete Form', style: TextStyle(color: AppColors.error)),
-        content: const Text('This action is irreversible. Are you sure you want to permanently delete this form?'),
+        title: const Text('Permanently Delete Form',
+            style: TextStyle(color: AppColors.error)),
+        content: const Text(
+            'This action is irreversible. Are you sure you want to permanently delete this form?'),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(ctx),
@@ -672,8 +680,7 @@ class _CaseFilesViewState extends State<_CaseFilesView> {
             Text(
                 'You are archiving a form from another unit. Type the form name to confirm:'),
             const SizedBox(height: 8),
-            Text(name,
-                style: const TextStyle(fontWeight: FontWeight.bold)),
+            Text(name, style: const TextStyle(fontWeight: FontWeight.bold)),
             const SizedBox(height: 12),
             TextField(
               controller: controller,
@@ -711,19 +718,19 @@ class _CaseFilesViewState extends State<_CaseFilesView> {
   IconData _getCategoryIcon(CaseFileCategory category) {
     switch (category) {
       case CaseFileCategory.admission:
-        return Icons.how_to_reg;
+        return LucideIcons.userCheck;
       case CaseFileCategory.ongoingCare:
-        return Icons.edit_note;
+        return LucideIcons.filePenLine;
       case CaseFileCategory.incidentsSpecial:
-        return Icons.warning_amber;
+        return LucideIcons.triangleAlert;
       case CaseFileCategory.medicalNutritionReports:
-        return Icons.medical_services;
+        return LucideIcons.stethoscope;
       case CaseFileCategory.dischargeTermination:
-        return Icons.exit_to_app;
+        return LucideIcons.logOut;
       case CaseFileCategory.inventory:
-        return Icons.inventory;
+        return LucideIcons.package;
       case CaseFileCategory.uploadedScanned:
-        return Icons.photo_camera;
+        return LucideIcons.camera;
     }
   }
 

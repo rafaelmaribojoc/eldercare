@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../data/models/resident_note.dart';
 import '../../../../data/repositories/resident_note_repository.dart';
@@ -309,7 +310,7 @@ class _ModernResidentNotesSheetState extends State<ModernResidentNotesSheet> {
                     ? Row(
                         children: [
                           IconButton(
-                            icon: const Icon(Icons.close),
+                            icon: const Icon(LucideIcons.x),
                             onPressed: () {
                               setState(() {
                                 _selectionMode = false;
@@ -327,17 +328,18 @@ class _ModernResidentNotesSheetState extends State<ModernResidentNotesSheet> {
                           ),
                           const Spacer(),
                           IconButton(
-                            icon: const Icon(Icons.select_all),
+                            icon: const Icon(LucideIcons.scan),
                             tooltip: 'Select All',
                             onPressed: _selectAll,
                           ),
                           IconButton(
-                            icon: const Icon(Icons.star, color: Colors.amber),
+                            icon: const Icon(LucideIcons.star,
+                                color: Colors.amber),
                             tooltip: 'Favorite Selected',
                             onPressed: _bulkFavorite,
                           ),
                           IconButton(
-                            icon: const Icon(Icons.delete_outline,
+                            icon: const Icon(LucideIcons.trash2,
                                 color: Colors.red),
                             tooltip: 'Delete Selected',
                             onPressed: _bulkDelete,
@@ -351,7 +353,7 @@ class _ModernResidentNotesSheetState extends State<ModernResidentNotesSheet> {
                           Row(
                             children: [
                               IconButton(
-                                icon: const Icon(Icons.menu),
+                                icon: const Icon(LucideIcons.menu),
                                 onPressed: () =>
                                     _scaffoldKey.currentState?.openDrawer(),
                               ),
@@ -367,14 +369,15 @@ class _ModernResidentNotesSheetState extends State<ModernResidentNotesSheet> {
                               const Spacer(),
                               if (widget.canAddNotes)
                                 IconButton(
-                                  icon: const Icon(Icons.add_circle,
+                                  icon: const Icon(LucideIcons.circlePlus,
                                       color: AppColors.primary, size: 32),
                                   onPressed: () async {
                                     await showModalBottomSheet(
                                       context: context,
                                       isScrollControlled: true,
                                       backgroundColor: Colors.transparent,
-                                      builder: (context) => QuickNoteBottomSheet(
+                                      builder: (context) =>
+                                          QuickNoteBottomSheet(
                                         residentId: widget.residentId,
                                         residentName: widget.residentName,
                                       ),
@@ -385,8 +388,8 @@ class _ModernResidentNotesSheetState extends State<ModernResidentNotesSheet> {
                               IconButton(
                                 icon: Icon(
                                   _startDate != null
-                                      ? Icons.calendar_month
-                                      : Icons.calendar_today_outlined,
+                                      ? LucideIcons.calendarDays
+                                      : LucideIcons.calendar,
                                   color: _startDate != null
                                       ? AppColors.primary
                                       : Colors.grey.shade600,
@@ -399,7 +402,8 @@ class _ModernResidentNotesSheetState extends State<ModernResidentNotesSheet> {
                                     initialDateRange:
                                         _startDate != null && _endDate != null
                                             ? DateTimeRange(
-                                                start: _startDate!, end: _endDate!)
+                                                start: _startDate!,
+                                                end: _endDate!)
                                             : null,
                                     builder: (context, child) {
                                       return Theme(
@@ -427,7 +431,7 @@ class _ModernResidentNotesSheetState extends State<ModernResidentNotesSheet> {
                               ),
                               if (_startDate != null)
                                 IconButton(
-                                  icon: const Icon(Icons.close, size: 20),
+                                  icon: const Icon(LucideIcons.x, size: 20),
                                   onPressed: () {
                                     setState(() {
                                       _startDate = null;
@@ -456,7 +460,7 @@ class _ModernResidentNotesSheetState extends State<ModernResidentNotesSheet> {
                                 },
                                 decoration: const InputDecoration(
                                   hintText: 'Search notes...',
-                                  prefixIcon: Icon(Icons.search),
+                                  prefixIcon: Icon(LucideIcons.search),
                                   border: InputBorder.none,
                                   contentPadding:
                                       EdgeInsets.symmetric(vertical: 10),
@@ -518,7 +522,7 @@ class _ModernResidentNotesSheetState extends State<ModernResidentNotesSheet> {
                       const Spacer(),
                       if (_currentFilter.type == NoteFilterType.trash)
                         TextButton.icon(
-                          icon: const Icon(Icons.delete_forever,
+                          icon: const Icon(LucideIcons.trash2,
                               size: 16, color: Colors.red),
                           label: const Text('Empty',
                               style: TextStyle(color: Colors.red)),
@@ -542,7 +546,7 @@ class _ModernResidentNotesSheetState extends State<ModernResidentNotesSheet> {
                   ),
                   child: Row(
                     children: [
-                      Icon(Icons.info_outline,
+                      Icon(LucideIcons.info,
                           size: 20, color: Colors.orange.shade800),
                       const SizedBox(width: 12),
                       Expanded(
@@ -591,7 +595,7 @@ class _ModernResidentNotesSheetState extends State<ModernResidentNotesSheet> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(Icons.notes, size: 64, color: Colors.grey.shade200),
+          Icon(LucideIcons.notebookTabs, size: 64, color: Colors.grey.shade200),
           const SizedBox(height: 16),
           Text(
             'No notes found',
@@ -698,7 +702,7 @@ class _ModernResidentNotesSheetState extends State<ModernResidentNotesSheet> {
                     SimpleDialogOption(
                       onPressed: () => Navigator.pop(ctx, 'restore'),
                       child: const Row(children: [
-                        Icon(Icons.restore),
+                        Icon(LucideIcons.rotateCcw),
                         SizedBox(width: 10),
                         Text('Restore')
                       ]),
@@ -706,7 +710,7 @@ class _ModernResidentNotesSheetState extends State<ModernResidentNotesSheet> {
                     SimpleDialogOption(
                       onPressed: () => Navigator.pop(ctx, 'delete'),
                       child: const Row(children: [
-                        Icon(Icons.delete_forever, color: Colors.red),
+                        Icon(LucideIcons.trash2, color: Colors.red),
                         SizedBox(width: 10),
                         Text('Delete Permanently')
                       ]),

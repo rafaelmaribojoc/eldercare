@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:printing/printing.dart';
@@ -122,7 +123,7 @@ class _FormPdfPreviewScreenState extends State<FormPdfPreviewScreen> {
       // Mobile: Use popup menu
       return [
         PopupMenuButton<String>(
-          icon: const Icon(Icons.more_vert),
+          icon: const Icon(LucideIcons.ellipsisVertical),
           onSelected: (value) {
             switch (value) {
               case 'share':
@@ -143,7 +144,7 @@ class _FormPdfPreviewScreenState extends State<FormPdfPreviewScreen> {
             const PopupMenuItem(
               value: 'download_pdf',
               child: ListTile(
-                leading: Icon(Icons.picture_as_pdf),
+                leading: Icon(LucideIcons.fileText),
                 title: Text('Download as PDF'),
                 dense: true,
                 contentPadding: EdgeInsets.zero,
@@ -152,7 +153,7 @@ class _FormPdfPreviewScreenState extends State<FormPdfPreviewScreen> {
             const PopupMenuItem(
               value: 'download_docx',
               child: ListTile(
-                leading: Icon(Icons.description),
+                leading: Icon(LucideIcons.fileText),
                 title: Text('Download as Word'),
                 dense: true,
                 contentPadding: EdgeInsets.zero,
@@ -161,7 +162,7 @@ class _FormPdfPreviewScreenState extends State<FormPdfPreviewScreen> {
             const PopupMenuItem(
               value: 'share',
               child: ListTile(
-                leading: Icon(Icons.share),
+                leading: Icon(LucideIcons.share2),
                 title: Text('Share'),
                 dense: true,
                 contentPadding: EdgeInsets.zero,
@@ -170,7 +171,7 @@ class _FormPdfPreviewScreenState extends State<FormPdfPreviewScreen> {
             const PopupMenuItem(
               value: 'print',
               child: ListTile(
-                leading: Icon(Icons.print),
+                leading: Icon(LucideIcons.printer),
                 title: Text('Print'),
                 dense: true,
                 contentPadding: EdgeInsets.zero,
@@ -185,7 +186,7 @@ class _FormPdfPreviewScreenState extends State<FormPdfPreviewScreen> {
     return [
       OutlinedButton.icon(
         onPressed: () => _showDownloadOptions(),
-        icon: const Icon(Icons.download),
+        icon: const Icon(LucideIcons.download),
         label: const Text('Download'),
         style: OutlinedButton.styleFrom(
           foregroundColor: Colors.white,
@@ -195,7 +196,7 @@ class _FormPdfPreviewScreenState extends State<FormPdfPreviewScreen> {
       const SizedBox(width: 8),
       OutlinedButton.icon(
         onPressed: _sharePdf,
-        icon: const Icon(Icons.share),
+        icon: const Icon(LucideIcons.share2),
         label: const Text('Share'),
         style: OutlinedButton.styleFrom(
           foregroundColor: Colors.white,
@@ -205,7 +206,7 @@ class _FormPdfPreviewScreenState extends State<FormPdfPreviewScreen> {
       const SizedBox(width: 8),
       OutlinedButton.icon(
         onPressed: _printPdf,
-        icon: const Icon(Icons.print),
+        icon: const Icon(LucideIcons.printer),
         label: const Text('Print'),
         style: OutlinedButton.styleFrom(
           foregroundColor: Colors.white,
@@ -246,7 +247,7 @@ class _FormPdfPreviewScreenState extends State<FormPdfPreviewScreen> {
             Expanded(
               child: OutlinedButton.icon(
                 onPressed: () => Navigator.pop(context),
-                icon: const Icon(Icons.edit_note),
+                icon: const Icon(LucideIcons.filePenLine),
                 label: const Text('Back to Editor'),
               ),
             ),
@@ -255,7 +256,7 @@ class _FormPdfPreviewScreenState extends State<FormPdfPreviewScreen> {
               Expanded(
                 child: OutlinedButton.icon(
                   onPressed: _saveForSigning,
-                  icon: const Icon(Icons.assignment_turned_in_outlined),
+                  icon: const Icon(LucideIcons.clipboardCheck),
                   label: Text(
                     isSigned ? 'Update Submission' : 'Save for Signing',
                     overflow: TextOverflow.ellipsis,
@@ -386,7 +387,7 @@ class _FormPdfPreviewScreenState extends State<FormPdfPreviewScreen> {
             mainAxisSize: MainAxisSize.min,
             children: [
               Icon(
-                Icons.error_outline,
+                LucideIcons.circleAlert,
                 size: screen.value(mobile: 48.0, tablet: 56.0, desktop: 64.0),
                 color: AppColors.error,
               ),
@@ -416,7 +417,7 @@ class _FormPdfPreviewScreenState extends State<FormPdfPreviewScreen> {
                       screen.value(mobile: 20.0, tablet: 22.0, desktop: 24.0)),
               ElevatedButton.icon(
                 onPressed: _initialize,
-                icon: const Icon(Icons.refresh),
+                icon: const Icon(LucideIcons.refreshCw),
                 label: const Text('Retry'),
               ),
             ],
@@ -463,7 +464,7 @@ class _FormPdfPreviewScreenState extends State<FormPdfPreviewScreen> {
             mainAxisSize: MainAxisSize.min,
             children: [
               Icon(
-                Icons.error_outline,
+                LucideIcons.circleAlert,
                 size: screen.value(mobile: 40.0, tablet: 44.0, desktop: 48.0),
                 color: AppColors.error,
               ),
@@ -845,7 +846,7 @@ class _FormPdfPreviewScreenState extends State<FormPdfPreviewScreen> {
               _downloadPdf(context, null, null);
             },
             child: const ListTile(
-              leading: Icon(Icons.picture_as_pdf, color: Colors.red),
+              leading: Icon(LucideIcons.fileText, color: Colors.red),
               title: Text('PDF Document'),
               subtitle: Text('Non-editable, ready to print'),
               dense: true,
@@ -858,7 +859,7 @@ class _FormPdfPreviewScreenState extends State<FormPdfPreviewScreen> {
               _downloadDocx();
             },
             child: const ListTile(
-              leading: Icon(Icons.description, color: Colors.blue),
+              leading: Icon(LucideIcons.fileText, color: Colors.blue),
               title: Text('Word Document (.docx)'),
               subtitle: Text('Editable in Microsoft Word'),
               dense: true,
@@ -1000,7 +1001,7 @@ class PdfPreviewButton extends StatelessWidget {
     final button = ElevatedButton.icon(
       onPressed: () => _openPreview(context),
       icon: Icon(
-        icon ?? Icons.picture_as_pdf,
+        icon ?? LucideIcons.fileText,
         size: screen.value(mobile: 18.0, tablet: 20.0, desktop: 22.0),
       ),
       label: Text(
@@ -1065,7 +1066,7 @@ class QuickPrintButton extends StatelessWidget {
       return TextButton.icon(
         onPressed: () => _print(context),
         icon: Icon(
-          Icons.print,
+          LucideIcons.printer,
           size: screen.value(mobile: 18.0, tablet: 20.0, desktop: 22.0),
         ),
         label: const Text('Print'),
@@ -1075,7 +1076,7 @@ class QuickPrintButton extends StatelessWidget {
     return IconButton(
       onPressed: () => _print(context),
       icon: Icon(
-        Icons.print,
+        LucideIcons.printer,
         size: screen.value(mobile: 22.0, tablet: 24.0, desktop: 26.0),
       ),
       tooltip: 'Print',

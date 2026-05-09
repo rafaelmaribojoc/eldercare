@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
@@ -53,7 +54,8 @@ class _VisuospatialScreenState extends State<VisuospatialScreen>
         children: [
           SectionHeader(
             title: 'Visuospatial / Executive',
-            subtitle: 'Pagguhit ng linya, pagkopya ng cube, at pagguhit ng orasan',
+            subtitle:
+                'Pagguhit ng linya, pagkopya ng cube, at pagguhit ng orasan',
             currentSection: 1,
             totalSections: 8,
             color: MocaColors.visuospatialColor,
@@ -123,12 +125,12 @@ class _VisuospatialScreenState extends State<VisuospatialScreen>
             children: [
               TextButton.icon(
                 onPressed: () => _trailCanvasKey.currentState?.clear(),
-                icon: const Icon(Icons.clear),
+                icon: const Icon(LucideIcons.x),
                 label: const Text('Clear'),
               ),
               TextButton.icon(
                 onPressed: () => _trailCanvasKey.currentState?.undo(),
-                icon: const Icon(Icons.undo),
+                icon: const Icon(LucideIcons.undo2),
                 label: const Text('Undo'),
               ),
             ],
@@ -206,12 +208,12 @@ class _VisuospatialScreenState extends State<VisuospatialScreen>
             children: [
               TextButton.icon(
                 onPressed: () => _cubeCanvasKey.currentState?.clear(),
-                icon: const Icon(Icons.clear),
+                icon: const Icon(LucideIcons.x),
                 label: const Text('Clear'),
               ),
               TextButton.icon(
                 onPressed: () => _cubeCanvasKey.currentState?.undo(),
-                icon: const Icon(Icons.undo),
+                icon: const Icon(LucideIcons.undo2),
                 label: const Text('Undo'),
               ),
             ],
@@ -264,12 +266,12 @@ class _VisuospatialScreenState extends State<VisuospatialScreen>
             children: [
               TextButton.icon(
                 onPressed: () => _clockCanvasKey.currentState?.clear(),
-                icon: const Icon(Icons.clear),
+                icon: const Icon(LucideIcons.x),
                 label: const Text('Clear'),
               ),
               TextButton.icon(
                 onPressed: () => _clockCanvasKey.currentState?.undo(),
-                icon: const Icon(Icons.undo),
+                icon: const Icon(LucideIcons.undo2),
                 label: const Text('Undo'),
               ),
             ],
@@ -325,7 +327,7 @@ class _VisuospatialScreenState extends State<VisuospatialScreen>
             child: Row(
               children: [
                 Icon(
-                  value ? Icons.check_circle : Icons.circle_outlined,
+                  value ? LucideIcons.circleCheck : LucideIcons.circle,
                   color: value ? MocaColors.success : MocaColors.textSecondary,
                   size: 20,
                 ),

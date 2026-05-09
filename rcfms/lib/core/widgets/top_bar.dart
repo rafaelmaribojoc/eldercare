@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_theme.dart';
@@ -52,7 +53,7 @@ class TopBar extends StatelessWidget {
                 builder: (context) => const NotificationsPanel(),
               );
             },
-            icon: const Icon(Icons.notifications_outlined),
+            icon: const Icon(LucideIcons.bell),
             color: AppColors.textSecondary,
             tooltip: 'Notifications',
           ),
@@ -88,7 +89,7 @@ class TopBar extends StatelessWidget {
             ),
             child: Row(
               children: [
-                const Icon(Icons.search,
+                const Icon(LucideIcons.search,
                     size: 20, color: AppColors.textTertiary),
                 const SizedBox(width: 12),
                 Expanded(
@@ -150,7 +151,7 @@ class TopBar extends StatelessWidget {
               value: 'logout',
               child: Row(
                 children: const [
-                  Icon(Icons.logout, size: 18, color: AppColors.error),
+                  Icon(LucideIcons.logOut, size: 18, color: AppColors.error),
                   SizedBox(width: 12),
                   Text('Logout', style: TextStyle(color: AppColors.error)),
                 ],
@@ -209,7 +210,7 @@ class TopBar extends StatelessWidget {
                       : null,
                 ),
                 const SizedBox(width: 8),
-                const Icon(Icons.keyboard_arrow_down,
+                const Icon(LucideIcons.chevronDown,
                     size: 16, color: AppColors.textSecondary),
               ],
             ),

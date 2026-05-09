@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 
 import '../../../core/theme/app_colors.dart';
 import '../../../data/models/ward_model.dart';
@@ -61,7 +62,7 @@ class _WardManagementScreenState extends State<WardManagementScreen> {
                 controller: nameController,
                 decoration: const InputDecoration(
                   labelText: 'Ward Name *',
-                  prefixIcon: Icon(Icons.room),
+                  prefixIcon: Icon(LucideIcons.mapPin),
                 ),
               ),
               const SizedBox(height: 16),
@@ -69,7 +70,7 @@ class _WardManagementScreenState extends State<WardManagementScreen> {
                 controller: descriptionController,
                 decoration: const InputDecoration(
                   labelText: 'Description',
-                  prefixIcon: Icon(Icons.description),
+                  prefixIcon: Icon(LucideIcons.fileText),
                 ),
                 maxLines: 2,
               ),
@@ -78,7 +79,7 @@ class _WardManagementScreenState extends State<WardManagementScreen> {
                 controller: capacityController,
                 decoration: const InputDecoration(
                   labelText: 'Capacity',
-                  prefixIcon: Icon(Icons.people),
+                  prefixIcon: Icon(LucideIcons.users),
                 ),
                 keyboardType: TextInputType.number,
               ),
@@ -87,7 +88,7 @@ class _WardManagementScreenState extends State<WardManagementScreen> {
                 controller: buildingController,
                 decoration: const InputDecoration(
                   labelText: 'Building',
-                  prefixIcon: Icon(Icons.business),
+                  prefixIcon: Icon(LucideIcons.building2),
                 ),
               ),
             ],
@@ -183,10 +184,10 @@ class _WardManagementScreenState extends State<WardManagementScreen> {
               controller: nfcController,
               decoration: InputDecoration(
                 labelText: 'NFC Tag ID',
-                prefixIcon: const Icon(Icons.nfc),
+                prefixIcon: const Icon(LucideIcons.nfc),
                 hintText: 'e.g., AA:BB:CC:DD',
                 suffixIcon: IconButton(
-                  icon: const Icon(Icons.qr_code_scanner),
+                  icon: const Icon(LucideIcons.scanQrCode),
                   tooltip: 'Scan Tag',
                   onPressed: () async {
                     final nfcService = context.read<NfcService>();
@@ -206,7 +207,8 @@ class _WardManagementScreenState extends State<WardManagementScreen> {
                         content: Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            Icon(Icons.nfc, size: 50, color: AppColors.primary),
+                            Icon(LucideIcons.nfc,
+                                size: 50, color: AppColors.primary),
                             SizedBox(height: 16),
                             Text('Hold phone to tag...'),
                           ],
@@ -303,7 +305,7 @@ class _WardManagementScreenState extends State<WardManagementScreen> {
           Padding(
             padding: const EdgeInsets.only(right: 16),
             child: FilledButton.icon(
-              icon: const Icon(Icons.add),
+              icon: const Icon(LucideIcons.plus),
               label: const Text('Add Ward'),
               onPressed: () => _showAddWardDialog(),
             ),
@@ -433,7 +435,8 @@ class _WardCard extends StatelessWidget {
                         color: AppColors.primaryLight.withValues(alpha: 0.2),
                         borderRadius: BorderRadius.circular(12),
                       ),
-                      child: const Icon(Icons.room, color: AppColors.primary),
+                      child: const Icon(LucideIcons.mapPin,
+                          color: AppColors.primary),
                     ),
                     const SizedBox(width: 12),
                     Expanded(
@@ -490,12 +493,12 @@ class _WardCard extends StatelessWidget {
                 Row(
                   children: [
                     _InfoChip(
-                      icon: Icons.people,
+                      icon: LucideIcons.users,
                       label: '${ward.currentOccupancy}/${ward.capacity}',
                     ),
                     const SizedBox(width: 12),
                     _InfoChip(
-                      icon: Icons.nfc,
+                      icon: LucideIcons.nfc,
                       label: ward.hasNfcTag ? 'NFC Assigned' : 'No NFC',
                       color: ward.hasNfcTag
                           ? AppColors.success
@@ -516,24 +519,25 @@ class _WardCard extends StatelessWidget {
                 children: [
                   TextButton.icon(
                     onPressed: onShowQr,
-                    icon: const Icon(Icons.qr_code, size: 18),
+                    icon: const Icon(LucideIcons.qrCode, size: 18),
                     label: const Text('QR'),
                   ),
                   TextButton.icon(
                     onPressed: onAssignNfc,
-                    icon: const Icon(Icons.nfc, size: 18),
+                    icon: const Icon(LucideIcons.nfc, size: 18),
                     label: const Text('NFC'),
                   ),
                   TextButton.icon(
                     onPressed: onEdit,
-                    icon: const Icon(Icons.edit, size: 18),
+                    icon: const Icon(LucideIcons.pencil, size: 18),
                     label: const Text('Edit'),
                   ),
                   TextButton.icon(
                     onPressed: onDelete,
-                    icon: const Icon(Icons.delete, size: 18),
+                    icon: const Icon(LucideIcons.trash2, size: 18),
                     label: const Text('Delete'),
-                    style: TextButton.styleFrom(foregroundColor: AppColors.error),
+                    style:
+                        TextButton.styleFrom(foregroundColor: AppColors.error),
                   ),
                 ],
               ),
@@ -663,7 +667,9 @@ class _WardIdCardDialogState extends State<_WardIdCardDialog>
           const SizedBox(height: 12),
           // Hint text
           Text(
-            _showingFront ? 'Tap card to see the back side' : 'Tap card to see the front side',
+            _showingFront
+                ? 'Tap card to see the back side'
+                : 'Tap card to see the front side',
             style: const TextStyle(color: Colors.white70, fontSize: 12),
           ),
           const SizedBox(height: 16),
@@ -672,19 +678,19 @@ class _WardIdCardDialogState extends State<_WardIdCardDialog>
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               _ActionButton(
-                icon: Icons.download_rounded,
+                icon: LucideIcons.download,
                 label: 'Download',
                 onTap: () => WardIdCardGenerator.downloadCard(ward),
               ),
               const SizedBox(width: 12),
               _ActionButton(
-                icon: Icons.print_rounded,
+                icon: LucideIcons.printer,
                 label: 'Print',
                 onTap: () => WardIdCardGenerator.printCard(ward),
               ),
               const SizedBox(width: 12),
               _ActionButton(
-                icon: Icons.close_rounded,
+                icon: LucideIcons.x,
                 label: 'Close',
                 onTap: () => Navigator.pop(context),
               ),
@@ -744,7 +750,8 @@ class _WardIdCardDialogState extends State<_WardIdCardDialog>
                               borderRadius: BorderRadius.circular(6),
                             ),
                             child: const Center(
-                              child: Icon(Icons.local_hospital_rounded, size: 16, color: Colors.white),
+                              child: Icon(LucideIcons.hospital,
+                                  size: 16, color: Colors.white),
                             ),
                           ),
                           const SizedBox(width: 8),
@@ -797,16 +804,19 @@ class _WardIdCardDialogState extends State<_WardIdCardDialog>
                       const Spacer(),
                       // NFC Badge
                       Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 8, vertical: 4),
                         decoration: BoxDecoration(
                           color: Colors.white.withValues(alpha: 0.15),
                           borderRadius: BorderRadius.circular(20),
-                          border: Border.all(color: Colors.white.withValues(alpha: 0.3)),
+                          border: Border.all(
+                              color: Colors.white.withValues(alpha: 0.3)),
                         ),
                         child: const Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            Icon(Icons.contactless_rounded, size: 14, color: Colors.white),
+                            Icon(LucideIcons.circle,
+                                size: 14, color: Colors.white),
                             SizedBox(width: 4),
                             Text(
                               'NFC ENABLED',
@@ -906,7 +916,8 @@ class _WardIdCardDialogState extends State<_WardIdCardDialog>
                   const SizedBox(height: 6),
                   _instructionStep('2', 'Select NFC Scan or Scan QR'),
                   const SizedBox(height: 6),
-                  _instructionStep('3', 'Hold phone flat against the card\nor scan the front QR code'),
+                  _instructionStep('3',
+                      'Hold phone flat against the card\nor scan the front QR code'),
                 ],
               ),
             ),
@@ -926,7 +937,8 @@ class _WardIdCardDialogState extends State<_WardIdCardDialog>
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(Icons.contactless_rounded, size: 24, color: Colors.white.withValues(alpha: 0.5)),
+                  Icon(LucideIcons.circle,
+                      size: 24, color: Colors.white.withValues(alpha: 0.5)),
                   const SizedBox(height: 4),
                   Text(
                     'PLACE NFC\nTAG HERE',
@@ -989,7 +1001,8 @@ class _ActionButton extends StatelessWidget {
   final IconData icon;
   final String label;
   final VoidCallback onTap;
-  const _ActionButton({required this.icon, required this.label, required this.onTap});
+  const _ActionButton(
+      {required this.icon, required this.label, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -1006,7 +1019,8 @@ class _ActionButton extends StatelessWidget {
             children: [
               Icon(icon, color: Colors.white, size: 20),
               const SizedBox(height: 4),
-              Text(label, style: const TextStyle(color: Colors.white, fontSize: 11)),
+              Text(label,
+                  style: const TextStyle(color: Colors.white, fontSize: 11)),
             ],
           ),
         ),

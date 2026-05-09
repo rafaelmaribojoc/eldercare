@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
@@ -30,7 +31,8 @@ class _DelayedRecallScreenState extends State<DelayedRecallScreen> {
         children: [
           SectionHeader(
             title: 'Delayed Recall / Naantalang Pag-alala',
-            subtitle: 'Alalahanin ang mga salita mula kanina nang walang tulong',
+            subtitle:
+                'Alalahanin ang mga salita mula kanina nang walang tulong',
             currentSection: 7,
             totalSections: 8,
             color: MocaColors.recallColor,
@@ -48,7 +50,7 @@ class _DelayedRecallScreenState extends State<DelayedRecallScreen> {
                       child: Row(
                         children: [
                           const Icon(
-                            Icons.info_outline,
+                            LucideIcons.info,
                             color: MocaColors.info,
                           ),
                           const SizedBox(width: 12),
@@ -101,7 +103,7 @@ class _DelayedRecallScreenState extends State<DelayedRecallScreen> {
                       child: Row(
                         children: [
                           const Icon(
-                            Icons.warning_amber,
+                            LucideIcons.triangleAlert,
                             color: MocaColors.warning,
                           ),
                           const SizedBox(width: 12),
@@ -170,7 +172,8 @@ class _DelayedRecallScreenState extends State<DelayedRecallScreen> {
                 ),
                 child: Center(
                   child: isRecalled
-                      ? const Icon(Icons.check, color: Colors.white, size: 20)
+                      ? const Icon(LucideIcons.check,
+                          color: Colors.white, size: 20)
                       : Text(
                           '${index + 1}',
                           style: TextStyle(
@@ -200,7 +203,7 @@ class _DelayedRecallScreenState extends State<DelayedRecallScreen> {
                 ),
               ),
               Icon(
-                isRecalled ? Icons.check_circle : Icons.circle_outlined,
+                isRecalled ? LucideIcons.circleCheck : LucideIcons.circle,
                 color:
                     isRecalled ? MocaColors.success : MocaColors.textSecondary,
                 size: 24,
@@ -264,8 +267,8 @@ class _DelayedRecallScreenState extends State<DelayedRecallScreen> {
                       children: [
                         Icon(
                           isSelected
-                              ? Icons.check_circle
-                              : Icons.circle_outlined,
+                              ? LucideIcons.circleCheck
+                              : LucideIcons.circle,
                           color: isDisabled
                               ? Colors.grey.shade400
                               : (isSelected
@@ -366,8 +369,8 @@ class _DelayedRecallScreenState extends State<DelayedRecallScreen> {
                       children: [
                         Icon(
                           isSelected
-                              ? Icons.check_circle
-                              : Icons.circle_outlined,
+                              ? LucideIcons.circleCheck
+                              : LucideIcons.circle,
                           color: isDisabled
                               ? Colors.grey.shade400
                               : (isSelected

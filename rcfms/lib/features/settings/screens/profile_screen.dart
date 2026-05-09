@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
@@ -156,7 +157,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         return Scaffold(
           appBar: AppBar(
             leading: IconButton(
-              icon: const Icon(Icons.arrow_back),
+              icon: const Icon(LucideIcons.arrowLeft),
               onPressed: () => Navigator.pop(context),
             ),
             title: const Text('Edit Profile'),
@@ -219,7 +220,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       ),
                                     )
                                   : const Icon(
-                                      Icons.camera_alt,
+                                      LucideIcons.camera,
                                       size: 20,
                                       color: Colors.white,
                                     ),
@@ -239,7 +240,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     padding: EdgeInsets.all(12),
                     child: Row(
                       children: [
-                        Icon(Icons.info, color: AppColors.info, size: 20),
+                        Icon(LucideIcons.info, color: AppColors.info, size: 20),
                         SizedBox(width: 8),
                         Expanded(
                           child: Text(
@@ -260,7 +261,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   enabled: false,
                   decoration: const InputDecoration(
                     labelText: 'Full Name (Locked)',
-                    prefixIcon: Icon(Icons.lock),
+                    prefixIcon: Icon(LucideIcons.lockKeyhole),
                   ),
                 ),
                 const SizedBox(height: 16),
@@ -270,7 +271,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   controller: _licenseController,
                   decoration: const InputDecoration(
                     labelText: 'PRC License Number',
-                    prefixIcon: Icon(Icons.badge),
+                    prefixIcon: Icon(LucideIcons.badge),
                     helperText: 'Enter your valid PRC License No.',
                   ),
                 ),
@@ -292,8 +293,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   child: InputDecorator(
                     decoration: const InputDecoration(
                       labelText: 'PRC License Expiry Date',
-                      prefixIcon: Icon(Icons.calendar_today),
-                      suffixIcon: Icon(Icons.arrow_drop_down),
+                      prefixIcon: Icon(LucideIcons.calendar),
+                      suffixIcon: Icon(LucideIcons.chevronDown),
                     ),
                     child: Text(
                       _selectedExpiryDate != null
@@ -315,7 +316,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   enabled: false,
                   decoration: const InputDecoration(
                     labelText: 'Email',
-                    prefixIcon: Icon(Icons.email),
+                    prefixIcon: Icon(LucideIcons.mail),
                   ),
                 ),
                 const SizedBox(height: 24),
@@ -325,7 +326,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   controller: _usernameController,
                   decoration: const InputDecoration(
                     labelText: 'Username',
-                    prefixIcon: Icon(Icons.person),
+                    prefixIcon: Icon(LucideIcons.user),
                     helperText: 'This is your display name',
                   ),
                 ),
@@ -336,7 +337,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   controller: _titleController,
                   decoration: const InputDecoration(
                     labelText: 'Designation / Title',
-                    prefixIcon: Icon(Icons.badge),
+                    prefixIcon: Icon(LucideIcons.badge),
                     helperText: 'e.g., Social Worker I, Houseparent II, Nurse',
                   ),
                 ),
@@ -392,7 +393,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         children: [
           Row(
             children: [
-              Icon(Icons.nfc, color: AppColors.primary),
+              Icon(LucideIcons.nfc, color: AppColors.primary),
               const SizedBox(width: 12),
               const Text(
                 'NFC ID Badge',
@@ -406,8 +407,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   decoration: BoxDecoration(
                     color: AppColors.success.withOpacity(0.1),
                     borderRadius: BorderRadius.circular(12),
-                    border: Border.all(
-                        color: AppColors.success.withOpacity(0.3)),
+                    border:
+                        Border.all(color: AppColors.success.withOpacity(0.3)),
                   ),
                   child: const Text(
                     'Connected',
@@ -431,7 +432,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 Expanded(
                   child: OutlinedButton.icon(
                     onPressed: () => _registerIdBadge(context),
-                    icon: const Icon(Icons.sync),
+                    icon: const Icon(LucideIcons.refreshCw),
                     label: const Text('Replace'),
                     style: OutlinedButton.styleFrom(
                       foregroundColor: AppColors.primary,
@@ -442,7 +443,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 Expanded(
                   child: OutlinedButton.icon(
                     onPressed: _isLoading ? null : () => _unlinkBadge(context),
-                    icon: const Icon(Icons.link_off),
+                    icon: const Icon(LucideIcons.unlink),
                     label: const Text('Unlink'),
                     style: OutlinedButton.styleFrom(
                       foregroundColor: AppColors.error,
@@ -457,7 +458,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               width: double.infinity,
               child: OutlinedButton.icon(
                 onPressed: () => _registerIdBadge(context),
-                icon: const Icon(Icons.add_card),
+                icon: const Icon(LucideIcons.badgePlus),
                 label: const Text('Register Badge'),
                 style: OutlinedButton.styleFrom(
                   foregroundColor: AppColors.primary,
@@ -555,7 +556,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Icon(Icons.badge, size: 60, color: AppColors.primary),
+              const Icon(LucideIcons.badge, size: 60, color: AppColors.primary),
               const SizedBox(height: 16),
               const Text(
                 'Hold your ID badge to the back of the device.',
@@ -629,7 +630,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         children: [
           Row(
             children: [
-              const Icon(Icons.draw, color: AppColors.primary),
+              const Icon(LucideIcons.penLine, color: AppColors.primary),
               const SizedBox(width: 12),
               const Text(
                 'Digital Signature',
@@ -643,8 +644,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   decoration: BoxDecoration(
                     color: AppColors.success.withOpacity(0.1),
                     borderRadius: BorderRadius.circular(12),
-                    border: Border.all(
-                        color: AppColors.success.withOpacity(0.3)),
+                    border:
+                        Border.all(color: AppColors.success.withOpacity(0.3)),
                   ),
                   child: const Text(
                     'Active',
@@ -681,7 +682,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             width: double.infinity,
             child: OutlinedButton.icon(
               onPressed: () => context.push('/setup-signature'),
-              icon: Icon(hasSignature ? Icons.edit : Icons.add_rounded),
+              icon: Icon(hasSignature ? LucideIcons.pencil : LucideIcons.plus),
               label:
                   Text(hasSignature ? 'Update Signature' : 'Setup Signature'),
               style: OutlinedButton.styleFrom(
@@ -704,7 +705,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         );
       } catch (e) {
         return const Center(
-          child: Icon(Icons.broken_image, color: AppColors.error),
+          child: Icon(LucideIcons.imageOff, color: AppColors.error),
         );
       }
     }
@@ -712,7 +713,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       url,
       fit: BoxFit.contain,
       errorBuilder: (context, error, stackTrace) => const Center(
-        child: Icon(Icons.broken_image, color: AppColors.error),
+        child: Icon(LucideIcons.imageOff, color: AppColors.error),
       ),
       loadingBuilder: (context, child, loadingProgress) {
         if (loadingProgress == null) return child;

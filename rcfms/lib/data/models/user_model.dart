@@ -68,8 +68,7 @@ class UserModel extends Equatable {
 
   /// Check if user can add residents (Social Head Only)
   bool get canAddResidents =>
-      role == 'social_head' ||
-      (role == 'head' && unit == 'social');
+      role == 'social_head' || (role == 'head' && unit == 'social');
 
   /// Check if user can administer MOCA-P (Psych Head only)
   bool get canAdministerMocaP =>

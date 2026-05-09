@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_theme.dart';
@@ -49,7 +50,7 @@ class ResidentSidebar extends StatelessWidget {
                 width: double.infinity,
                 child: FilledButton.icon(
                   onPressed: onAddResident, // Use callback
-                  icon: const Icon(Icons.add),
+                  icon: const Icon(LucideIcons.plus),
                   label: const Text('Add Resident'),
                   style: FilledButton.styleFrom(
                     padding: const EdgeInsets.symmetric(vertical: 12),
@@ -68,19 +69,19 @@ class ResidentSidebar extends StatelessWidget {
                 _buildNavItem(
                   context,
                   'All Residents',
-                  Icons.people_outline,
+                  LucideIcons.users,
                   {'type': 'all', 'value': 'All'},
                 ),
                 _buildNavItem(
                   context,
                   'Admitted',
-                  Icons.check_circle_outlined,
+                  LucideIcons.circleCheck,
                   {'type': 'status', 'value': 'admitted'},
                 ),
                 _buildNavItem(
                   context,
                   'Applications',
-                  Icons.file_open_outlined,
+                  LucideIcons.fileUp,
                   {'type': 'status', 'value': 'pre_admission'},
                 ),
                 const SizedBox(height: 24),
@@ -88,7 +89,7 @@ class ResidentSidebar extends StatelessWidget {
                 ...wards.map((ward) => _buildNavItem(
                       context,
                       ward.name,
-                      Icons.meeting_room_outlined,
+                      LucideIcons.doorOpen,
                       {'type': 'ward', 'value': ward.name},
                     )),
                 if (wards.isEmpty)
@@ -107,13 +108,13 @@ class ResidentSidebar extends StatelessWidget {
                 _buildNavItem(
                   context,
                   'Discharged',
-                  Icons.exit_to_app,
+                  LucideIcons.logOut,
                   {'type': 'status', 'value': 'discharged'},
                 ),
                 _buildNavItem(
                   context,
                   'Deceased',
-                  Icons.heart_broken_outlined,
+                  LucideIcons.heartCrack,
                   {'type': 'status', 'value': 'deceased'},
                 ),
               ],

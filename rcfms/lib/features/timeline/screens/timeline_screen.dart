@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
@@ -83,13 +84,13 @@ class _TimelineScreenState extends State<TimelineScreen> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
+          icon: const Icon(LucideIcons.arrowLeft),
           onPressed: () => Navigator.pop(context),
         ),
         title: Text(_resident?.fullName ?? 'Timeline'),
         actions: [
           IconButton(
-            icon: const Icon(Icons.filter_list),
+            icon: const Icon(LucideIcons.listFilter),
             onPressed: _showFilterSheet,
           ),
         ],
@@ -108,7 +109,7 @@ class _TimelineScreenState extends State<TimelineScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Icon(
-            Icons.timeline,
+            LucideIcons.chartNoAxesGantt,
             size: 64,
             color: AppColors.textSecondaryLight.withOpacity(0.5),
           ),
@@ -172,12 +173,15 @@ class _TimelineScreenState extends State<TimelineScreen> {
                   style: Theme.of(context).textTheme.titleLarge,
                 ),
                 const SizedBox(height: 16),
-                _buildFilterOption(null, 'All Units', Icons.all_inclusive),
-                _buildFilterOption('social', 'Social Services', Icons.people),
-                _buildFilterOption('medical', 'Medical', Icons.medical_services),
-                _buildFilterOption('psych', 'Psychology', Icons.psychology),
-                _buildFilterOption('homelife', 'Homelife', Icons.home),
-                _buildFilterOption('nutrition', 'Nutrition & Dietetics', Icons.restaurant),
+                _buildFilterOption(null, 'All Units', LucideIcons.infinity),
+                _buildFilterOption(
+                    'social', 'Social Services', LucideIcons.users),
+                _buildFilterOption(
+                    'medical', 'Medical', LucideIcons.stethoscope),
+                _buildFilterOption('psych', 'Psychology', LucideIcons.brain),
+                _buildFilterOption('homelife', 'Homelife', LucideIcons.house),
+                _buildFilterOption(
+                    'nutrition', 'Nutrition & Dietetics', LucideIcons.utensils),
               ],
             ),
           ),
@@ -193,7 +197,7 @@ class _TimelineScreenState extends State<TimelineScreen> {
     return ListTile(
       leading: Icon(icon, color: color),
       title: Text(label),
-      trailing: isSelected ? Icon(Icons.check, color: color) : null,
+      trailing: isSelected ? Icon(LucideIcons.check, color: color) : null,
       onTap: () {
         setState(() {
           _selectedUnit = unit;
@@ -308,9 +312,10 @@ class _TimelineItem extends StatelessWidget {
                           const Spacer(),
                           Text(
                             _formatDate(entry.createdAt),
-                            style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                                  color: AppColors.textSecondaryLight,
-                                ),
+                            style:
+                                Theme.of(context).textTheme.bodySmall?.copyWith(
+                                      color: AppColors.textSecondaryLight,
+                                    ),
                           ),
                         ],
                       ),
@@ -327,7 +332,10 @@ class _TimelineItem extends StatelessWidget {
                           Expanded(
                             child: Text(
                               entry.title,
-                              style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleSmall
+                                  ?.copyWith(
                                     fontWeight: FontWeight.w600,
                                   ),
                             ),
@@ -339,9 +347,10 @@ class _TimelineItem extends StatelessWidget {
                         const SizedBox(height: 8),
                         Text(
                           entry.description!,
-                          style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                                color: AppColors.textSecondaryLight,
-                              ),
+                          style:
+                              Theme.of(context).textTheme.bodySmall?.copyWith(
+                                    color: AppColors.textSecondaryLight,
+                                  ),
                         ),
                       ],
                       // Creator
@@ -349,21 +358,22 @@ class _TimelineItem extends StatelessWidget {
                       Row(
                         children: [
                           Icon(
-                            Icons.person,
+                            LucideIcons.user,
                             size: 14,
                             color: AppColors.textSecondaryLight,
                           ),
                           const SizedBox(width: 4),
                           Text(
                             entry.creatorName ?? 'Unknown',
-                            style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                                  color: AppColors.textSecondaryLight,
-                                ),
+                            style:
+                                Theme.of(context).textTheme.bodySmall?.copyWith(
+                                      color: AppColors.textSecondaryLight,
+                                    ),
                           ),
                           if (onTap != null) ...[
                             const Spacer(),
                             Icon(
-                              Icons.chevron_right,
+                              LucideIcons.chevronRight,
                               size: 18,
                               color: AppColors.textSecondaryLight,
                             ),

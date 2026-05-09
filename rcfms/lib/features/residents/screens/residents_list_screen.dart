@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
@@ -9,7 +10,6 @@ import '../../../core/constants/app_constants.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../core/utils/error_handler.dart';
-import '../../../core/widgets/main_bottom_nav.dart';
 import '../../../data/models/resident_model.dart';
 import '../../../data/models/ward_model.dart';
 import '../../../data/repositories/resident_repository.dart';
@@ -265,7 +265,7 @@ class _ResidentsListScreenState extends State<ResidentsListScreen> {
                     actions: [
                       if (canManage && !showSidebar)
                         IconButton(
-                          icon: const Icon(Icons.person_add_outlined),
+                          icon: const Icon(LucideIcons.userPlus),
                           tooltip: 'Add Resident',
                           onPressed: () async {
                             await context.push('/residents/add');
@@ -274,7 +274,7 @@ class _ResidentsListScreenState extends State<ResidentsListScreen> {
                         ),
                       if (!showSidebar)
                         IconButton(
-                          icon: const Icon(Icons.filter_list),
+                          icon: const Icon(LucideIcons.listFilter),
                           onPressed: _showFilterSheet,
                         ),
                       const SizedBox(width: 6),
@@ -383,7 +383,7 @@ class _ResidentsListScreenState extends State<ResidentsListScreen> {
                                 ),
                           ),
                           const Icon(
-                            Icons.keyboard_arrow_down,
+                            LucideIcons.chevronDown,
                             size: 16,
                             color: AppColors.primary,
                           ),
@@ -399,12 +399,7 @@ class _ResidentsListScreenState extends State<ResidentsListScreen> {
                 ),
               ],
             ),
-            // bottomNavigationBar: handled by ShellScaffold
-            floatingActionButton: MediaQuery.of(context).size.width < 800
-                ? const MainScanFab()
-                : null,
-            floatingActionButtonLocation:
-                FloatingActionButtonLocation.centerDocked,
+            // bottomNavigationBar / scan FAB: handled by ShellScaffold
           );
         },
       ),
@@ -650,7 +645,7 @@ class _ResidentsListScreenState extends State<ResidentsListScreen> {
                             TextSpan(
                               children: [
                                 const WidgetSpan(
-                                    child: Icon(Icons.meeting_room_outlined,
+                                    child: Icon(LucideIcons.doorOpen,
                                         size: 12,
                                         color: AppColors.textTertiary),
                                     alignment: PlaceholderAlignment.middle),
@@ -684,7 +679,7 @@ class _ResidentsListScreenState extends State<ResidentsListScreen> {
                     if (availableWidth > 400) ...[
                       const SizedBox(width: 6),
                       IconButton(
-                        icon: const Icon(Icons.edit_outlined, size: 20),
+                        icon: const Icon(LucideIcons.pencil, size: 20),
                         color: AppColors.textSecondary,
                         onPressed: () =>
                             _handleResidentAction('edit', resident),
@@ -852,7 +847,7 @@ class _ResidentsListScreenState extends State<ResidentsListScreen> {
               borderRadius: BorderRadius.circular(AppTheme.radiusLg),
             ),
             child: const Icon(
-              Icons.people_outline,
+              LucideIcons.users,
               size: 40,
               color: AppColors.textTertiary,
             ),
@@ -889,7 +884,7 @@ class _ResidentsListScreenState extends State<ResidentsListScreen> {
                 borderRadius: BorderRadius.circular(AppTheme.radiusLg),
               ),
               child: const Icon(
-                Icons.error_outline,
+                LucideIcons.circleAlert,
                 size: 40,
                 color: AppColors.error,
               ),
@@ -912,7 +907,7 @@ class _ResidentsListScreenState extends State<ResidentsListScreen> {
             const SizedBox(height: 24),
             OutlinedButton.icon(
               onPressed: _loadResidents,
-              icon: const Icon(Icons.refresh),
+              icon: const Icon(LucideIcons.refreshCw),
               label: const Text('Try again'),
             ),
           ],
@@ -1154,7 +1149,7 @@ class _ResidentsListScreenState extends State<ResidentsListScreen> {
               value: value,
               items: items,
               onChanged: onChanged,
-              icon: const Icon(Icons.keyboard_arrow_down_rounded,
+              icon: const Icon(LucideIcons.chevronDown,
                   size: 18, color: AppColors.textTertiary),
               style: Theme.of(context).textTheme.bodySmall?.copyWith(
                     fontWeight: FontWeight.w600,
@@ -1398,7 +1393,7 @@ class _ResidentsListScreenState extends State<ResidentsListScreen> {
                             ),
                             child: Row(
                               children: [
-                                const Icon(Icons.date_range,
+                                const Icon(LucideIcons.calendarRange,
                                     size: 20, color: AppColors.textSecondary),
                                 const SizedBox(width: 4),
                                 Text(
@@ -1416,7 +1411,7 @@ class _ResidentsListScreenState extends State<ResidentsListScreen> {
                                   InkWell(
                                     onTap: () => setSheetState(
                                         () => _selectedDateRange = null),
-                                    child: const Icon(Icons.close, size: 16),
+                                    child: const Icon(LucideIcons.x, size: 16),
                                   ),
                               ],
                             ),
@@ -1533,10 +1528,10 @@ class _ResidentsListScreenState extends State<ResidentsListScreen> {
       textInputAction: TextInputAction.search,
       decoration: InputDecoration(
         hintText: 'Search residents...',
-        prefixIcon: const Icon(Icons.search, size: 20),
+        prefixIcon: const Icon(LucideIcons.search, size: 20),
         suffixIcon: _searchController.text.isNotEmpty
             ? IconButton(
-                icon: const Icon(Icons.clear, size: 20),
+                icon: const Icon(LucideIcons.x, size: 20),
                 onPressed: () {
                   _searchController.clear();
                   _loadResidents();
@@ -1687,7 +1682,7 @@ class _ResidentsListScreenState extends State<ResidentsListScreen> {
               _loadResidents();
             }
           },
-          icon: const Icon(Icons.calendar_today_rounded, size: 16),
+          icon: const Icon(LucideIcons.calendar, size: 16),
           label: Text(
             _selectedDateRange == null
                 ? 'Date'
@@ -1728,7 +1723,7 @@ class _ResidentsListScreenState extends State<ResidentsListScreen> {
         children: [
           IconButton(
             onPressed: () => setState(() => _isGridView = true),
-            icon: const Icon(Icons.grid_view),
+            icon: const Icon(LucideIcons.layoutGrid),
             color: _isGridView
                 ? AppColors.primary
                 : Theme.of(context).iconTheme.color?.withOpacity(0.5),
@@ -1741,7 +1736,7 @@ class _ResidentsListScreenState extends State<ResidentsListScreen> {
               width: 1, height: 24, color: Theme.of(context).dividerColor),
           IconButton(
             onPressed: () => setState(() => _isGridView = false),
-            icon: const Icon(Icons.view_list),
+            icon: const Icon(LucideIcons.list),
             color: !_isGridView
                 ? AppColors.primary
                 : Theme.of(context).iconTheme.color?.withOpacity(0.5),
@@ -1939,7 +1934,7 @@ class _ResidentCard extends StatelessWidget {
                                   color: Colors.white,
                                   shape: BoxShape.circle,
                                 ),
-                                child: const Icon(Icons.check_circle,
+                                child: const Icon(LucideIcons.circleCheck,
                                     size: 16, color: AppColors.primary),
                               ),
                             ),
@@ -1986,7 +1981,7 @@ class _ResidentCard extends StatelessWidget {
                   // Info Row 1: Age • Gender • Category
                   Row(
                     children: [
-                      _buildInfoIcon(Icons.person_outline),
+                      _buildInfoIcon(LucideIcons.user),
                       const SizedBox(width: 4),
                       Expanded(
                         child: Text.rich(
@@ -2029,7 +2024,7 @@ class _ResidentCard extends StatelessWidget {
                   // Info Row 2: Location
                   Row(
                     children: [
-                      _buildInfoIcon(Icons.meeting_room_outlined),
+                      _buildInfoIcon(LucideIcons.doorOpen),
                       const SizedBox(width: 4),
                       Expanded(
                         child: Text(
@@ -2053,7 +2048,7 @@ class _ResidentCard extends StatelessWidget {
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            _buildInfoIcon(Icons.tag),
+                            _buildInfoIcon(LucideIcons.tag),
                             const SizedBox(width: 4),
                             Flexible(
                               child: Text(
@@ -2077,7 +2072,7 @@ class _ResidentCard extends StatelessWidget {
                           mainAxisSize: MainAxisSize.min,
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
-                            Icon(Icons.calendar_today,
+                            Icon(LucideIcons.calendar,
                                 size: 12, color: AppColors.textTertiary),
                             const SizedBox(width: 4),
                             Flexible(
@@ -2108,7 +2103,7 @@ class _ResidentCard extends StatelessWidget {
             top: 4,
             right: 0,
             child: PopupMenuButton<String>(
-              icon: const Icon(Icons.more_vert,
+              icon: const Icon(LucideIcons.ellipsisVertical,
                   color: AppColors.textSecondary, size: 20),
               onSelected: onAction,
               itemBuilder: (context) => [
@@ -2116,7 +2111,8 @@ class _ResidentCard extends StatelessWidget {
                   value: 'edit',
                   child: Row(
                     children: [
-                      Icon(Icons.edit, size: 18, color: AppColors.textPrimary),
+                      Icon(LucideIcons.pencil,
+                          size: 18, color: AppColors.textPrimary),
                       SizedBox(width: 12),
                       Text('Edit Profile'),
                     ],
@@ -2127,7 +2123,8 @@ class _ResidentCard extends StatelessWidget {
                     value: 'transfer',
                     child: Row(
                       children: [
-                        Icon(Icons.bed, size: 18, color: AppColors.primary),
+                        Icon(LucideIcons.bed,
+                            size: 18, color: AppColors.primary),
                         SizedBox(width: 12),
                         Text('Transfer Ward'),
                       ],
@@ -2137,7 +2134,7 @@ class _ResidentCard extends StatelessWidget {
                     value: 'discharge',
                     child: Row(
                       children: [
-                        Icon(Icons.exit_to_app,
+                        Icon(LucideIcons.logOut,
                             size: 18, color: AppColors.warning),
                         SizedBox(width: 12),
                         Text('Discharge'),
@@ -2150,7 +2147,7 @@ class _ResidentCard extends StatelessWidget {
                     value: 'deceased',
                     child: Row(
                       children: [
-                        Icon(Icons.person_off_outlined,
+                        Icon(LucideIcons.userX,
                             size: 18, color: AppColors.textPrimary),
                         SizedBox(width: 12),
                         Text('Mark as Deceased'),
@@ -2162,7 +2159,8 @@ class _ResidentCard extends StatelessWidget {
                     value: 'delete',
                     child: Row(
                       children: [
-                        Icon(Icons.delete, size: 18, color: AppColors.error),
+                        Icon(LucideIcons.trash2,
+                            size: 18, color: AppColors.error),
                         SizedBox(width: 12),
                         Text('Delete Request'),
                       ],

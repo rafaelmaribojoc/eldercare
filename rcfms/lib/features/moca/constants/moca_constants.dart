@@ -92,9 +92,21 @@ class MocaConstants {
 
   // Naming Animals (Filipino names + English)
   static const List<Map<String, String>> namingAnimalsFilipino = [
-    {'filipino': 'Leon', 'english': 'Lion', 'description': 'Malaking pusa na may buhok sa leeg'},
-    {'filipino': 'Rinoseronte', 'english': 'Rhinoceros', 'description': 'Malaking hayop na may sungay sa ilong'},
-    {'filipino': 'Kamelyo', 'english': 'Camel', 'description': 'Hayop sa disyerto na may umbok sa likod'},
+    {
+      'filipino': 'Leon',
+      'english': 'Lion',
+      'description': 'Malaking pusa na may buhok sa leeg'
+    },
+    {
+      'filipino': 'Rinoseronte',
+      'english': 'Rhinoceros',
+      'description': 'Malaking hayop na may sungay sa ilong'
+    },
+    {
+      'filipino': 'Kamelyo',
+      'english': 'Camel',
+      'description': 'Hayop sa disyerto na may umbok sa likod'
+    },
   ];
 
   // Fluency Test (MoCA-P uses letter "P" for Filipino)

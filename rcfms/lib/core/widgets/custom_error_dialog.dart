@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import '../theme/app_colors.dart';
 import '../utils/error_handler.dart';
 
@@ -24,12 +25,13 @@ class CustomErrorDialog extends StatefulWidget {
     dynamic error,
   }) {
     final bool isNetwork = ErrorHandler.isNetworkError(error ?? message);
-    final String finalMessage = isNetwork 
+    final String finalMessage = isNetwork
         ? ErrorHandler.getUserFriendlyMessage(error ?? message)
         : message;
-    final String finalTitle = isNetwork && title.toLowerCase().contains('failed') 
-        ? 'No Internet Connection' 
-        : title;
+    final String finalTitle =
+        isNetwork && title.toLowerCase().contains('failed')
+            ? 'No Internet Connection'
+            : title;
 
     showDialog(
       context: context,
@@ -92,7 +94,9 @@ class _CustomErrorDialogState extends State<CustomErrorDialog> {
                   ),
                 ),
                 child: Icon(
-                  widget.isNetworkError ? Icons.wifi_off_rounded : Icons.error_rounded,
+                  widget.isNetworkError
+                      ? LucideIcons.wifiOff
+                      : LucideIcons.circleAlert,
                   size: 64,
                   color: AppColors.error,
                 ),

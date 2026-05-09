@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'form_field_builders.dart';
 
 /// Medical Service Form Templates
@@ -15,7 +16,8 @@ class MedicalServiceForms {
     bool readOnly = false,
     Set<String>? readOnlyFieldKeys,
   }) {
-    bool ro(String key) => readOnly || (readOnlyFieldKeys?.contains(key) ?? false);
+    bool ro(String key) =>
+        readOnly || (readOnlyFieldKeys?.contains(key) ?? false);
     switch (templateType) {
       case 'md_nursing_care_service':
         return _nursingCareService(data, onChanged, ro: ro);
@@ -538,7 +540,7 @@ class MedicalServiceForms {
                   children: [
                     Padding(
                       padding: const EdgeInsets.only(top: 12.0, right: 8.0),
-                      child: Icon(Icons.circle,
+                      child: Icon(LucideIcons.circle,
                           size: 8,
                           color: Theme.of(context).textTheme.bodySmall?.color ??
                               Theme.of(context).hintColor),
@@ -564,7 +566,7 @@ class MedicalServiceForms {
                       ),
                     ),
                     IconButton(
-                      icon: Icon(Icons.close,
+                      icon: Icon(LucideIcons.x,
                           color: Theme.of(context).disabledColor),
                       onPressed: () {
                         final newItems = List<dynamic>.from(items);

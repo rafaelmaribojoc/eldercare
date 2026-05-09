@@ -2,6 +2,7 @@ import 'dart:ui' as ui;
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../../core/theme/app_colors.dart';
@@ -290,7 +291,7 @@ class _SignaturePadDialogState extends State<SignaturePadDialog> {
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Icon(Icons.gesture,
+                                  Icon(LucideIcons.mousePointerClick,
                                       size: 36,
                                       color: Theme.of(context).hintColor),
                                   const SizedBox(height: 6),
@@ -330,7 +331,7 @@ class _SignaturePadDialogState extends State<SignaturePadDialog> {
                                   child: Row(
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
-                                      Icon(Icons.refresh,
+                                      Icon(LucideIcons.refreshCw,
                                           size: 14,
                                           color: Theme.of(context)
                                               .textTheme
@@ -358,7 +359,7 @@ class _SignaturePadDialogState extends State<SignaturePadDialog> {
               Center(
                 child: TextButton.icon(
                   onPressed: _pickImage,
-                  icon: const Icon(Icons.upload_file, size: 18),
+                  icon: const Icon(LucideIcons.fileUp, size: 18),
                   label: const Text('Upload Signature Image'),
                   style: TextButton.styleFrom(
                     foregroundColor: AppColors.textSecondary,

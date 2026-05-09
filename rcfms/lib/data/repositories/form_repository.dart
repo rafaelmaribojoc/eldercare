@@ -306,8 +306,6 @@ class FormRepository {
     }
   }
 
-
-
   /// Create draft form
   Future<FormSubmissionModel> createDraft({
     required String residentId,
@@ -1095,17 +1093,15 @@ class FormRepository {
     bool includeArchived = false,
   }) async {
     try {
-      _log('Fetching case files for resident: $residentId (archived=$includeArchived)');
+      _log(
+          'Fetching case files for resident: $residentId (archived=$includeArchived)');
 
-      var query = _supabase
-          .from('form_submissions')
-          .select('''
+      var query = _supabase.from('form_submissions').select('''
             *,
             resident:residents(first_name, last_name),
             submitter:profiles!form_submissions_submitted_by_fkey(full_name, signature_url),
             reviewer:profiles!form_submissions_reviewed_by_fkey(full_name, signature_url)
-          ''')
-          .eq('resident_id', residentId);
+          ''').eq('resident_id', residentId);
 
       if (!includeArchived) {
         query = query.eq('is_archived', false);
@@ -1125,15 +1121,12 @@ class FormRepository {
   /// Get archived forms, optionally filtered by unit
   Future<List<FormSubmissionModel>> getArchivedForms({String? unit}) async {
     try {
-      var query = _supabase
-          .from('form_submissions')
-          .select('''
+      var query = _supabase.from('form_submissions').select('''
             *,
             resident:residents!resident_id(first_name, last_name),
             submitter:profiles!form_submissions_submitted_by_fkey(full_name, signature_url),
             reviewer:profiles!form_submissions_reviewed_by_fkey(full_name, signature_url)
-          ''')
-          .eq('is_archived', true);
+          ''').eq('is_archived', true);
 
       if (unit != null) {
         query = query.eq('unit', unit);
@@ -1205,13 +1198,10 @@ class FormRepository {
       }
 
       // Direct Supabase fallback
-      await _supabase
-          .from('form_submissions')
-          .update({
-            'is_archived': false,
-            'updated_at': DateTime.now().toUtc().toIso8601String(),
-          })
-          .eq('id', formId);
+      await _supabase.from('form_submissions').update({
+        'is_archived': false,
+        'updated_at': DateTime.now().toUtc().toIso8601String(),
+      }).eq('id', formId);
       _log('Form restored via direct update: $formId');
     } catch (e) {
       _log('Error restoring form: $e');
@@ -1239,8 +1229,7 @@ class FormRepository {
       if (response.statusCode == 200) {
         _log('Form permanently deleted via backend: $formId');
         _logAudit('Form Permanently Deleted',
-            details: 'Permanent delete of archived form',
-            resourceId: formId);
+            details: 'Permanent delete of archived form', resourceId: formId);
         return;
       }
 

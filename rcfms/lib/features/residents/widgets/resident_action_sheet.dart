@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -78,7 +79,7 @@ class ResidentActionSheet extends StatelessWidget {
                 ),
               ),
               IconButton(
-                icon: const Icon(Icons.close),
+                icon: const Icon(LucideIcons.x),
                 onPressed: () => Navigator.pop(context),
               ),
             ],
@@ -96,7 +97,7 @@ class ResidentActionSheet extends StatelessWidget {
             children: [
               if (canMakeNotes)
                 _ActionButton(
-                  icon: Icons.note_add,
+                  icon: LucideIcons.filePlus,
                   label: 'Quick Note',
                   color: AppColors.warning,
                   onTap: () {
@@ -113,7 +114,7 @@ class ResidentActionSheet extends StatelessWidget {
                   },
                 ),
               _ActionButton(
-                icon: Icons.person,
+                icon: LucideIcons.user,
                 label: 'View Profile',
                 color: AppColors.primary,
                 onTap: () {
@@ -122,7 +123,7 @@ class ResidentActionSheet extends StatelessWidget {
                 },
               ),
               _ActionButton(
-                icon: Icons.local_hospital,
+                icon: LucideIcons.hospital,
                 label: 'Vitals / Meds',
                 color: AppColors.error,
                 onTap: () {
@@ -133,7 +134,7 @@ class ResidentActionSheet extends StatelessWidget {
               ),
               if (isPsych)
                 _ActionButton(
-                  icon: Icons.psychology,
+                  icon: LucideIcons.brain,
                   label: 'MoCA Test',
                   color: MocaColors.primary,
                   onTap: () {

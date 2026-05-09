@@ -73,7 +73,8 @@ class AppConstants {
     if (role == 'social_head' || role == 'social_staff') return true;
 
     // Check for legacy split roles
-    if ((role == roleHead || role == roleStaff) && unit == unitSocial) return true;
+    if ((role == roleHead || role == roleStaff) && unit == unitSocial)
+      return true;
 
     return false;
   }
@@ -102,7 +103,8 @@ class AppConstants {
     }
 
     // Staff-level houseparents: must be assigned
-    if ((role == 'homelife_staff' || role.contains('houseparent') ||
+    if ((role == 'homelife_staff' ||
+        role.contains('houseparent') ||
         (role == roleStaff && unit == unitHomelife))) {
       return userId == residentHouseparentId;
     }

@@ -1,5 +1,6 @@
 /// Export all models
 library;
+
 export 'user_model.dart';
 export 'resident_model.dart';
 export 'ward_model.dart';

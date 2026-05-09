@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 
 import 'form_field_builders.dart';
 
@@ -21,7 +22,8 @@ class PsychologicalServiceForms {
     List<String>? residentNames,
     List<dynamic>? residents,
   }) {
-    bool ro(String key) => readOnly || (readOnlyFieldKeys?.contains(key) ?? false);
+    bool ro(String key) =>
+        readOnly || (readOnlyFieldKeys?.contains(key) ?? false);
     switch (templateType) {
       case 'progress_notes':
         return _progressNotes(data, onChanged, ro: ro);
@@ -177,7 +179,7 @@ class PsychologicalServiceForms {
         ),
         child: const Row(
           children: [
-            Icon(Icons.lock, color: Colors.amber, size: 20),
+            Icon(LucideIcons.lockKeyhole, color: Colors.amber, size: 20),
             SizedBox(width: 8),
             Expanded(
               child: Text(
@@ -608,7 +610,7 @@ class PsychologicalServiceForms {
         ),
         child: const Row(
           children: [
-            Icon(Icons.lock, color: Colors.amber, size: 20),
+            Icon(LucideIcons.lockKeyhole, color: Colors.amber, size: 20),
             SizedBox(width: 8),
             Expanded(
               child: Text(
@@ -802,7 +804,7 @@ class PsychologicalServiceForms {
         ),
         child: const Row(
           children: [
-            Icon(Icons.lock, color: Colors.amber, size: 20),
+            Icon(LucideIcons.lockKeyhole, color: Colors.amber, size: 20),
             SizedBox(width: 8),
             Expanded(
               child: Text(
@@ -1125,7 +1127,7 @@ class _InterventionItemCardState extends State<InterventionItemCard> {
                   style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
                 IconButton(
-                  icon: const Icon(Icons.delete, color: Colors.red),
+                  icon: const Icon(LucideIcons.trash2, color: Colors.red),
                   onPressed: widget.onDelete,
                 ),
               ],
@@ -1235,7 +1237,7 @@ class _InterventionItemCardState extends State<InterventionItemCard> {
                         decoration: const InputDecoration(
                           labelText: 'Start Date',
                           border: OutlineInputBorder(),
-                          suffixIcon: Icon(Icons.calendar_today, size: 16),
+                          suffixIcon: Icon(LucideIcons.calendar, size: 16),
                         ),
                         child: Text(
                           _startDate != null
@@ -1264,7 +1266,7 @@ class _InterventionItemCardState extends State<InterventionItemCard> {
                         decoration: const InputDecoration(
                           labelText: 'End Date',
                           border: OutlineInputBorder(),
-                          suffixIcon: Icon(Icons.calendar_today, size: 16),
+                          suffixIcon: Icon(LucideIcons.calendar, size: 16),
                         ),
                         child: Text(
                           _endDate != null ? _formatDate(_endDate!) : 'Select',

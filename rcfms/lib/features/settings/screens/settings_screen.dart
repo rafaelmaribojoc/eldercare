@@ -1,11 +1,11 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../core/theme/app_colors.dart';
 import '../../../core/widgets/custom_snackbar.dart';
-import '../../../core/widgets/main_bottom_nav.dart';
 import '../../../data/repositories/auth_repository.dart';
 import '../../auth/bloc/auth_bloc.dart';
 
@@ -123,7 +123,7 @@ class SettingsScreen extends StatelessWidget {
                             ),
                           ),
                           IconButton(
-                            icon: const Icon(Icons.edit),
+                            icon: const Icon(LucideIcons.pencil),
                             onPressed: () => context.push('/settings/profile'),
                           ),
                         ],
@@ -144,7 +144,7 @@ class SettingsScreen extends StatelessWidget {
                   _SettingsCard(
                     children: [
                       _SettingsTile(
-                        icon: Icons.person,
+                        icon: LucideIcons.user,
                         title: 'Edit Profile',
                         subtitle: 'Update username and profile info',
                         onTap: () => context.push('/settings/profile'),
@@ -153,7 +153,7 @@ class SettingsScreen extends StatelessWidget {
                       Column(
                         children: [
                           _SettingsTile(
-                            icon: Icons.draw,
+                            icon: LucideIcons.penLine,
                             title: user.signatureUrl != null
                                 ? 'Update Signature'
                                 : 'Setup Signature',
@@ -178,7 +178,7 @@ class SettingsScreen extends StatelessWidget {
                                       ),
                                     ),
                                   )
-                                : const Icon(Icons.check_circle,
+                                : const Icon(LucideIcons.circleCheck,
                                     color: AppColors.success, size: 20),
                             onTap: () => context.push('/setup-signature'),
                           ),
@@ -219,7 +219,7 @@ class SettingsScreen extends StatelessWidget {
                       ),
                       const Divider(height: 1),
                       _SettingsTile(
-                        icon: Icons.lock,
+                        icon: LucideIcons.lockKeyhole,
                         title: 'Change Password',
                         subtitle: 'Update your account password',
                         onTap: () => _showChangePasswordDialog(context),
@@ -240,14 +240,14 @@ class SettingsScreen extends StatelessWidget {
                   _SettingsCard(
                     children: [
                       _SettingsTile(
-                        icon: Icons.notifications,
+                        icon: LucideIcons.bell,
                         title: 'Notifications',
                         subtitle: 'Manage notification preferences',
                         onTap: () => context.push('/settings/notifications'),
                       ),
                       const Divider(height: 1),
                       _SettingsTile(
-                        icon: Icons.dark_mode,
+                        icon: LucideIcons.moon,
                         title: 'Appearance',
                         subtitle: 'Theme and display settings',
                         onTap: () => context.push('/settings/appearance'),
@@ -268,14 +268,14 @@ class SettingsScreen extends StatelessWidget {
                   _SettingsCard(
                     children: [
                       _SettingsTile(
-                        icon: Icons.info,
+                        icon: LucideIcons.info,
                         title: 'About RCFMS',
                         subtitle: 'Version 1.0.0',
                         onTap: () => _showAboutDialog(context),
                       ),
                       const Divider(height: 1),
                       _SettingsTile(
-                        icon: Icons.help,
+                        icon: LucideIcons.circle,
                         title: 'Help & Support',
                         subtitle: 'Contact support team',
                         onTap: () => context.push('/settings/help'),
@@ -289,7 +289,7 @@ class SettingsScreen extends StatelessWidget {
                     width: double.infinity,
                     child: OutlinedButton.icon(
                       onPressed: () => _showLogoutDialog(context),
-                      icon: const Icon(Icons.logout),
+                      icon: const Icon(LucideIcons.logOut),
                       label: const Text('Sign Out'),
                       style: OutlinedButton.styleFrom(
                         foregroundColor: AppColors.error,
@@ -302,13 +302,7 @@ class SettingsScreen extends StatelessWidget {
                 ],
               ),
             ),
-            // bottomNavigationBar: handled by ShellScaffold
-            floatingActionButton:
-                user.isSuperAdmin || MediaQuery.of(context).size.width >= 800
-                    ? null
-                    : const MainScanFab(),
-            floatingActionButtonLocation:
-                FloatingActionButtonLocation.centerDocked,
+            // bottomNavigationBar / scan FAB: handled by ShellScaffold
           );
         },
       ),
@@ -342,7 +336,7 @@ class SettingsScreen extends StatelessWidget {
               obscureText: true,
               decoration: const InputDecoration(
                 labelText: 'Current Password',
-                prefixIcon: Icon(Icons.lock_outline),
+                prefixIcon: Icon(LucideIcons.lockKeyhole),
               ),
             ),
             const SizedBox(height: 16),
@@ -351,7 +345,7 @@ class SettingsScreen extends StatelessWidget {
               obscureText: true,
               decoration: const InputDecoration(
                 labelText: 'New Password',
-                prefixIcon: Icon(Icons.lock),
+                prefixIcon: Icon(LucideIcons.lockKeyhole),
               ),
             ),
             const SizedBox(height: 16),
@@ -360,7 +354,7 @@ class SettingsScreen extends StatelessWidget {
               obscureText: true,
               decoration: const InputDecoration(
                 labelText: 'Confirm New Password',
-                prefixIcon: Icon(Icons.lock),
+                prefixIcon: Icon(LucideIcons.lockKeyhole),
               ),
             ),
           ],
@@ -418,7 +412,7 @@ class SettingsScreen extends StatelessWidget {
       builder: (context) => AlertDialog(
         title: const Row(
           children: [
-            Icon(Icons.elderly, color: AppColors.primary),
+            Icon(LucideIcons.personStanding, color: AppColors.primary),
             SizedBox(width: 12),
             Text('RCFMS'),
           ],
@@ -488,7 +482,7 @@ class SettingsScreen extends StatelessWidget {
         );
       } catch (e) {
         return const Center(
-          child: Icon(Icons.broken_image, color: AppColors.error),
+          child: Icon(LucideIcons.imageOff, color: AppColors.error),
         );
       }
     }
@@ -496,7 +490,7 @@ class SettingsScreen extends StatelessWidget {
       url,
       fit: BoxFit.contain,
       errorBuilder: (context, error, stackTrace) => const Center(
-        child: Icon(Icons.broken_image, color: AppColors.error),
+        child: Icon(LucideIcons.imageOff, color: AppColors.error),
       ),
       loadingBuilder: (context, child, loadingProgress) {
         if (loadingProgress == null) return child;
@@ -554,7 +548,7 @@ class _SettingsTile extends StatelessWidget {
             const SizedBox(width: 8),
           ],
           const Icon(
-            Icons.chevron_right,
+            LucideIcons.chevronRight,
             color: AppColors.textSecondaryLight,
           ),
         ],

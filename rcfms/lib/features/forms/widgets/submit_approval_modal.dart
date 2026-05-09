@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_theme.dart';
@@ -103,7 +104,7 @@ class _SubmitApprovalModalState extends State<SubmitApprovalModal> {
                       borderRadius: BorderRadius.circular(AppTheme.radiusSm),
                     ),
                     child: const Icon(
-                      Icons.send_rounded,
+                      LucideIcons.send,
                       color: Colors.white,
                       size: 20,
                     ),
@@ -133,7 +134,7 @@ class _SubmitApprovalModalState extends State<SubmitApprovalModal> {
                   ),
                   IconButton(
                     onPressed: () => Navigator.pop(context),
-                    icon: const Icon(Icons.close),
+                    icon: const Icon(LucideIcons.x),
                     iconSize: 20,
                   ),
                 ],
@@ -199,7 +200,7 @@ class _SubmitApprovalModalState extends State<SubmitApprovalModal> {
           mainAxisSize: MainAxisSize.min,
           children: [
             Icon(
-              Icons.error_outline,
+              LucideIcons.circleAlert,
               size: 48,
               color: AppColors.error,
             ),
@@ -225,7 +226,7 @@ class _SubmitApprovalModalState extends State<SubmitApprovalModal> {
           mainAxisSize: MainAxisSize.min,
           children: [
             Icon(
-              Icons.people_outline,
+              LucideIcons.users,
               size: 48,
               color: AppColors.textTertiary,
             ),
@@ -380,7 +381,7 @@ class _SubmitApprovalModalState extends State<SubmitApprovalModal> {
                 // Check icon
                 if (isSelected)
                   Icon(
-                    Icons.check_circle,
+                    LucideIcons.circleCheck,
                     color: AppColors.primary,
                   ),
               ],

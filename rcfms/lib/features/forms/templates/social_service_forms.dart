@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'form_field_builders.dart';
 import 'admission_case_conference.dart';
@@ -20,7 +21,8 @@ class SocialServiceForms {
     bool readOnly = false,
     Set<String>? readOnlyFieldKeys,
   }) {
-    bool ro(String key) => readOnly || (readOnlyFieldKeys?.contains(key) ?? false);
+    bool ro(String key) =>
+        readOnly || (readOnlyFieldKeys?.contains(key) ?? false);
     switch (templateType) {
       case 'pre_admission_checklist':
         return _preAdmissionChecklist(data, onChanged, ro: ro);
@@ -961,8 +963,8 @@ class SocialServiceForms {
       const SizedBox(height: 16),
       FormFieldBuilders.sectionHeader('Signed in the presence of:'),
       ...() {
-        final witnesses = List<Map<String, dynamic>>.from(
-            data['witnesses'] ?? [
+        final witnesses = List<Map<String, dynamic>>.from(data['witnesses'] ??
+            [
               {'name': '', 'designation': ''},
               {'name': '', 'designation': ''},
             ]);
@@ -2017,8 +2019,8 @@ class SocialServiceForms {
                                     fontWeight: FontWeight.bold)),
                             if (activities.length > 1)
                               IconButton(
-                                icon:
-                                    const Icon(Icons.delete, color: Colors.red),
+                                icon: const Icon(LucideIcons.trash2,
+                                    color: Colors.red),
                                 onPressed: () => removeActivity(i),
                               ),
                           ],
@@ -2073,7 +2075,7 @@ class SocialServiceForms {
                   alignment: Alignment.centerLeft,
                   child: TextButton.icon(
                     onPressed: addActivity,
-                    icon: const Icon(Icons.add),
+                    icon: const Icon(LucideIcons.plus),
                     label: const Text('Add Activity'),
                   ),
                 ),
@@ -2198,8 +2200,8 @@ class SocialServiceForms {
                                     fontWeight: FontWeight.bold)),
                             if (activities.length > 1)
                               IconButton(
-                                icon:
-                                    const Icon(Icons.delete, color: Colors.red),
+                                icon: const Icon(LucideIcons.trash2,
+                                    color: Colors.red),
                                 onPressed: () => removeActivity(i),
                               ),
                           ],
@@ -2260,7 +2262,7 @@ class SocialServiceForms {
                   alignment: Alignment.centerLeft,
                   child: TextButton.icon(
                     onPressed: addActivity,
-                    icon: const Icon(Icons.add),
+                    icon: const Icon(LucideIcons.plus),
                     label: const Text('Add Activity'),
                   ),
                 ),
@@ -2708,7 +2710,8 @@ class SocialServiceForms {
                       ),
                       if (findings.length > 1)
                         IconButton(
-                          icon: const Icon(Icons.delete, color: Colors.red),
+                          icon:
+                              const Icon(LucideIcons.trash2, color: Colors.red),
                           onPressed: () {
                             findings.removeAt(i);
                             updateFindings();
@@ -2725,7 +2728,7 @@ class SocialServiceForms {
                       findings.add('');
                       updateFindings();
                     },
-                    icon: const Icon(Icons.add),
+                    icon: const Icon(LucideIcons.plus),
                     label: const Text('Add Finding'),
                   ),
                 ),
@@ -2884,7 +2887,7 @@ class SocialServiceForms {
                   Padding(
                     padding: const EdgeInsets.only(top: 8.0),
                     child: IconButton(
-                      icon: const Icon(Icons.remove_circle_outline,
+                      icon: const Icon(LucideIcons.circleMinus,
                           color: Colors.red),
                       onPressed: () {
                         witnesses.removeAt(index);
@@ -2904,7 +2907,7 @@ class SocialServiceForms {
               witnesses.add({'name': '', 'designation': ''});
               onChanged('witnesses', witnesses);
             },
-            icon: const Icon(Icons.person_add, size: 18),
+            icon: const Icon(LucideIcons.userPlus, size: 18),
             label: const Text('Add Witness'),
           ),
         ],
@@ -3110,7 +3113,8 @@ class _ActivitiesTableState extends State<_ActivitiesTable> {
                             style:
                                 const TextStyle(fontWeight: FontWeight.bold)),
                         IconButton(
-                          icon: const Icon(Icons.delete, color: Colors.red),
+                          icon:
+                              const Icon(LucideIcons.trash2, color: Colors.red),
                           onPressed: () => _removeItem(index),
                         ),
                       ],
@@ -3205,7 +3209,7 @@ class _ActivitiesTableState extends State<_ActivitiesTable> {
         ),
         OutlinedButton.icon(
           onPressed: _addItem,
-          icon: const Icon(Icons.add),
+          icon: const Icon(LucideIcons.plus),
           label: const Text('Add Activity'),
         ),
       ],
@@ -3271,7 +3275,7 @@ class _FamilyCompositionTableState extends State<_FamilyCompositionTable> {
             ),
             OutlinedButton.icon(
               onPressed: _addMember,
-              icon: const Icon(Icons.add),
+              icon: const Icon(LucideIcons.plus),
               label: const Text('Add Member'),
             ),
           ],
@@ -3298,7 +3302,8 @@ class _FamilyCompositionTableState extends State<_FamilyCompositionTable> {
                             style:
                                 const TextStyle(fontWeight: FontWeight.bold)),
                         IconButton(
-                          icon: const Icon(Icons.delete, color: Colors.red),
+                          icon:
+                              const Icon(LucideIcons.trash2, color: Colors.red),
                           onPressed: () => _removeMember(index),
                         ),
                       ],

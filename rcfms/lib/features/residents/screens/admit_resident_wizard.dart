@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
@@ -333,7 +334,7 @@ class _AdmitResidentWizardState extends State<AdmitResidentWizard> {
           child: InputDecorator(
             decoration: const InputDecoration(
               labelText: 'ADMISSION DATE',
-              prefixIcon: Icon(Icons.calendar_today),
+              prefixIcon: Icon(LucideIcons.calendar),
             ),
             child: Text(DateFormat('MMMM d, yyyy').format(_admissionDate)),
           ),
@@ -343,7 +344,7 @@ class _AdmitResidentWizardState extends State<AdmitResidentWizard> {
           controller: _caseNumberController,
           decoration: const InputDecoration(
             labelText: 'CASE NUMBER',
-            prefixIcon: Icon(Icons.tag),
+            prefixIcon: Icon(LucideIcons.tag),
             helperText: 'Auto-generated based on date (C-YYMM##)',
           ),
           textCapitalization: TextCapitalization.characters, // Capitalized
@@ -355,7 +356,7 @@ class _AdmitResidentWizardState extends State<AdmitResidentWizard> {
           initialValue: _selectedWard,
           decoration: const InputDecoration(
             labelText: 'WARD',
-            prefixIcon: Icon(Icons.meeting_room),
+            prefixIcon: Icon(LucideIcons.doorOpen),
           ),
           items: _wards
               .map((w) => DropdownMenuItem(value: w, child: Text(w.name)))
@@ -373,7 +374,7 @@ class _AdmitResidentWizardState extends State<AdmitResidentWizard> {
           initialValue: _selectedBed,
           decoration: const InputDecoration(
             labelText: 'BED NO.',
-            prefixIcon: Icon(Icons.bed),
+            prefixIcon: Icon(LucideIcons.bed),
           ),
           items: _availableBeds
               .map((b) => DropdownMenuItem(value: b, child: Text(b)))
@@ -405,7 +406,7 @@ class _AdmitResidentWizardState extends State<AdmitResidentWizard> {
           initialValue: _selectedHouseparentId,
           decoration: InputDecoration(
             labelText: 'ASSIGNED HOUSEPARENT',
-            prefixIcon: const Icon(Icons.manage_accounts),
+            prefixIcon: const Icon(LucideIcons.usersRound),
             filled: true,
             fillColor: Theme.of(context).inputDecorationTheme.fillColor,
           ),
@@ -429,7 +430,7 @@ class _AdmitResidentWizardState extends State<AdmitResidentWizard> {
           initialValue: _selectedSocialWorkerId,
           decoration: InputDecoration(
             labelText: 'ASSIGNED SOCIAL WORKER',
-            prefixIcon: const Icon(Icons.person_outline),
+            prefixIcon: const Icon(LucideIcons.user),
             filled: true,
             fillColor: Theme.of(context).inputDecorationTheme.fillColor,
           ),

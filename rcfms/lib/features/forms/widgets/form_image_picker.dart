@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -144,7 +145,7 @@ class _FormImagePickerState extends State<FormImagePicker> {
               errorWidget: (context, url, error) => const Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(Icons.error, color: Colors.red),
+                  Icon(LucideIcons.circleAlert, color: Colors.red),
                   SizedBox(height: 4),
                   Text('Failed to load', style: TextStyle(fontSize: 12)),
                 ],
@@ -162,7 +163,7 @@ class _FormImagePickerState extends State<FormImagePicker> {
                   shape: BoxShape.circle,
                 ),
                 child: const Icon(
-                  Icons.edit,
+                  LucideIcons.pencil,
                   color: Colors.white,
                   size: 20,
                 ),
@@ -176,7 +177,7 @@ class _FormImagePickerState extends State<FormImagePicker> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Icon(
-          Icons.add_a_photo,
+          LucideIcons.camera,
           size: 48,
           color: Colors.grey[400],
         ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
@@ -15,7 +16,6 @@ import '../../auth/bloc/auth_bloc.dart';
 import '../../admin/screens/admin_dashboard_screen.dart';
 import '../../../data/repositories/resident_repository.dart';
 import '../../../core/services/router_service.dart';
-import '../../../core/widgets/main_bottom_nav.dart';
 import '../../../core/widgets/notifications_panel.dart';
 
 class DashboardScreen extends StatefulWidget {
@@ -198,11 +198,6 @@ class _DashboardScreenState extends State<DashboardScreen> with RouteAware {
               ),
             ),
           ),
-          floatingActionButton: MediaQuery.of(context).size.width < 800
-              ? const MainScanFab()
-              : null,
-          floatingActionButtonLocation:
-              FloatingActionButtonLocation.centerDocked,
         );
       },
     );
@@ -267,7 +262,7 @@ class _DashboardScreenState extends State<DashboardScreen> with RouteAware {
                   alignment: Alignment.center,
                   children: [
                     Icon(
-                      Icons.notifications_outlined,
+                      LucideIcons.bell,
                       color: AppColors.primary,
                     ),
                     if (_unreadNotificationCount > 0)
@@ -315,7 +310,7 @@ class _DashboardScreenState extends State<DashboardScreen> with RouteAware {
                   border: Border.all(color: AppColors.primaryBorder),
                 ),
                 child: const Icon(
-                  Icons.person_outline,
+                  LucideIcons.user,
                   color: AppColors.primary,
                 ),
               ),
@@ -350,8 +345,8 @@ class _DashboardScreenState extends State<DashboardScreen> with RouteAware {
       builder: (context, constraints) {
         final isWide = constraints.maxWidth > 900;
         final authState = context.read<AuthBloc>().state;
-        final isPsych = authState is AuthAuthenticated &&
-            authState.user.unit == 'psych';
+        final isPsych =
+            authState is AuthAuthenticated && authState.user.unit == 'psych';
         final canApprove = AppConstants.canApproveforms(
             authState is AuthAuthenticated ? authState.user.role : null);
 
@@ -360,7 +355,7 @@ class _DashboardScreenState extends State<DashboardScreen> with RouteAware {
 
         // Define cards
         final residentsCard = _StatCard(
-          icon: Icons.people_outline,
+          icon: LucideIcons.users,
           iconColor: AppColors.primary,
           label: 'Total Residents',
           value: _residentCount.toString(),
@@ -368,7 +363,7 @@ class _DashboardScreenState extends State<DashboardScreen> with RouteAware {
         );
 
         final pendingApprovalsCard = _StatCard(
-          icon: Icons.assignment_outlined,
+          icon: LucideIcons.clipboardList,
           iconColor: AppColors.warning,
           label: 'Forms for Review',
           value: _pendingApprovalsCount.toString(),
@@ -376,7 +371,7 @@ class _DashboardScreenState extends State<DashboardScreen> with RouteAware {
         );
 
         final completedCard = _StatCard(
-          icon: Icons.check_circle_outline,
+          icon: LucideIcons.circleCheck,
           iconColor: AppColors.success,
           label: 'Completed Today',
           value: _completedFormsCount.toString(),
@@ -385,7 +380,7 @@ class _DashboardScreenState extends State<DashboardScreen> with RouteAware {
         );
 
         final activeWardsCard = _StatCard(
-          icon: Icons.meeting_room_outlined,
+          icon: LucideIcons.doorOpen,
           iconColor: AppColors.unitPsych,
           label: 'Active Wards',
           value: _wardCount.toString(),
@@ -393,7 +388,7 @@ class _DashboardScreenState extends State<DashboardScreen> with RouteAware {
         );
 
         final preAdmissionCard = _StatCard(
-          icon: Icons.person_add_outlined,
+          icon: LucideIcons.userPlus,
           iconColor: AppColors.info,
           label: 'Pre-Admission',
           value: _preAdmissionCount.toString(),
@@ -402,7 +397,7 @@ class _DashboardScreenState extends State<DashboardScreen> with RouteAware {
         );
 
         final mocaAssessmentCard = _StatCard(
-          icon: Icons.psychology,
+          icon: LucideIcons.brain,
           iconColor: AppColors.unitPsych,
           label: 'MoCA Assessment',
           value: 'Start',
@@ -410,7 +405,7 @@ class _DashboardScreenState extends State<DashboardScreen> with RouteAware {
         );
 
         final mocaAnalyticsCard = _StatCard(
-          icon: Icons.analytics_outlined,
+          icon: LucideIcons.chartColumn,
           iconColor: AppColors.unitPsych,
           label: 'MoCA Analytics',
           value: 'View',
@@ -418,7 +413,7 @@ class _DashboardScreenState extends State<DashboardScreen> with RouteAware {
         );
 
         final caseCompletenessCard = _StatCard(
-          icon: Icons.fact_check_outlined,
+          icon: LucideIcons.listChecks,
           iconColor: AppColors.unitSocial,
           label: 'Case Files',
           value: '',
@@ -550,7 +545,7 @@ class _DashboardScreenState extends State<DashboardScreen> with RouteAware {
                               borderRadius: BorderRadius.circular(8),
                             ),
                             child: Icon(
-                              Icons.description,
+                              LucideIcons.fileText,
                               color: statusColor,
                               size: 20,
                             ),

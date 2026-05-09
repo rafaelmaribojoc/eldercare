@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import '../models/workflow_models.dart';
 import 'social_service_forms.dart';
 import 'homelife_service_forms.dart';
@@ -65,10 +66,8 @@ class FormTemplate {
     required this.templateType,
     this.requiresSignature = true,
     this.requiredSignatories = const [],
-    this.allowedResidentStatuses = const [
-      'admitted'
-    ],
-    this.icon = Icons.description,
+    this.allowedResidentStatuses = const ['admitted'],
+    this.icon = LucideIcons.fileText,
     this.workflowConfig,
     this.preparerSignatureField,
     this.category = CaseFileCategory.ongoingCare,
@@ -178,7 +177,7 @@ class FormTemplatesRegistry {
       templateType: 'pre_admission_checklist',
       requiresSignature: false, // No Prepared By/Noted By - just acknowledge
       allowedResidentStatuses: ['pre_admission'],
-      icon: Icons.checklist,
+      icon: LucideIcons.listChecks,
       category: CaseFileCategory.admission,
     ),
     FormTemplate(
@@ -189,7 +188,7 @@ class FormTemplatesRegistry {
       templateType: 'requirements_checklist',
       requiresSignature: false, // No Prepared By/Noted By - just acknowledge
       allowedResidentStatuses: ['pre_admission'],
-      icon: Icons.fact_check,
+      icon: LucideIcons.listChecks,
       category: CaseFileCategory.admission,
     ),
     FormTemplate(
@@ -201,7 +200,7 @@ class FormTemplatesRegistry {
       requiresSignature: false,
       requiredSignatories: [],
       allowedResidentStatuses: ['admitted'],
-      icon: Icons.person_add,
+      icon: LucideIcons.userPlus,
       category: CaseFileCategory.admission,
     ),
     FormTemplate(
@@ -212,7 +211,7 @@ class FormTemplatesRegistry {
       templateType: 'admission_case_conference',
       requiredSignatories: ['Social Worker', 'Center Head'],
       allowedResidentStatuses: ['admitted'],
-      icon: Icons.groups,
+      icon: LucideIcons.users,
       category: CaseFileCategory.admission,
       workflowConfig: WorkflowConfig(
         templateId: 'ss_admission_conference',
@@ -236,7 +235,7 @@ class FormTemplatesRegistry {
       templateType: 'clients_contract',
       requiredSignatories: ['Witness', 'Center Head'],
       allowedResidentStatuses: ['admitted'],
-      icon: Icons.handshake,
+      icon: LucideIcons.handshake,
       category: CaseFileCategory.admission,
       workflowConfig: WorkflowConfig(
         templateId: 'ss_clients_contract',
@@ -260,7 +259,7 @@ class FormTemplatesRegistry {
       templateType: 'admission_slip',
       requiredSignatories: ['Medical Staff', 'Social Worker', 'Center Head'],
       allowedResidentStatuses: ['admitted'],
-      icon: Icons.badge,
+      icon: LucideIcons.badge,
       category: CaseFileCategory.admission,
       workflowConfig: WorkflowConfig(
         templateId: 'ss_admission_slip',
@@ -291,7 +290,7 @@ class FormTemplatesRegistry {
       serviceUnit: ServiceUnit.socialService,
       templateType: 'progress_notes',
       requiredSignatories: ['Social Worker', 'Center Head'],
-      icon: Icons.edit_note,
+      icon: LucideIcons.filePenLine,
       workflowConfig: WorkflowConfig(
         templateId: 'ss_progress_notes',
         initialStepId: 'pending_review',
@@ -313,7 +312,7 @@ class FormTemplatesRegistry {
       serviceUnit: ServiceUnit.socialService,
       templateType: 'running_notes',
       requiredSignatories: ['Social Worker', 'Center Head'],
-      icon: Icons.notes,
+      icon: LucideIcons.notebookTabs,
       workflowConfig: WorkflowConfig(
         templateId: 'ss_running_notes',
         initialStepId: 'pending_review',
@@ -335,7 +334,7 @@ class FormTemplatesRegistry {
       serviceUnit: ServiceUnit.socialService,
       templateType: 'intervention_plan',
       requiredSignatories: ['Social Worker', 'Center Head'],
-      icon: Icons.assignment,
+      icon: LucideIcons.clipboardList,
       workflowConfig: WorkflowConfig(
         templateId: 'ss_intervention_plan',
         initialStepId: 'pending_review',
@@ -358,7 +357,7 @@ class FormTemplatesRegistry {
       templateType: 'updated_social_case_study',
       requiredSignatories: ['Social Worker', 'Center Head'],
       allowedResidentStatuses: ['admitted'],
-      icon: Icons.update,
+      icon: LucideIcons.refreshCw,
       workflowConfig: WorkflowConfig(
         templateId: 'ss_updated_social_case_study',
         initialStepId: 'pending_review',
@@ -381,7 +380,7 @@ class FormTemplatesRegistry {
       templateType: 'social_case_study',
       requiredSignatories: ['Social Worker', 'Center Head'],
       allowedResidentStatuses: ['admitted'],
-      icon: Icons.article,
+      icon: LucideIcons.newspaper,
       workflowConfig: WorkflowConfig(
         templateId: 'ss_social_case_study',
         initialStepId: 'pending_review',
@@ -403,7 +402,7 @@ class FormTemplatesRegistry {
       serviceUnit: ServiceUnit.socialService,
       templateType: 'case_conference',
       requiredSignatories: ['Social Worker', 'Center Head'],
-      icon: Icons.meeting_room,
+      icon: LucideIcons.doorOpen,
       workflowConfig: WorkflowConfig(
         templateId: 'ss_case_conference',
         initialStepId: 'pending_review',
@@ -425,7 +424,7 @@ class FormTemplatesRegistry {
       serviceUnit: ServiceUnit.socialService,
       templateType: 'termination_report',
       requiredSignatories: ['Social Worker', 'Center Head'],
-      icon: Icons.exit_to_app,
+      icon: LucideIcons.logOut,
       category: CaseFileCategory.dischargeTermination,
       workflowConfig: WorkflowConfig(
         templateId: 'ss_termination_report',
@@ -448,7 +447,7 @@ class FormTemplatesRegistry {
       serviceUnit: ServiceUnit.socialService,
       templateType: 'closing_summary',
       requiredSignatories: ['Social Worker', 'Center Head'],
-      icon: Icons.summarize,
+      icon: LucideIcons.clipboardList,
       category: CaseFileCategory.dischargeTermination,
       workflowConfig: WorkflowConfig(
         templateId: 'ss_closing_summary',
@@ -471,7 +470,7 @@ class FormTemplatesRegistry {
       serviceUnit: ServiceUnit.socialService,
       templateType: 'quarterly_narrative',
       requiredSignatories: ['Social Worker', 'Center Head'],
-      icon: Icons.calendar_month,
+      icon: LucideIcons.calendarDays,
       workflowConfig: WorkflowConfig(
         templateId: 'ss_quarterly_narrative',
         initialStepId: 'pending_review',
@@ -494,7 +493,7 @@ class FormTemplatesRegistry {
       templateType: 'pre_termination_plan',
       requiredSignatories: ['Social Worker', 'Center Head'],
       allowedResidentStatuses: ['admitted'],
-      icon: Icons.next_plan,
+      icon: LucideIcons.calendarPlus,
       category: CaseFileCategory.dischargeTermination,
       workflowConfig: WorkflowConfig(
         templateId: 'ss_pre_termination_plan',
@@ -526,7 +525,7 @@ class FormTemplatesRegistry {
         'Center Head'
       ],
       allowedResidentStatuses: ['admitted', 'discharged'],
-      icon: Icons.healing,
+      icon: LucideIcons.heartPulse,
       category: CaseFileCategory.dischargeTermination,
       workflowConfig: WorkflowConfig(
         templateId: 'ss_after_care_plan',
@@ -572,7 +571,7 @@ class FormTemplatesRegistry {
       templateType: 'case_transfer_summary',
       requiredSignatories: ['Social Worker', 'Center Head'],
       allowedResidentStatuses: ['admitted', 'discharged'],
-      icon: Icons.move_to_inbox,
+      icon: LucideIcons.archiveRestore,
       category: CaseFileCategory.dischargeTermination,
       workflowConfig: WorkflowConfig(
         templateId: 'ss_case_transfer',
@@ -597,7 +596,7 @@ class FormTemplatesRegistry {
       requiresSignature: false,
       requiredSignatories: [],
       allowedResidentStatuses: ['admitted'],
-      icon: Icons.photo_camera,
+      icon: LucideIcons.camera,
       category: CaseFileCategory.admission,
     ),
     FormTemplate(
@@ -608,7 +607,7 @@ class FormTemplatesRegistry {
       templateType: 'pre_admission_conference',
       requiredSignatories: ['Social Worker', 'Center Head'],
       allowedResidentStatuses: ['pre_admission'],
-      icon: Icons.groups,
+      icon: LucideIcons.users,
       category: CaseFileCategory.admission,
       workflowConfig: WorkflowConfig(
         templateId: 'ss_pre_admission_conference',
@@ -632,7 +631,7 @@ class FormTemplatesRegistry {
       templateType: 'kasunduan',
       requiredSignatories: ['Witness', 'Center Head'],
       allowedResidentStatuses: ['admitted'],
-      icon: Icons.handshake,
+      icon: LucideIcons.handshake,
       category: CaseFileCategory.admission,
       workflowConfig: WorkflowConfig(
         templateId: 'ss_kasunduan',
@@ -656,7 +655,7 @@ class FormTemplatesRegistry {
       templateType: 'pre_discharge_conference',
       requiredSignatories: ['Social Worker', 'Center Head'],
       allowedResidentStatuses: ['admitted'],
-      icon: Icons.meeting_room,
+      icon: LucideIcons.doorOpen,
       category: CaseFileCategory.dischargeTermination,
       workflowConfig: WorkflowConfig(
         templateId: 'ss_pre_discharge_conference',
@@ -681,7 +680,7 @@ class FormTemplatesRegistry {
       templateType: 'discharge_slip',
       requiredSignatories: ['Medical Staff', 'Social Worker', 'Center Head'],
       allowedResidentStatuses: ['discharged'],
-      icon: Icons.logout,
+      icon: LucideIcons.logOut,
       category: CaseFileCategory.dischargeTermination,
       workflowConfig: WorkflowConfig(
         templateId: 'ss_discharge_slip',
@@ -714,7 +713,7 @@ class FormTemplatesRegistry {
       templateType: 'inventory_admission',
       preparerSignatureField: 'inspected_by',
       requiredSignatories: ['HP on Duty', 'Supervising HP', 'Center Head'],
-      icon: Icons.inventory,
+      icon: LucideIcons.package,
       category: CaseFileCategory.inventory,
       workflowConfig: WorkflowConfig(
         templateId: 'hl_inventory_admission',
@@ -746,7 +745,7 @@ class FormTemplatesRegistry {
       templateType: 'inventory_discharge',
       preparerSignatureField: 'inspected_by',
       requiredSignatories: ['HP on Duty', 'Supervising HP', 'Center Head'],
-      icon: Icons.inventory_2,
+      icon: LucideIcons.packageOpen,
       category: CaseFileCategory.inventory,
       workflowConfig: WorkflowConfig(
         templateId: 'hl_inventory_discharge',
@@ -778,7 +777,7 @@ class FormTemplatesRegistry {
       templateType: 'inventory_monthly',
       preparerSignatureField: 'prepared_by',
       requiredSignatories: ['HP II', 'Supervising HP III', 'Center Head'],
-      icon: Icons.inventory_2_outlined,
+      icon: LucideIcons.packageOpen,
       category: CaseFileCategory.inventory,
       workflowConfig: WorkflowConfig(
         templateId: 'hl_inventory_monthly',
@@ -810,7 +809,7 @@ class FormTemplatesRegistry {
       templateType: 'progress_notes',
       preparerSignatureField: 'prepared_by',
       requiredSignatories: ['Houseparent I', 'Homelife Head', 'Center Head'],
-      icon: Icons.edit_note,
+      icon: LucideIcons.filePenLine,
       workflowConfig: WorkflowConfig(
         templateId: 'hl_progress_notes',
         initialStepId: 'pending_supervisor',
@@ -848,7 +847,7 @@ class FormTemplatesRegistry {
         'Homelife Head',
         'Center Head'
       ],
-      icon: Icons.warning_amber,
+      icon: LucideIcons.triangleAlert,
       category: CaseFileCategory.incidentsSpecial,
       workflowConfig: WorkflowConfig(
         templateId: 'hl_incident_report',
@@ -898,7 +897,7 @@ class FormTemplatesRegistry {
         'Social Worker',
         'Center Head'
       ],
-      icon: Icons.door_front_door,
+      icon: LucideIcons.doorOpen,
       category: CaseFileCategory.incidentsSpecial,
       workflowConfig: WorkflowConfig(
         templateId: 'hl_out_on_pass',
@@ -948,7 +947,7 @@ class FormTemplatesRegistry {
       templateType: 'progress_notes',
       requiredSignatories: ['Psychometrician', 'Center Head'],
       preparerSignatureField: 'prepared_by',
-      icon: Icons.psychology,
+      icon: LucideIcons.brain,
       workflowConfig: WorkflowConfig(
         templateId: 'ps_progress_notes',
         initialStepId: 'pending_review',
@@ -971,7 +970,7 @@ class FormTemplatesRegistry {
       templateType: 'group_sessions',
       requiredSignatories: ['Psychometrician', 'Center Head'],
       preparerSignatureField: 'prepared_by',
-      icon: Icons.groups_2,
+      icon: LucideIcons.usersRound,
       workflowConfig: WorkflowConfig(
         templateId: 'ps_group_sessions',
         initialStepId: 'pending_review',
@@ -994,7 +993,7 @@ class FormTemplatesRegistry {
       templateType: 'individual_sessions',
       requiredSignatories: ['Psychometrician', 'Center Head'],
       preparerSignatureField: 'prepared_by',
-      icon: Icons.person,
+      icon: LucideIcons.user,
       workflowConfig: WorkflowConfig(
         templateId: 'ps_individual_sessions',
         initialStepId: 'pending_review',
@@ -1016,7 +1015,7 @@ class FormTemplatesRegistry {
       serviceUnit: ServiceUnit.psychologicalService,
       templateType: 'inter_service_referral',
       requiredSignatories: ['Referring Staff', 'Psych Head'],
-      icon: Icons.send,
+      icon: LucideIcons.send,
       category: CaseFileCategory.incidentsSpecial,
       workflowConfig: WorkflowConfig(
         templateId: 'ps_inter_service_referral',
@@ -1040,7 +1039,7 @@ class FormTemplatesRegistry {
       templateType: 'initial_assessment',
       requiredSignatories: ['Psychometrician', 'Center Head'],
       preparerSignatureField: 'prepared_by',
-      icon: Icons.assessment,
+      icon: LucideIcons.clipboardList,
       workflowConfig: WorkflowConfig(
         templateId: 'ps_initial_assessment',
         initialStepId: 'pending_review',
@@ -1063,7 +1062,7 @@ class FormTemplatesRegistry {
       templateType: 'psychometrician_report',
       requiredSignatories: ['Psychometrician', 'Center Head'],
       preparerSignatureField: 'prepared_by',
-      icon: Icons.analytics,
+      icon: LucideIcons.chartColumn,
       workflowConfig: WorkflowConfig(
         templateId: 'ps_psychometrician_report',
         initialStepId: 'pending_review',
@@ -1087,7 +1086,7 @@ class FormTemplatesRegistry {
       serviceUnit: ServiceUnit.medicalService,
       templateType: 'md_nursing_care_service',
       requiredSignatories: ['Nurse', 'Center Head'],
-      icon: Icons.medical_services,
+      icon: LucideIcons.stethoscope,
       workflowConfig: WorkflowConfig(
         templateId: 'md_nursing_care_service',
         initialStepId: 'pending_review',
@@ -1109,7 +1108,7 @@ class FormTemplatesRegistry {
       serviceUnit: ServiceUnit.medicalService,
       templateType: 'md_special_events',
       requiredSignatories: ['Nurse', 'Medical Officer', 'Center Head'],
-      icon: Icons.event_note,
+      icon: LucideIcons.calendarCheck,
       category: CaseFileCategory.incidentsSpecial,
       workflowConfig: WorkflowConfig(
         templateId: 'md_special_events',
@@ -1140,7 +1139,7 @@ class FormTemplatesRegistry {
       serviceUnit: ServiceUnit.medicalService,
       templateType: 'md_quarterly_report',
       requiredSignatories: ['Nurse', 'Center Head'],
-      icon: Icons.analytics,
+      icon: LucideIcons.chartColumn,
       category: CaseFileCategory.medicalNutritionReports,
       workflowConfig: WorkflowConfig(
         templateId: 'md_quarterly_report',
@@ -1163,7 +1162,7 @@ class FormTemplatesRegistry {
       serviceUnit: ServiceUnit.medicalService,
       templateType: 'md_monthly_accomplishment_report',
       requiredSignatories: ['Nurse', 'Center Head'],
-      icon: Icons.summarize,
+      icon: LucideIcons.clipboardList,
       category: CaseFileCategory.medicalNutritionReports,
       workflowConfig: WorkflowConfig(
         templateId: 'md_monthly_accomplishment_report',
@@ -1190,7 +1189,7 @@ class FormTemplatesRegistry {
       requiresSignature: false,
       requiredSignatories: [],
       allowedResidentStatuses: ['pre_admission', 'admitted'],
-      icon: Icons.monitor_weight,
+      icon: LucideIcons.scale,
     ),
     FormTemplate(
       id: 'nt_meal_plan',
@@ -1199,7 +1198,7 @@ class FormTemplatesRegistry {
       serviceUnit: ServiceUnit.nutritionService,
       templateType: 'nt_meal_plan',
       requiredSignatories: ['Nutritionist/Dietitian'],
-      icon: Icons.restaurant_menu,
+      icon: LucideIcons.utensils,
       workflowConfig: WorkflowConfig(
         templateId: 'nt_meal_plan',
         initialStepId: 'pending_review',
@@ -1221,7 +1220,7 @@ class FormTemplatesRegistry {
       serviceUnit: ServiceUnit.nutritionService,
       templateType: 'nt_diet_diary',
       requiredSignatories: ['Nutritionist/Dietitian'],
-      icon: Icons.book,
+      icon: LucideIcons.bookOpen,
       workflowConfig: WorkflowConfig(
         templateId: 'nt_diet_diary',
         initialStepId: 'pending_review',
@@ -1243,7 +1242,7 @@ class FormTemplatesRegistry {
       serviceUnit: ServiceUnit.nutritionService,
       templateType: 'nt_diet_orders',
       requiredSignatories: ['Nutritionist/Dietitian'],
-      icon: Icons.list_alt,
+      icon: LucideIcons.list,
       workflowConfig: WorkflowConfig(
         templateId: 'nt_diet_orders',
         initialStepId: 'pending_review',
@@ -1269,7 +1268,7 @@ class FormTemplatesRegistry {
         'Center Doctor',
         'Center Head'
       ],
-      icon: Icons.warning,
+      icon: LucideIcons.triangleAlert,
       category: CaseFileCategory.medicalNutritionReports,
       workflowConfig: WorkflowConfig(
         templateId: 'nt_malnourished_list',
@@ -1308,7 +1307,7 @@ class FormTemplatesRegistry {
       serviceUnit: ServiceUnit.nutritionService,
       templateType: 'nt_ncp_mnt',
       requiredSignatories: ['Nutritionist/Dietitian', 'Center Doctor'],
-      icon: Icons.healing,
+      icon: LucideIcons.heartPulse,
       workflowConfig: WorkflowConfig(
         templateId: 'nt_ncp_mnt',
         initialStepId: 'pending_review',
@@ -1339,7 +1338,7 @@ class FormTemplatesRegistry {
       templateType: 'nt_progress_notes',
       requiresSignature: false,
       requiredSignatories: [],
-      icon: Icons.note_add,
+      icon: LucideIcons.filePlus,
     ),
     FormTemplate(
       id: 'nt_bmi_summary',
@@ -1348,7 +1347,7 @@ class FormTemplatesRegistry {
       serviceUnit: ServiceUnit.nutritionService,
       templateType: 'nt_bmi_summary',
       requiredSignatories: ['Nutritionist/Dietitian'],
-      icon: Icons.analytics,
+      icon: LucideIcons.chartColumn,
       category: CaseFileCategory.medicalNutritionReports,
       workflowConfig: WorkflowConfig(
         templateId: 'nt_bmi_summary',
@@ -1371,7 +1370,7 @@ class FormTemplatesRegistry {
       serviceUnit: ServiceUnit.nutritionService,
       templateType: 'nt_status_summary',
       requiredSignatories: ['Nutritionist/Dietitian'],
-      icon: Icons.pie_chart,
+      icon: LucideIcons.chartPie,
       category: CaseFileCategory.medicalNutritionReports,
       workflowConfig: WorkflowConfig(
         templateId: 'nt_status_summary',
@@ -1394,7 +1393,7 @@ class FormTemplatesRegistry {
       serviceUnit: ServiceUnit.nutritionService,
       templateType: 'nt_dietary_kardex',
       requiredSignatories: ['Nutritionist/Dietitian'],
-      icon: Icons.grid_on,
+      icon: LucideIcons.grid2x2,
       workflowConfig: WorkflowConfig(
         templateId: 'nt_dietary_kardex',
         initialStepId: 'pending_review',

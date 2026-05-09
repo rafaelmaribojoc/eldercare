@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 
 class CustomErrorView extends StatelessWidget {
   final FlutterErrorDetails errorDetails;
@@ -19,7 +20,7 @@ class CustomErrorView extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Icon(
-                Icons.error_outline,
+                LucideIcons.circleAlert,
                 color: Colors.red,
                 size: 64,
               ),
@@ -71,7 +72,7 @@ class CustomErrorView extends StatelessWidget {
                   // Or we can try to pop if feasible.
                   // For now, simple "Report" or "Close".
                 },
-                icon: const Icon(Icons.refresh),
+                icon: const Icon(LucideIcons.refreshCw),
                 label: const Text('Restart App'),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFF00695C), // App Theme Color

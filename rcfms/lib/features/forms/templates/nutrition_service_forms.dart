@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'form_field_builders.dart';
 
 /// Nutrition and Dietetics Form Templates
@@ -16,7 +17,8 @@ class NutritionServiceForms {
     List<String>? residentNames,
     List<dynamic>? residents,
   }) {
-    bool ro(String key) => readOnly || (readOnlyFieldKeys?.contains(key) ?? false);
+    bool ro(String key) =>
+        readOnly || (readOnlyFieldKeys?.contains(key) ?? false);
     switch (templateType) {
       case 'nt_screening':
         return _nutritionScreening(data, onChanged,
@@ -1815,7 +1817,8 @@ class NutritionServiceForms {
                               style:
                                   const TextStyle(fontWeight: FontWeight.bold)),
                           IconButton(
-                            icon: const Icon(Icons.delete, color: Colors.red),
+                            icon: const Icon(LucideIcons.trash2,
+                                color: Colors.red),
                             onPressed: () {
                               setState(() {
                                 malnourishedList.removeAt(i);
@@ -1907,7 +1910,7 @@ class NutritionServiceForms {
                 ),
               ),
             TextButton.icon(
-              icon: const Icon(Icons.add),
+              icon: const Icon(LucideIcons.plus),
               label: const Text('Add Client'),
               onPressed: () {
                 setState(() {
@@ -2820,7 +2823,8 @@ class NutritionServiceForms {
                               style:
                                   const TextStyle(fontWeight: FontWeight.bold)),
                           IconButton(
-                            icon: const Icon(Icons.delete, color: Colors.red),
+                            icon: const Icon(LucideIcons.trash2,
+                                color: Colors.red),
                             onPressed: () {
                               setState(() {
                                 notesList.removeAt(i);
@@ -2878,7 +2882,7 @@ class NutritionServiceForms {
                 ),
               ),
             TextButton.icon(
-              icon: const Icon(Icons.add),
+              icon: const Icon(LucideIcons.plus),
               label: const Text('Add Progress Note'),
               onPressed: () {
                 setState(() {
@@ -3007,7 +3011,8 @@ class NutritionServiceForms {
                               style:
                                   const TextStyle(fontWeight: FontWeight.bold)),
                           IconButton(
-                            icon: const Icon(Icons.delete, color: Colors.red),
+                            icon: const Icon(LucideIcons.trash2,
+                                color: Colors.red),
                             onPressed: () {
                               setState(() {
                                 clientsList.removeAt(i);
@@ -3274,7 +3279,7 @@ class NutritionServiceForms {
                 ),
               ),
             TextButton.icon(
-              icon: const Icon(Icons.add),
+              icon: const Icon(LucideIcons.plus),
               label: const Text('Add Client'),
               onPressed: () {
                 setState(() {

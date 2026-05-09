@@ -1,6 +1,7 @@
 import 'package:http/http.dart' as http;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
@@ -246,7 +247,7 @@ class _FormViewScreenState extends State<FormViewScreen> {
       return Scaffold(
         appBar: AppBar(
           leading: IconButton(
-            icon: const Icon(Icons.arrow_back),
+            icon: const Icon(LucideIcons.arrowLeft),
             onPressed: () => Navigator.pop(context),
           ),
           title: const Text('Form'),
@@ -312,7 +313,7 @@ class _FormViewScreenState extends State<FormViewScreen> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
+          icon: const Icon(LucideIcons.arrowLeft),
           onPressed: () => Navigator.pop(context),
         ),
         title: Text(form.templateDisplayName),
@@ -328,7 +329,7 @@ class _FormViewScreenState extends State<FormViewScreen> {
                 : Theme.of(context).appBarTheme.foregroundColor),
         actions: [
           IconButton(
-            icon: const Icon(Icons.picture_as_pdf),
+            icon: const Icon(LucideIcons.fileText),
             onPressed: () {
               Navigator.of(context).push(
                 MaterialPageRoute(
@@ -429,7 +430,7 @@ class _FormViewScreenState extends State<FormViewScreen> {
                   ).toString(),
                 );
               },
-              icon: const Icon(Icons.add),
+              icon: const Icon(LucideIcons.plus),
               label: const Text('Add Entry'),
               backgroundColor: AppColors.primary,
             )
@@ -450,7 +451,7 @@ class _FormViewScreenState extends State<FormViewScreen> {
       children: [
         Row(
           children: [
-            Icon(Icons.history, color: AppColors.textSecondary),
+            Icon(LucideIcons.history, color: AppColors.textSecondary),
             const SizedBox(width: 8),
             Text(
               'Previous Entries',
@@ -521,7 +522,7 @@ class _FormViewScreenState extends State<FormViewScreen> {
                   style:
                       TextStyle(fontSize: 12, color: AppColors.textSecondary),
                 ),
-                trailing: const Icon(Icons.chevron_right, size: 16),
+                trailing: const Icon(LucideIcons.chevronRight, size: 16),
               ),
             );
           },
@@ -556,14 +557,14 @@ class _FormViewScreenState extends State<FormViewScreen> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
+          icon: const Icon(LucideIcons.arrowLeft),
           onPressed: () => Navigator.pop(context),
         ),
         title: Text(form.templateDisplayName),
         actions: [
           IconButton(
             tooltip: 'Open full PDF screen',
-            icon: const Icon(Icons.open_in_full),
+            icon: const Icon(LucideIcons.maximize2),
             onPressed: () {
               Navigator.of(context).push(
                 MaterialPageRoute(
@@ -937,7 +938,8 @@ class _FormViewScreenState extends State<FormViewScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(children: [
-                      Icon(Icons.replay, color: AppColors.warning, size: 16),
+                      Icon(LucideIcons.rotateCcw,
+                          color: AppColors.warning, size: 16),
                       const SizedBox(width: 6),
                       Expanded(
                         child: Text(
@@ -973,7 +975,7 @@ class _FormViewScreenState extends State<FormViewScreen> {
                               ).toString(),
                             );
                           },
-                          icon: const Icon(Icons.edit, size: 16),
+                          icon: const Icon(LucideIcons.pencil, size: 16),
                           label: const Text('Edit & Resubmit'),
                           style: ElevatedButton.styleFrom(
                             backgroundColor: AppColors.warning,
@@ -989,7 +991,7 @@ class _FormViewScreenState extends State<FormViewScreen> {
             ],
             Row(
               children: [
-                Icon(Icons.fact_check_outlined, color: AppColors.primary),
+                Icon(LucideIcons.listChecks, color: AppColors.primary),
                 const SizedBox(width: 8),
                 Expanded(
                   child: Text(
@@ -1050,7 +1052,7 @@ class _FormViewScreenState extends State<FormViewScreen> {
                   child: OutlinedButton.icon(
                     onPressed:
                         (_canAct && !_isActioning) ? _showReturnDialog : null,
-                    icon: const Icon(Icons.replay),
+                    icon: const Icon(LucideIcons.rotateCcw),
                     label: const Text('Return'),
                     style: OutlinedButton.styleFrom(
                       foregroundColor: AppColors.warning,
@@ -1074,7 +1076,7 @@ class _FormViewScreenState extends State<FormViewScreen> {
                               color: Colors.white,
                             ),
                           )
-                        : const Icon(Icons.draw),
+                        : const Icon(LucideIcons.penLine),
                     label:
                         Text(_signatureFieldName != null ? 'Sign' : 'Approve'),
                     style: ElevatedButton.styleFrom(
@@ -1128,7 +1130,7 @@ class _FormViewScreenState extends State<FormViewScreen> {
             Expanded(
               child: OutlinedButton.icon(
                 onPressed: _isActioning ? null : () => _showReturnDialog(),
-                icon: const Icon(Icons.replay),
+                icon: const Icon(LucideIcons.rotateCcw),
                 label: const Text('Return'),
                 style: OutlinedButton.styleFrom(
                   foregroundColor: AppColors.error,
@@ -1198,15 +1200,15 @@ class _FormViewScreenState extends State<FormViewScreen> {
   /// Get the appropriate action icon
   IconData _getActionIcon() {
     if (_signatureFieldName != null) {
-      return Icons.draw; // Signature required
+      return LucideIcons.penLine; // Signature required
     }
     switch (_actionType) {
       case 'approve':
-        return Icons.check_circle;
+        return LucideIcons.circleCheck;
       case 'acknowledge':
-        return Icons.thumb_up;
+        return LucideIcons.thumbsUp;
       default:
-        return Icons.check;
+        return LucideIcons.check;
     }
   }
 
@@ -1457,14 +1459,14 @@ class _FormViewScreenState extends State<FormViewScreen> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
+          icon: const Icon(LucideIcons.arrowLeft),
           onPressed: () => Navigator.pop(context),
         ),
         title: Text(form.templateDisplayName),
         actions: [
           if (imageUrl != null)
             IconButton(
-              icon: const Icon(Icons.open_in_new),
+              icon: const Icon(LucideIcons.externalLink),
               tooltip: 'Open in browser',
               onPressed: () async {
                 final uri = Uri.parse(imageUrl);
@@ -1480,7 +1482,7 @@ class _FormViewScreenState extends State<FormViewScreen> {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Icon(Icons.broken_image, size: 64, color: Colors.grey),
+                  Icon(LucideIcons.imageOff, size: 64, color: Colors.grey),
                   SizedBox(height: 16),
                   Text('No file available for this uploaded form.'),
                 ],
@@ -1495,7 +1497,7 @@ class _FormViewScreenState extends State<FormViewScreen> {
                   color: AppColors.successSurface,
                   child: Row(
                     children: [
-                      Icon(Icons.upload_file,
+                      Icon(LucideIcons.fileUp,
                           color: AppColors.success, size: 20),
                       const SizedBox(width: 8),
                       Expanded(
@@ -1531,7 +1533,8 @@ class _FormViewScreenState extends State<FormViewScreen> {
                   child: isPdf
                       ? PdfPreview(
                           build: (_) async {
-                            final response = await http.get(Uri.parse(imageUrl));
+                            final response =
+                                await http.get(Uri.parse(imageUrl));
                             return response.bodyBytes;
                           },
                           canChangePageFormat: false,
@@ -1563,7 +1566,7 @@ class _FormViewScreenState extends State<FormViewScreen> {
                                 return Column(
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
-                                    const Icon(Icons.error_outline,
+                                    const Icon(LucideIcons.circleAlert,
                                         size: 64, color: Colors.red),
                                     const SizedBox(height: 16),
                                     Text('Failed to load image: $error'),
@@ -1600,7 +1603,7 @@ class _FormViewScreenState extends State<FormViewScreen> {
           children: [
             Row(
               children: [
-                Icon(Icons.edit_note, color: AppColors.info, size: 20),
+                Icon(LucideIcons.filePenLine, color: AppColors.info, size: 20),
                 const SizedBox(width: 8),
                 Text(
                   'Fields Requiring Your Input',
@@ -1699,15 +1702,15 @@ class _FormViewScreenState extends State<FormViewScreen> {
   IconData _getStatusIcon(String status) {
     switch (status) {
       case 'draft':
-        return Icons.edit;
+        return LucideIcons.pencil;
       case 'pending_review':
-        return Icons.hourglass_empty;
+        return LucideIcons.hourglass;
       case 'approved':
-        return Icons.check_circle;
+        return LucideIcons.circleCheck;
       case 'returned':
-        return Icons.replay;
+        return LucideIcons.rotateCcw;
       default:
-        return Icons.description;
+        return LucideIcons.fileText;
     }
   }
 
@@ -1919,7 +1922,7 @@ class _FormViewScreenState extends State<FormViewScreen> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(Icons.broken_image,
+                        Icon(LucideIcons.imageOff,
                             size: 20, color: AppColors.textSecondaryLight),
                         Text('Load failed',
                             style: TextStyle(
@@ -1973,7 +1976,7 @@ class _FormViewScreenState extends State<FormViewScreen> {
           children: [
             Row(
               children: [
-                const Icon(Icons.warning, color: AppColors.error),
+                const Icon(LucideIcons.triangleAlert, color: AppColors.error),
                 const SizedBox(width: 8),
                 Expanded(
                   child: Text(

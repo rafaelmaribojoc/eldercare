@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/theme/app_colors.dart';
@@ -86,9 +87,9 @@ class _ReassignStaffDialogState extends State<ReassignStaffDialog> {
       }
 
       if (mounted) {
-        final selectedName = _staffList
-            .firstWhere((s) => s['id'] == _selectedStaffId,
-                orElse: () => {'full_name': 'Unknown'})['full_name'];
+        final selectedName = _staffList.firstWhere(
+            (s) => s['id'] == _selectedStaffId,
+            orElse: () => {'full_name': 'Unknown'})['full_name'];
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text('$_label reassigned to $selectedName'),
@@ -115,7 +116,8 @@ class _ReassignStaffDialogState extends State<ReassignStaffDialog> {
     return AlertDialog(
       title: Text('Reassign $_label'),
       content: ConstrainedBox(
-        constraints: const BoxConstraints(maxWidth: Breakpoints.tablet, minHeight: 100),
+        constraints:
+            const BoxConstraints(maxWidth: Breakpoints.tablet, minHeight: 100),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -169,7 +171,7 @@ class _ReassignStaffDialogState extends State<ReassignStaffDialog> {
                 initialValue: _selectedStaffId,
                 decoration: InputDecoration(
                   labelText: 'Select $_label',
-                  prefixIcon: const Icon(Icons.person_outline),
+                  prefixIcon: const Icon(LucideIcons.user),
                 ),
                 items: _staffList
                     .map((s) => DropdownMenuItem<String>(
@@ -180,7 +182,8 @@ class _ReassignStaffDialogState extends State<ReassignStaffDialog> {
                         ))
                     .toList(),
                 onChanged: (value) => setState(() => _selectedStaffId = value),
-                validator: (value) => value == null ? 'Please select a staff member' : null,
+                validator: (value) =>
+                    value == null ? 'Please select a staff member' : null,
               ),
           ],
         ),
@@ -200,7 +203,8 @@ class _ReassignStaffDialogState extends State<ReassignStaffDialog> {
               ? const SizedBox(
                   width: 20,
                   height: 20,
-                  child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white),
+                  child: CircularProgressIndicator(
+                      strokeWidth: 2, color: Colors.white),
                 )
               : const Text('Save'),
         ),
@@ -212,7 +216,8 @@ class _ReassignStaffDialogState extends State<ReassignStaffDialog> {
     return role
         .replaceAll('_', ' ')
         .split(' ')
-        .map((w) => w.isNotEmpty ? '${w[0].toUpperCase()}${w.substring(1)}' : '')
+        .map(
+            (w) => w.isNotEmpty ? '${w[0].toUpperCase()}${w.substring(1)}' : '')
         .join(' ');
   }
 }

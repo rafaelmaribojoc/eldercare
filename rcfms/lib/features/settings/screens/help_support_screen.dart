@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../core/theme/app_colors.dart';
 
@@ -56,7 +57,7 @@ class _HelpSupportScreenState extends State<HelpSupportScreen>
                         right: -50,
                         top: -50,
                         child: Icon(
-                          Icons.help_outline,
+                          LucideIcons.circle,
                           size: 200,
                           color: Colors.white.withOpacity(0.1),
                         ),
@@ -104,7 +105,7 @@ class _HelpSupportScreenState extends State<HelpSupportScreen>
                                 decoration: const InputDecoration(
                                   hintText: 'Search for articles, guides...',
                                   border: InputBorder.none,
-                                  icon: Icon(Icons.search,
+                                  icon: Icon(LucideIcons.search,
                                       color: AppColors.textSecondary),
                                 ),
                               ),
@@ -173,7 +174,7 @@ class _HelpSupportScreenState extends State<HelpSupportScreen>
               children: [
                 Expanded(
                   child: _SupportCard(
-                    icon: Icons.email_outlined,
+                    icon: LucideIcons.mail,
                     title: 'Email',
                     subtitle: 'Get a response in 24h',
                     color: Colors.blue,
@@ -184,7 +185,7 @@ class _HelpSupportScreenState extends State<HelpSupportScreen>
                 const SizedBox(width: 16),
                 Expanded(
                   child: _SupportCard(
-                    icon: Icons.phone_outlined,
+                    icon: LucideIcons.phone,
                     title: 'Call',
                     subtitle: 'Mon-Fri, 9am-6pm',
                     color: Colors.green,
@@ -194,7 +195,7 @@ class _HelpSupportScreenState extends State<HelpSupportScreen>
                 const SizedBox(width: 16),
                 Expanded(
                   child: _SupportCard(
-                    icon: Icons.chat_bubble_outline,
+                    icon: LucideIcons.messageCircle,
                     title: 'Chat',
                     subtitle: 'Usually instant',
                     color: Colors.purple,
@@ -260,7 +261,7 @@ class _HelpSupportScreenState extends State<HelpSupportScreen>
                     const SnackBar(content: Text('Bug Report form opening...')),
                   );
                 },
-                icon: const Icon(Icons.bug_report_outlined,
+                icon: const Icon(LucideIcons.bug,
                     color: AppColors.error),
                 label: const Text(
                   'Report a Bug',
